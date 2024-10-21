@@ -1,0 +1,11 @@
+INITIALIZATION
+    npm install -g @vue/cli
+    vue create project_name
+    cd project_name
+    npm install gh-pages --save-dev
+    git remote add origin https://github.com/username/repo_name.git
+    git add .
+    git commit -m "msg"
+    git push origin main
+
+https://<username>.github.io/<repository-name>
