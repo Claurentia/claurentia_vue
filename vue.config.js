@@ -3,5 +3,5 @@ module.exports = defineConfig({
   transpileDependencies: true
 })
 module.exports = {
-  publicPath: process.env.NODE_ENV === "production" ? "/claurentia_vue/" : "/",
+  publicPath: "/claurentia_vue/"
 };
