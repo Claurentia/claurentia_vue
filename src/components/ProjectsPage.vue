@@ -57,7 +57,9 @@ export default {
   padding: 6rem 2rem;
   background: linear-gradient(
     to bottom,
-    rgba(28, 36, 54, 0.95),
+    rgba(1, 0, 18, 1),
+    rgba(1, 0, 18, 0.95),
+    rgba(28, 36, 54, 0.95) 50%,
     rgba(18, 24, 38, 0.95)
   );
 }
@@ -73,8 +75,8 @@ export default {
 .projects-grid {
   max-width: 1200px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
   padding: 1rem;
 }
@@ -87,6 +89,8 @@ export default {
   border: 1px solid rgba(163, 255, 187, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  height: 300px;
 }
 
 .project-card:hover {
@@ -95,8 +99,9 @@ export default {
 }
 
 .project-image {
-  width: 100%;
-  height: 200px;
+  width: 40%;
+  min-width: 300px;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -112,7 +117,11 @@ export default {
 }
 
 .project-content {
-  padding: 1.5rem;
+  padding: 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .project-content h3 {
@@ -172,8 +181,19 @@ export default {
     font-size: 2rem;
   }
 
-  .projects-grid {
-    grid-template-columns: 1fr;
+  .project-card {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .project-image {
+    width: 100%;
+    height: 200px;
+    min-width: unset;
+  }
+
+  .project-content {
+    padding: 1.5rem;
   }
 }
 </style> 

@@ -13,3 +13,7 @@ https://claurentia.github.io/claurentia_vue/
 
 BUILD & RUN LOCAL
     npm run serve
+
+BUILD & DEPLOY
+    npm run build
+    npx gh-pages -d dist

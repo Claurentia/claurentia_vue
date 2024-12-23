@@ -5,6 +5,8 @@
     </header>
     <main>
       <HomePage />
+      <ProjectsPage />
+      <MinigamesPage />
     </main>
     <footer>
       <!-- Add footer component here later -->
@@ -15,12 +17,16 @@
 <script>
 import HomePage from './components/HomePage.vue'
 import NavBar from './components/NavBar.vue'
+import ProjectsPage from './components/ProjectsPage.vue'
+import MinigamesPage from './components/MinigamesPage.vue'
 
 export default {
   name: 'App',
   components: {
     HomePage,
-    NavBar
+    NavBar,
+    ProjectsPage,
+    MinigamesPage
   }
 }
 </script>
@@ -43,5 +49,16 @@ html, body {
   overscroll-behavior: none;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
+}
+
+main {
+  scroll-snap-type: y mandatory;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+main > * {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 </style>
