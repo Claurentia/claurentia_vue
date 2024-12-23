@@ -9,3 +9,7 @@ INITIALIZATION
     git push origin main
 
 https://<username>.github.io/<repository-name>
+https://claurentia.github.io/claurentia_vue/
+
+BUILD & RUN LOCAL
+    npm run serve
