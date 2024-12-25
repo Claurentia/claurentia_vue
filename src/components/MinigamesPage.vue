@@ -9,44 +9,69 @@
         <div class="game-content">
           <h3>{{ game.title }}</h3>
           <p>{{ game.description }}</p>
-          <div class="game-stats">
-            <span class="stat">
-              <i class="fas fa-trophy"></i> High Score: {{ game.highScore }}
-            </span>
-            <span class="stat">
-              <i class="fas fa-clock"></i> Best Time: {{ game.bestTime }}
-            </span>
-          </div>
           <button class="play-button">
             Play Now
           </button>
         </div>
       </div>
     </div>
+
+    <GameModal 
+      v-if="activeGame"
+      :gameName="activeGame"
+      @close="activeGame = null"
+    />
   </div>
 </template>
 
 <script>
+import GameModal from './GameModal.vue'
+
 export default {
   name: 'MinigamesPage',
+  components: {
+    GameModal
+  },
   data() {
     return {
+      activeGame: null,
       games: [
         {
-          title: 'Memory Match',
-          description: 'Test your memory by matching pairs of cards in this classic game.',
-          icon: '../assets/memory-game-icon.png',
-          highScore: 0,
-          bestTime: '--:--',
+          title: 'Tic Tac Toe',
+          description: 'Classic game of X\'s and O\'s. Challenge the computer or play with a friend in this timeless strategy game.',
+          icon: '../assets/tictactoe-icon.png',
         },
-        // Add more games here
+        {
+          title: 'Snake',
+          description: 'Guide the snake to eat food and grow longer, but don\'t hit the walls or yourself! A classic arcade game that tests your reflexes.',
+          icon: '../assets/snake-icon.png',
+        },
+        {
+          title: '2048',
+          description: 'Combine matching numbers to reach 2048! A addictive puzzle game that challenges your strategic thinking.',
+          icon: '../assets/2048-icon.png',
+        },
+        {
+          title: 'Memory Match',
+          description: 'Find matching pairs of cards in this classic memory game. Test and improve your memory skills!',
+          icon: '../assets/memory-icon.png',
+        },
+        {
+          title: 'Tetris',
+          description: 'Arrange falling blocks to create complete lines. The ultimate test of spatial awareness and quick thinking.',
+          icon: '../assets/tetris-icon.png',
+        },
+        {
+          title: 'Pong',
+          description: 'The original arcade classic! Keep the ball in play and score points in this simple yet addictive game.',
+          icon: '../assets/pong-icon.png',
+        }
       ]
     }
   },
   methods: {
     playGame(game) {
-      // Implement game launch logic here
-      console.log(`Starting ${game.title}`);
+      this.activeGame = game.title
     }
   }
 }
@@ -58,8 +83,9 @@ export default {
   padding: 6rem 2rem;
   background: linear-gradient(
     to bottom,
-    rgba(18, 24, 38, 0.95),
-    rgba(28, 36, 54, 0.95)
+    rgba(1, 0, 18, 0.95),
+    rgba(28, 36, 54, 0.95) 50%,
+    rgba(18, 24, 38, 0.95)
   );
 }
 
@@ -89,6 +115,9 @@ export default {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .game-card:hover {
@@ -115,6 +144,10 @@ export default {
 .game-content {
   padding: 1.5rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
 }
 
 .game-content h3 {
@@ -127,21 +160,7 @@ export default {
   color: rgba(255, 255, 255, 0.7);
   margin-bottom: 1.5rem;
   line-height: 1.6;
-}
-
-.game-stats {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.stat {
-  color: rgba(163, 255, 187, 0.9);
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  flex-grow: 1;
 }
 
 .play-button {
@@ -180,11 +199,6 @@ export default {
 
   .minigames-grid {
     grid-template-columns: 1fr;
-  }
-
-  .game-stats {
-    flex-direction: column;
-    gap: 0.5rem;
   }
 }
 </style> 

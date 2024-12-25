@@ -55,7 +55,7 @@ export default {
   left: 0;
   right: 0;
   padding: 1rem;
-  z-index: 1000;
+  z-index: 100;
   pointer-events: none;
 }
 
