@@ -16,3 +16,4 @@ BUILD & RUN LOCAL
 
 BUILD & DEPLOY
     npm run build
+    npm run deploy
