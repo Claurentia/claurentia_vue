@@ -1,6 +1,6 @@
 <!-- src/components/Home.vue -->
 <template>
-  <div class="home-container">
+  <div class="home-container" id="home">
     <div class="content-wrapper">
       <div class="summary-box">
         <h1>Carmel Laurentia</h1>

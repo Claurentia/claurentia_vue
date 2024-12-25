@@ -5,9 +5,9 @@
         <img src="../assets/Cl_brand.png" alt="CL" class="brand-logo">
       </div>
       <div class="nav-links">
-        <a href="#home">Home</a>
-        <a href="#projects">Projects</a>
-        <a href="#minigames">Minigames</a>
+        <a @click="scrollToSection('home')" href="#" class="nav-link">Home</a>
+        <a @click="scrollToSection('projects')" href="#" class="nav-link">Projects</a>
+        <a @click="scrollToSection('minigames')" href="#" class="nav-link">Minigames</a>
       </div>
     </div>
   </nav>
@@ -15,7 +15,20 @@
 
 <script>
 export default {
-  name: 'NavBar'
+  name: 'NavBar',
+  methods: {
+    scrollToSection(sectionId) {
+      const mainElement = document.querySelector('main')
+      const section = document.getElementById(sectionId)
+      if (mainElement && section) {
+        const topOffset = section.offsetTop
+        mainElement.scrollTo({
+          top: topOffset,
+          behavior: 'smooth'
+        })
+      }
+    }
+  }
 }
 </script>
 
@@ -70,7 +83,7 @@ export default {
   gap: 3rem;
 }
 
-.nav-links a {
+.nav-link {
   color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
   font-size: 1rem;
@@ -78,9 +91,10 @@ export default {
   transition: all 0.3s ease;
   position: relative;
   letter-spacing: 0.5px;
+  cursor: pointer;
 }
 
-.nav-links a::after {
+.nav-link::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -95,12 +109,12 @@ export default {
   transition: width 0.3s ease;
 }
 
-.nav-links a:hover {
+.nav-link:hover {
   color: rgba(163, 255, 187, 0.9);
   text-shadow: 0 0 8px rgba(163, 255, 187, 0.3);
 }
 
-.nav-links a:hover::after {
+.nav-link:hover::after {
   width: 100%;
 }
 
@@ -114,8 +128,8 @@ export default {
     gap: 2rem;
   }
 
-  .nav-links a {
-    font-size: 1rem;
+  .nav-link {
+    font-size: 0.9rem;
   }
 }
 </style>

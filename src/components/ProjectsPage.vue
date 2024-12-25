@@ -18,7 +18,7 @@
           </div>
           <div class="project-links">
             <a :href="project.github" target="_blank" rel="noopener" class="project-link" v-if="project.github">
-              GitHub
+              Go to {{ project.repo }} repository >
             </a>
             <a :href="project.demo" target="_blank" rel="noopener" class="project-link" v-if="project.demo">
               Live Demo
@@ -37,14 +37,78 @@ export default {
     return {
       projects: [
         {
-          title: 'Project 1',
+          title: 'Personal Website',
           description: 'Description of project 1. Add details about what the project does and its key features.',
           image: '../assets/project1.jpg',
-          technologies: ['Vue.js', 'Node.js', 'MongoDB'],
-          github: 'https://github.com/yourusername/project1',
-          demo: 'https://project1-demo.com'
+          technologies: ['Vue.js', 'JavaScript', 'CSS'],
+          github: 'https://github.com/Claurentia/claurentia_vue',
+          repo: 'GitHub'
         },
-        // Add more projects here
+        {
+          title: 'Customer Feedback Analysis',
+          description: 'Description of project 1. Add details about what the project does and its key features.',
+          image: '../assets/project1.jpg',
+          technologies: ['Python', 'JavaScript', 'HTML', 'CSS'],
+          github: 'https://github.com/Nortus222/amazon-feedback-demo',
+          repo: 'GitHub'
+        },
+        {
+          title: 'Gourmet App UI/UX Design',
+          description: 'Description of project 1. Add details about what the project does and its key features.',
+          image: '../assets/project1.jpg',
+          technologies: ['Figma'],
+          github: 'https://github.com/ThePandaGroup/GourmetAppUXDesign',
+          repo: 'GitHub'
+        },
+        {
+          title: 'Eco-Panda',
+          description: 'Description of project 1. Add details about what the project does and its key features.',
+          image: '../assets/project1.jpg',
+          technologies: ['Flutter', 'Dart'],
+          github: 'https://github.com/yourusername/project1',
+          repo: 'GitHub'
+        },
+        {
+          title: 'Health Recorder Mobile App',
+          description: 'Description of project 1. Add details about what the project does and its key features.',
+          image: '../assets/project1.jpg',
+          technologies: ['Flutter', 'Dart', 'JavaScript'],
+          github: 'https://github.com/Claurentia/health-recorder',
+          repo: 'GitHub'
+        },
+        {
+          title: 'Panda-S E-commerce',
+          description: 'Description of project 1. Add details about what the project does and its key features.',
+          image: '../assets/project1.jpg',
+          technologies: ['Flutter', 'Dart', 'JavaScript'],
+          github: 'https://github.com/Claurentia/health-recorder',
+          repo: 'GitHub'
+        },
+        {
+          title: 'Simple Shell',
+          description: 'Description of project 1. Add details about what the project does and its key features.',
+          image: '../assets/project1.jpg',
+          technologies: ['C++'],
+          github: 'https://github.com/Claurentia/Simple-Shell',
+          repo: 'GitHub'
+        },
+        {
+          title: 'Covid Database',
+          description: 'Description of project 1. Add details about what the project does and its key features.',
+          image: '../assets/project1.jpg',
+          technologies: ['C++'],
+          github: 'https://github.com/Claurentia/Covid-Database',
+          repo: 'GitHub'
+        },
+        {
+          title: 'Trivia Game',
+          description: 'Description of project 1. Add details about what the project does and its key features.',
+          image: '../assets/project1.jpg',
+          technologies: ['C++'],
+          github: 'https://github.com/Claurentia/Trivia',
+          repo: 'GitHub'
+        },
+        
       ]
     }
   }

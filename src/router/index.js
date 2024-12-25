@@ -1,19 +1,41 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../components/HomePage.vue'
-// import About from '../components/About.vue'
-// import Projects from '../components/Projects.vue'
-// import Contact from '../components/Contact.vue'
+import HomePage from '../components/HomePage.vue'
+import ProjectsPage from '../components/ProjectsPage.vue'
+import MinigamesPage from '../components/MinigamesPage.vue'
 
 const routes = [
-  { path: '/', component: Home },
-  // { path: '/about', component: About },
-  // { path: '/projects', component: Projects },
-  // { path: '/contact', component: Contact }
+  {
+    path: '/',
+    name: 'Home',
+    component: HomePage
+  },
+  {
+    path: '/projects',
+    name: 'Projects',
+    component: ProjectsPage
+  },
+  {
+    path: '/minigames',
+    name: 'Minigames',
+    component: MinigamesPage
+  }
 ]
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    }
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth'
+      }
+    }
+    return { top: 0, behavior: 'smooth' }
+  }
 })
 
 export default router

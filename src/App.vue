@@ -8,9 +8,7 @@
       <ProjectsPage />
       <MinigamesPage />
     </main>
-    <footer>
-      <!-- Add footer component here later -->
-    </footer>
+    <FooterSection />
   </div>
 </template>
 
@@ -19,6 +17,7 @@ import HomePage from './components/HomePage.vue'
 import NavBar from './components/NavBar.vue'
 import ProjectsPage from './components/ProjectsPage.vue'
 import MinigamesPage from './components/MinigamesPage.vue'
+import FooterSection from './components/FooterSection.vue'
 
 export default {
   name: 'App',
@@ -26,7 +25,8 @@ export default {
     HomePage,
     NavBar,
     ProjectsPage,
-    MinigamesPage
+    MinigamesPage,
+    FooterSection
   }
 }
 </script>
