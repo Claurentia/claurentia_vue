@@ -3,7 +3,7 @@
     <h2 class="section-title">Projects</h2>
     <div class="projects-grid">
       <div class="project-card" v-for="(project, index) in projects" :key="index">
-        <div class="project-image">
+        <div class="project-image" :style="{ backgroundColor: project.color }">
           <img :src="project.image" :alt="project.title">
         </div>
         <div class="project-content">
@@ -18,7 +18,7 @@
           </div>
           <div class="project-links">
             <a :href="project.github" target="_blank" rel="noopener" class="project-link" v-if="project.github">
-              Go to {{ project.repo }} repository >
+              View on {{ project.repo }}
             </a>
             <a :href="project.demo" target="_blank" rel="noopener" class="project-link" v-if="project.demo">
               Live Demo
@@ -38,8 +38,9 @@ export default {
       projects: [
         {
           title: 'Personal Website',
-          description: 'Description of project 1. Add details about what the project does and its key features.',
-          image: '../assets/project1.jpg',
+          description: 'A responsive portfolio website built with Vue.js, featuring a modern UI design with smooth animations and dark theme. Showcases my projects, skills, and professional experience.',
+          image: require('@/assets/Cl_brand.png'),
+          color: '#2c3e50',
           technologies: ['Vue.js', 'JavaScript', 'CSS'],
           github: 'https://github.com/Claurentia/claurentia_vue',
           repo: 'GitHub'
@@ -47,15 +48,16 @@ export default {
         {
           title: 'Customer Feedback Analysis',
           description: 'Description of project 1. Add details about what the project does and its key features.',
-          image: '../assets/project1.jpg',
-          technologies: ['Python', 'JavaScript', 'HTML', 'CSS'],
-          github: 'https://github.com/Nortus222/amazon-feedback-demo',
+          image: require('@/assets/SeattleU.png'),
+          color: '#eeebe3',
+          technologies: ['Python', 'React.js', 'JavaScript', 'HTML', 'CSS'],
           repo: 'GitHub'
         },
         {
           title: 'Gourmet App UI/UX Design',
           description: 'Description of project 1. Add details about what the project does and its key features.',
-          image: '../assets/project1.jpg',
+          image: require('@/assets/Gourmet.png'),
+          color: '#fff4ef',
           technologies: ['Figma'],
           github: 'https://github.com/ThePandaGroup/GourmetAppUXDesign',
           repo: 'GitHub'
@@ -63,15 +65,17 @@ export default {
         {
           title: 'Eco-Panda',
           description: 'Description of project 1. Add details about what the project does and its key features.',
-          image: '../assets/project1.jpg',
+          image: require('@/assets/EcoPanda.png'),
+          color: '#f3fce5',
           technologies: ['Flutter', 'Dart'],
-          github: 'https://github.com/yourusername/project1',
+          github: 'https://github.com/ThePandaGroup/Eco-Panda',
           repo: 'GitHub'
         },
         {
           title: 'Health Recorder Mobile App',
           description: 'Description of project 1. Add details about what the project does and its key features.',
-          image: '../assets/project1.jpg',
+          image: require('@/assets/Cl_brand.png'),
+          color: '#34495e',
           technologies: ['Flutter', 'Dart', 'JavaScript'],
           github: 'https://github.com/Claurentia/health-recorder',
           repo: 'GitHub'
@@ -79,15 +83,17 @@ export default {
         {
           title: 'Panda-S E-commerce',
           description: 'Description of project 1. Add details about what the project does and its key features.',
-          image: '../assets/project1.jpg',
-          technologies: ['Flutter', 'Dart', 'JavaScript'],
-          github: 'https://github.com/Claurentia/health-recorder',
+          image: require('@/assets/Panda-S.png'),
+          color: '#fcfaeb',
+          technologies: ['Angular', 'TypeScript', 'MongoDB', 'HTML'],
+          github: 'https://github.com/ThePandaGroup/Panda-S-Angular',
           repo: 'GitHub'
         },
         {
           title: 'Simple Shell',
           description: 'Description of project 1. Add details about what the project does and its key features.',
-          image: '../assets/project1.jpg',
+          image: require('@/assets/Cl_brand.png'),
+          color: '#34495e',
           technologies: ['C++'],
           github: 'https://github.com/Claurentia/Simple-Shell',
           repo: 'GitHub'
@@ -95,7 +101,8 @@ export default {
         {
           title: 'Covid Database',
           description: 'Description of project 1. Add details about what the project does and its key features.',
-          image: '../assets/project1.jpg',
+          image: require('@/assets/Cl_brand.png'),
+          color: '#34495e',
           technologies: ['C++'],
           github: 'https://github.com/Claurentia/Covid-Database',
           repo: 'GitHub'
@@ -103,7 +110,8 @@ export default {
         {
           title: 'Trivia Game',
           description: 'Description of project 1. Add details about what the project does and its key features.',
-          image: '../assets/project1.jpg',
+          image: require('@/assets/Cl_brand.png'),
+          color: '#34495e',
           technologies: ['C++'],
           github: 'https://github.com/Claurentia/Trivia',
           repo: 'GitHub'
@@ -154,6 +162,7 @@ export default {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
+  align-items: stretch;
   height: 300px;
 }
 
@@ -165,15 +174,20 @@ export default {
 .project-image {
   width: 40%;
   min-width: 300px;
-  height: 100%;
+  height: auto;
   overflow: hidden;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .project-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: calc(100% - 2rem);
+  height: calc(100% - 2rem);
+  object-fit: contain;
   transition: transform 0.3s ease;
+  border-radius: 8px;
 }
 
 .project-card:hover .project-image img {
@@ -219,21 +233,42 @@ export default {
 .project-links {
   display: flex;
   gap: 1rem;
+  margin-top: auto;
 }
 
 .project-link {
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.9);
-  background: rgba(163, 255, 187, 0.1);
+  color: rgba(163, 255, 187, 0.9);
+  background: rgba(163, 255, 187, 0.05);
   border: 1px solid rgba(163, 255, 187, 0.2);
   transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .project-link:hover {
-  background: rgba(163, 255, 187, 0.2);
+  background: rgba(163, 255, 187, 0.15);
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(163, 255, 187, 0.1);
+}
+
+.project-link:active {
+  transform: translateY(0);
+}
+
+.project-link::after {
+  content: '↗';
+  font-size: 1.1rem;
+  transition: transform 0.2s ease;
+}
+
+.project-link:hover::after {
+  transform: translate(2px, -2px);
 }
 
 @media (max-width: 768px) {
@@ -254,6 +289,12 @@ export default {
     width: 100%;
     height: 200px;
     min-width: unset;
+    padding: 0.75rem;
+  }
+
+  .project-image img {
+    width: calc(100% - 1.5rem);
+    height: calc(100% - 1.5rem);
   }
 
   .project-content {

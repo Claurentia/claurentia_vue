@@ -4,11 +4,17 @@
     <div class="content-wrapper">
       <div class="summary-box">
         <h1>Carmel Laurentia</h1>
+        <!-- contact info -->
         <p>
-          Software Engineer passionate about creating elegant solutions to complex problems.
-          Experienced in full-stack development with expertise in modern web technologies.
+          Software Engineer with expertise in full-stack development and a strong foundation in computer science. Currently pursuing a Master's degree at Seattle University, with a keen interest in exploring innovative solutions at the intersection of AI and customer experience.
         </p>
-        <!-- Add more summary content as needed -->
+        <p className="leading-relaxed">
+          Through my experience developing a customer feedback analysis platform at Amazon, I discovered my passion for creating technology that enhances user experiences. I'm particularly interested in leveraging AI and modern technologies to build scalable solutions that drive meaningful impact in how people interact with software.
+        </p>
+        
+        <p className="leading-relaxed">
+          With a diverse technical toolkit spanning C/C++, Python, and modern web technologies, I pride myself on my adaptability and quick learning ability. My experience in both academic and professional settings has honed my skills in areas ranging from penetration testing to full-stack application development.
+        </p>
       </div>
       <div class="profile-circle">
         <div class="image-container">
@@ -31,26 +37,32 @@ export default {
   background-image: url('../assets/foxhillaurora.png');
   background-size: cover;
   background-position: center;
-  height: 100dvh;
+  min-height: 100dvh;
+  height: auto;
   display: flex;
   align-items: flex-start;
+  position: relative;
+  background-color: rgba(1, 0, 18, 1);
+  justify-content: center;
 }
 
 .content-wrapper {
   max-width: 1200px;
   width: 100%;
-  margin: 20dvh auto 0;
+  margin-top: 20dvh;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 0 2rem;
+  flex-wrap: wrap;
+  gap: 4rem;
 }
 
 .summary-box {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
   padding: 1.5rem;
   border-radius: 10px;
-  max-width: 500px;
+  max-width: 700px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -228,7 +240,8 @@ export default {
 /* Responsive design */
 @media (max-width: 768px) {
   .content-wrapper {
-    flex-direction: column;
+    flex-direction: column-reverse;
+    justify-content: center;
     gap: 2rem;
   }
 
