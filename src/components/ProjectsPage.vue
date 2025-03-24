@@ -79,7 +79,7 @@ export default {
         },
         {
           title: 'Eco-Panda',
-          description: 'Description of project 1. Add details about what the project does and its key features.',
+          description: 'Eco Panda is a Flutter-based mobile application designed to encourage environmentally friendly transportation choices and track users\' carbon footprint. The app gamifies eco-friendly travel by rewarding users with points for choosing sustainable transportation options. It features route planning and navigation, carbon footprint tracking, challenges and rewards, a leaderboard system, and a customizable user profile. The app is built with Flutter for cross-platform compatibility, integrates Firebase for authentication and cloud functions, and uses a local SQLite database for data persistence.',
           image: require('@/assets/EcoPanda.png'),
           color: '#f3fce5',
           technologies: ['Flutter', 'Dart', 'Firebase'],
@@ -88,7 +88,7 @@ export default {
         },
         {
           title: 'Health Recorder Mobile App',
-          description: 'Description of project 1. Add details about what the project does and its key features.',
+          description: 'A comprehensive Flutter application for tracking personal health and wellness activities, featuring emotion logging, diet tracking, and workout recording capabilities. It includes gamification elements, multi-language support, and a provider-based architecture for efficient data management and user experience.',
           image: require('@/assets/Cl_brand.png'),
           color: '#34495e',
           technologies: ['Flutter', 'Dart', 'JavaScript', 'Firebase'],

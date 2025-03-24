@@ -87,53 +87,53 @@ export default defineComponent({
           </svg>
           `
         },
-        {
-          title: 'Memory Match',
-          description: 'Find matching pairs of cards in this classic memory game. Test and improve your memory skills!',
-          icon: `
-            <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke-width="1">
-              <rect x="4" y="4" width="6" height="7" rx="1" stroke="rgba(163, 255, 187, 0.9)" fill="rgba(163, 255, 187, 0.1)"/>
-              <path d="M5.5 7.5h3M7 6v3" stroke="rgba(163, 255, 187, 0.9)" stroke-width="0.8"/>
-              <rect x="14" y="4" width="6" height="7" rx="1" stroke="rgba(163, 255, 187, 0.9)" fill="rgba(163, 255, 187, 0.1)"/>
-              <circle cx="17" cy="7.5" r="1.5" stroke="rgba(163, 255, 187, 0.9)" fill="none"/>
-              <rect x="4" y="13" width="6" height="7" rx="1" stroke="rgba(163, 255, 187, 0.9)" fill="rgba(163, 255, 187, 0.1)"/>
-              <circle cx="7" cy="16.5" r="1.5" stroke="rgba(163, 255, 187, 0.9)" fill="none"/>
-              <rect x="14" y="13" width="6" height="7" rx="1" stroke="rgba(163, 255, 187, 0.9)" fill="rgba(163, 255, 187, 0.1)"/>
-              <path d="M15.5 16.5h3M17 15v3" stroke="rgba(163, 255, 187, 0.9)" stroke-width="0.8"/>
-            </svg>
-          `
-        },
-        {
-          title: 'Tetris',
-          description: 'Arrange falling blocks to create complete lines. The ultimate test of spatial awareness and quick thinking.',
-          icon: `
-            <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke-width="1">
-            <rect x="3" y="3" width="18" height="18" stroke="rgba(163, 255, 187, 0.4)" fill="none"/>
-            <rect x="7" y="5" width="3" height="3" fill="rgba(163, 255, 187, 0.9)"/>
-            <rect x="10" y="5" width="3" height="3" fill="rgba(163, 255, 187, 0.9)"/>
-            <rect x="13" y="5" width="3" height="3" fill="rgba(163, 255, 187, 0.9)"/>
-            <rect x="10" y="8" width="3" height="3" fill="rgba(163, 255, 187, 0.9)"/>
-            <rect x="7" y="13" width="3" height="3" fill="rgba(163, 255, 187, 0.2)"/>
-            <rect x="10" y="13" width="3" height="3" fill="rgba(163, 255, 187, 0.2)"/>
-            <line x1="3" y1="18" x2="21" y2="18" stroke="rgba(163, 255, 187, 0.4)" stroke-dasharray="2,2"/>
-          </svg>
-          `
-        },
-        {
-          title: 'Pong',
-          description: 'The original arcade classic! Keep the ball in play and score points in this simple yet addictive game.',
-          icon: `
-            <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke-width="1">
-            <rect x="3" y="3" width="18" height="18" stroke="rgba(163, 255, 187, 0.4)" fill="none"/>
-            <rect x="4" y="8" width="1.5" height="8" fill="rgba(163, 255, 187, 0.9)"/>
-            <rect x="18.5" y="8" width="1.5" height="8" fill="rgba(163, 255, 187, 0.9)"/>
-            <circle cx="12" cy="12" r="1" fill="rgba(163, 255, 187, 0.9)"/>
-            <path d="M12 12L14 10" stroke="rgba(163, 255, 187, 0.4)" stroke-width="0.8" stroke-dasharray="0.8,0.8"/>
-            <text x="8" y="7" font-size="3" fill="rgba(163, 255, 187, 0.4)" font-family="sans-serif">0</text>
-            <text x="16" y="7" font-size="3" fill="rgba(163, 255, 187, 0.4)" font-family="sans-serif">0</text>
-          </svg>
-          `
-        }
+      //   {
+      //     title: 'Memory Match',
+      //     description: 'Find matching pairs of cards in this classic memory game. Test and improve your memory skills!',
+      //     icon: `
+      //       <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke-width="1">
+      //         <rect x="4" y="4" width="6" height="7" rx="1" stroke="rgba(163, 255, 187, 0.9)" fill="rgba(163, 255, 187, 0.1)"/>
+      //         <path d="M5.5 7.5h3M7 6v3" stroke="rgba(163, 255, 187, 0.9)" stroke-width="0.8"/>
+      //         <rect x="14" y="4" width="6" height="7" rx="1" stroke="rgba(163, 255, 187, 0.9)" fill="rgba(163, 255, 187, 0.1)"/>
+      //         <circle cx="17" cy="7.5" r="1.5" stroke="rgba(163, 255, 187, 0.9)" fill="none"/>
+      //         <rect x="4" y="13" width="6" height="7" rx="1" stroke="rgba(163, 255, 187, 0.9)" fill="rgba(163, 255, 187, 0.1)"/>
+      //         <circle cx="7" cy="16.5" r="1.5" stroke="rgba(163, 255, 187, 0.9)" fill="none"/>
+      //         <rect x="14" y="13" width="6" height="7" rx="1" stroke="rgba(163, 255, 187, 0.9)" fill="rgba(163, 255, 187, 0.1)"/>
+      //         <path d="M15.5 16.5h3M17 15v3" stroke="rgba(163, 255, 187, 0.9)" stroke-width="0.8"/>
+      //       </svg>
+      //     `
+      //   },
+      //   {
+      //     title: 'Tetris',
+      //     description: 'Arrange falling blocks to create complete lines. The ultimate test of spatial awareness and quick thinking.',
+      //     icon: `
+      //       <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke-width="1">
+      //       <rect x="3" y="3" width="18" height="18" stroke="rgba(163, 255, 187, 0.4)" fill="none"/>
+      //       <rect x="7" y="5" width="3" height="3" fill="rgba(163, 255, 187, 0.9)"/>
+      //       <rect x="10" y="5" width="3" height="3" fill="rgba(163, 255, 187, 0.9)"/>
+      //       <rect x="13" y="5" width="3" height="3" fill="rgba(163, 255, 187, 0.9)"/>
+      //       <rect x="10" y="8" width="3" height="3" fill="rgba(163, 255, 187, 0.9)"/>
+      //       <rect x="7" y="13" width="3" height="3" fill="rgba(163, 255, 187, 0.2)"/>
+      //       <rect x="10" y="13" width="3" height="3" fill="rgba(163, 255, 187, 0.2)"/>
+      //       <line x1="3" y1="18" x2="21" y2="18" stroke="rgba(163, 255, 187, 0.4)" stroke-dasharray="2,2"/>
+      //     </svg>
+      //     `
+      //   },
+      //   {
+      //     title: 'Pong',
+      //     description: 'The original arcade classic! Keep the ball in play and score points in this simple yet addictive game.',
+      //     icon: `
+      //       <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke-width="1">
+      //       <rect x="3" y="3" width="18" height="18" stroke="rgba(163, 255, 187, 0.4)" fill="none"/>
+      //       <rect x="4" y="8" width="1.5" height="8" fill="rgba(163, 255, 187, 0.9)"/>
+      //       <rect x="18.5" y="8" width="1.5" height="8" fill="rgba(163, 255, 187, 0.9)"/>
+      //       <circle cx="12" cy="12" r="1" fill="rgba(163, 255, 187, 0.9)"/>
+      //       <path d="M12 12L14 10" stroke="rgba(163, 255, 187, 0.4)" stroke-width="0.8" stroke-dasharray="0.8,0.8"/>
+      //       <text x="8" y="7" font-size="3" fill="rgba(163, 255, 187, 0.4)" font-family="sans-serif">0</text>
+      //       <text x="16" y="7" font-size="3" fill="rgba(163, 255, 187, 0.4)" font-family="sans-serif">0</text>
+      //     </svg>
+      //     `
+      //   }
       ]
     }
   },

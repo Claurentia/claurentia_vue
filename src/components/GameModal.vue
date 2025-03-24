@@ -9,12 +9,14 @@
 <script>
 import TicTacToe from '../games/TicTacToe/TicTacToe.vue'
 import SnakeGame from '../games/Snake/Snake.vue'
+import TwentyFortyEight from '../games/2048/Game2048.vue'
 
 export default {
   name: 'GameModal',
   components: {
     TicTacToe,
-    SnakeGame
+    SnakeGame,
+    TwentyFortyEight
   },
   props: {
     gameName: {
@@ -26,7 +28,8 @@ export default {
     currentGame() {
       const games = {
         'Tic Tac Toe': 'TicTacToe',
-        'Snake': 'SnakeGame'
+        'Snake': 'SnakeGame',
+        '2048': 'TwentyFortyEight'
       }
       return games[this.gameName]
     }
