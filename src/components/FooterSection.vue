@@ -2,10 +2,8 @@
   <footer class="footer">
     <div class="footer-content">
       <button @click="scrollToTop" class="scroll-top-button" :class="{ visible: showButton }">
-        <svg class="arrow-up" viewBox="0 0 24 24" width="24" height="24">
-          <path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
-        </svg>
-        Return to Top
+        <span class="btn-icon">▲</span>
+        <span class="btn-text">[ RETURN_TO_TOP ]</span>
       </button>
     </div>
   </footer>
@@ -54,7 +52,7 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 1rem;
+  padding: 1.5rem;
   z-index: 100;
   pointer-events: none;
 }
@@ -67,26 +65,24 @@ export default {
 }
 
 .scroll-top-button {
-  background: linear-gradient(
-    to right,
-    rgba(163, 255, 187, 0.2),
-    rgba(115, 255, 160, 0.2)
-  );
-  border: 1px solid rgba(163, 255, 187, 0.3);
-  color: rgba(163, 255, 187, 0.9);
+  background: var(--color-bg-charcoal);
+  border: 3px solid var(--color-terminal-green);
+  color: var(--color-terminal-green);
   padding: 0.8rem 1.5rem;
-  border-radius: 25px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 1rem;
-  backdrop-filter: blur(8px);
-  transition: all 0.3s ease;
+  gap: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  transition: all 0.1s ease;
   transform: translateY(100px);
   opacity: 0;
   pointer-events: auto;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 0 20px rgba(0, 255, 65, 0.3),
+    inset 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .scroll-top-button.visible {
@@ -95,30 +91,41 @@ export default {
 }
 
 .scroll-top-button:hover {
-  background: linear-gradient(
-    to right,
-    rgba(163, 255, 187, 0.3),
-    rgba(115, 255, 160, 0.3)
-  );
-  transform: translateY(-2px);
+  background: var(--color-earth-olive);
+  color: var(--color-yellow-highlight);
+  box-shadow:
+    0 0 30px rgba(0, 255, 65, 0.5),
+    inset 0 0 10px rgba(0, 0, 0, 0.5);
+  transform: translateY(-3px);
 }
 
-.arrow-up {
-  transition: transform 0.3s ease;
+.scroll-top-button:active {
+  transform: translateY(1px);
 }
 
-.scroll-top-button:hover .arrow-up {
-  transform: translateY(-2px);
+.btn-icon {
+  font-size: 1.2rem;
+  color: var(--color-neon-orange);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.btn-text {
+  text-transform: uppercase;
 }
 
 @media (max-width: 768px) {
   .footer {
-    padding: 0.8rem;
+    padding: 1rem;
   }
 
   .scroll-top-button {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
   }
 }
 </style> 

@@ -1,43 +1,93 @@
 <template>
   <div class="projects-container" id="projects">
-    <h2 class="section-title">Projects</h2>
-    <div class="projects-grid">
-      <div class="project-card" 
-           v-for="(project, index) in projects" 
-           :key="index"
-           :class="{ expanded: expandedProjects[index] }">
-        <div class="project-image" :style="{ backgroundColor: project.color }">
-          <img :src="project.image" :alt="project.title">
+    <!-- Cassette Player Header -->
+    <div class="cassette-player">
+      <div class="player-header">
+        <div class="player-title">[TRACK LIST]</div>
+        <div class="player-controls">
+          <button class="control-button" @click="scrollProjects('left')">
+            <span class="control-icon">◄◄</span>
+          </button>
+          <button class="control-button play-btn">
+            <span class="control-icon">▶</span>
+          </button>
+          <button class="control-button">
+            <span class="control-icon">■</span>
+          </button>
+          <button class="control-button" @click="scrollProjects('right')">
+            <span class="control-icon">►►</span>
+          </button>
         </div>
-        <div class="project-content">
-          <div class="project-header">
-            <h3>{{ project.title }}</h3>
-            <a v-if="project.github" 
-               :href="project.github" 
-               target="_blank" 
-               rel="noopener" 
-               class="github-link">
-              <i class="fab fa-github"></i>
-              View Code
-            </a>
+      </div>
+      <div class="track-counter">
+        TRACK {{ currentTrack.toString().padStart(2, '0') }} / {{ projects.length.toString().padStart(2, '0') }}
+      </div>
+    </div>
+
+    <!-- Horizontal Scrolling Track List -->
+    <div class="tracks-wrapper">
+      <div class="projects-grid" ref="projectsGrid">
+        <!-- Track Card -->
+        <div class="track-card"
+             v-for="(project, index) in projects"
+             :key="index"
+             :class="{ expanded: expandedProjects[index] }">
+
+          <!-- Track Header -->
+          <div class="track-header">
+            <div class="track-number">{{ 'TRACK_' + (index + 1).toString().padStart(2, '0') }}</div>
+            <div class="track-led" :class="{ active: index === currentTrack - 1 }"></div>
           </div>
-          <p :class="{ expanded: expandedProjects[index] }">
-            {{ expandedProjects[index] ? project.description : truncateText(project.description) }}
-            <button 
-              v-if="shouldShowReadMore(project.description)" 
-              @click="toggleDescription(index)" 
-              class="read-more-btn"
+
+          <!-- Track Info Panel -->
+          <div class="track-info">
+            <div class="track-title-bar">
+              <span class="track-label">TITLE:</span>
+              <span class="track-value">{{ project.title.toUpperCase() }}</span>
+            </div>
+
+            <!-- Description with typewriter effect on hover -->
+            <div class="track-description" :class="{ expanded: expandedProjects[index] }">
+              <span class="desc-prompt">></span>
+              <span class="desc-text">
+                {{ expandedProjects[index] ? project.description : truncateText(project.description) }}
+              </span>
+            </div>
+
+            <button
+              v-if="shouldShowReadMore(project.description)"
+              @click="toggleDescription(index)"
+              class="expand-btn"
             >
-              {{ expandedProjects[index] ? 'Read Less' : 'Read More' }}
+              {{ expandedProjects[index] ? '[COLLAPSE]' : '[EXPAND...]' }}
             </button>
-          </p>
-          <div class="tech-stack">
-            <span v-for="(tech, techIndex) in project.technologies" 
-                  :key="techIndex" 
-                  class="tech-tag">
-              {{ tech }}
-            </span>
+
+            <!-- Tech Stack as Terminal Tags -->
+            <div class="tech-display">
+              <div class="tech-label">TECH_STACK:</div>
+              <div class="tech-tags">
+                <span v-for="(tech, techIndex) in project.technologies"
+                      :key="techIndex"
+                      class="tech-chip">
+                  {{ tech }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="track-actions">
+              <a v-if="project.github"
+                 :href="project.github"
+                 target="_blank"
+                 rel="noopener"
+                 class="action-btn">
+                <span class="btn-bracket">[</span> VIEW_SOURCE <span class="btn-bracket">]</span>
+              </a>
+            </div>
           </div>
+
+          <!-- Cassette Tape Hiss Effect -->
+          <div class="tape-hiss"></div>
         </div>
       </div>
     </div>
@@ -49,7 +99,8 @@ export default {
   name: 'ProjectsPage',
   data() {
     return {
-      expandedProjects: Array(10).fill(false),  // Initialize with false for each project
+      expandedProjects: Array(10).fill(false),
+      currentTrack: 1,
       projects: [
         {
           title: 'Personal Website',
@@ -137,7 +188,6 @@ export default {
   },
   methods: {
     toggleDescription(index) {
-      // Create a new array with the toggled value
       const newExpandedProjects = [...this.expandedProjects]
       newExpandedProjects[index] = !newExpandedProjects[index]
       this.expandedProjects = newExpandedProjects
@@ -150,6 +200,19 @@ export default {
         return text.slice(0, 200) + '... '
       }
       return text
+    },
+    scrollProjects(direction) {
+      const grid = this.$refs.projectsGrid
+      if (!grid) return
+
+      const scrollAmount = 400
+      if (direction === 'left') {
+        grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' })
+        if (this.currentTrack > 1) this.currentTrack--
+      } else {
+        grid.scrollBy({ left: scrollAmount, behavior: 'smooth' })
+        if (this.currentTrack < this.projects.length) this.currentTrack++
+      }
     }
   }
 }
@@ -158,204 +221,373 @@ export default {
 <style scoped>
 .projects-container {
   min-height: 100dvh;
-  padding: 6rem 2rem;
-  background: linear-gradient(
-    to bottom,
-    rgba(1, 0, 18, 1),
-    rgba(1, 0, 18, 0.95),
-    rgba(28, 36, 54, 0.95) 50%,
-    rgba(18, 24, 38, 0.95)
-  );
-}
-
-.section-title {
-  text-align: center;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.projects-grid {
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 10rem 2rem 4rem;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      var(--color-bg-dark) 0px,
+      var(--color-bg-dark) 2px,
+      var(--color-bg-charcoal) 2px,
+      var(--color-bg-charcoal) 4px
+    );
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 2rem;
-  padding: 1rem;
 }
 
-.project-card {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(163, 255, 187, 0.1);
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* Cassette Player Controls */
+.cassette-player {
+  background: var(--color-bg-charcoal);
+  border: 3px solid var(--color-earth-olive);
+  padding: 1.5rem;
+  max-width: 800px;
+  width: 100%;
+  box-shadow:
+    0 0 20px rgba(0, 255, 65, 0.2),
+    inset 0 0 30px rgba(0, 0, 0, 0.8);
+}
+
+.player-header {
   display: flex;
-  align-items: stretch;
-  height: 300px;
-}
-
-.project-card.expanded {
-  height: auto;
-  min-height: 300px;
-  transition: all 0.3s ease;
-}
-
-.project-image {
-  width: 40%;
-  min-width: 300px;
-  height: auto;
-  overflow: hidden;
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.project-image img {
-  width: calc(100% - 2rem);
-  height: calc(100% - 2rem);
-  object-fit: contain;
-  transition: transform 0.3s ease;
-  border-radius: 8px;
-}
-
-.project-card:hover .project-image img {
-  transform: scale(1.05);
-}
-
-.project-content {
-  padding: 2rem 2rem 1.5rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.project-header {
-  display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.project-header h3 {
-  color: rgba(255, 255, 255, 0.9);
-  margin: 0;
-  font-size: 1.4rem;
-  flex: 1;
-}
-
-.github-link {
-  display: flex;
   align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--color-earth-olive);
+}
+
+.player-title {
+  font-family: var(--font-retro);
+  font-size: 1.5rem;
+  color: var(--color-terminal-green);
+  text-shadow: 0 0 10px var(--color-terminal-green);
+}
+
+.player-controls {
+  display: flex;
   gap: 0.5rem;
-  text-decoration: none;
-  color: rgba(163, 255, 187, 0.9);
-  font-size: 0.9rem;
-  padding: 0.4rem 0.8rem;
-  border-radius: 20px;
-  background: rgba(163, 255, 187, 0.1);
-  border: 1px solid rgba(163, 255, 187, 0.2);
-  transition: all 0.3s ease;
-  white-space: nowrap;
 }
 
-.github-link i {
-  font-size: 1rem;
-}
-
-.github-link:hover {
-  background: rgba(163, 255, 187, 0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.project-content p {
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
+.control-button {
+  background: var(--color-bg-dark);
+  border: 2px solid var(--color-terminal-green);
+  color: var(--color-terminal-green);
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  transition: all 0.1s;
   position: relative;
 }
 
-.project-content p:not(.expanded) {
+.control-button:hover {
+  background: var(--color-earth-olive);
+  color: var(--color-yellow-highlight);
+  box-shadow: 0 0 15px var(--color-terminal-green);
+}
+
+.control-button:active {
+  transform: translateY(3px);
+}
+
+.control-icon {
+  font-size: 1.2rem;
+}
+
+.play-btn {
+  background: var(--color-earth-olive);
+}
+
+.track-counter {
+  font-family: var(--font-mono);
+  color: var(--color-neon-orange);
+  font-size: 1.2rem;
+  text-align: center;
+  letter-spacing: 3px;
+}
+
+/* Tracks Wrapper */
+.tracks-wrapper {
+  width: 100%;
+  max-width: 1400px;
+  position: relative;
+}
+
+.projects-grid {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  padding: 2rem 1rem;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+
+/* Hide scrollbar but keep functionality */
+.projects-grid::-webkit-scrollbar {
+  height: 8px;
+}
+
+.projects-grid::-webkit-scrollbar-track {
+  background: var(--color-bg-dark);
+  border: 1px solid var(--color-earth-olive);
+}
+
+.projects-grid::-webkit-scrollbar-thumb {
+  background: var(--color-terminal-green);
+  box-shadow: 0 0 5px var(--color-terminal-green);
+}
+
+/* Track Card */
+.track-card {
+  min-width: 450px;
+  max-width: 450px;
+  background: var(--color-bg-dark);
+  border: 3px solid var(--color-terminal-green);
+  box-shadow:
+    0 0 15px rgba(0, 255, 65, 0.2),
+    inset 0 0 20px rgba(0, 0, 0, 0.9);
+  scroll-snap-align: start;
+  transition: all 0.3s;
+  position: relative;
   overflow: hidden;
 }
 
-.read-more-btn {
+.track-card.expanded {
+  min-height: auto;
+}
+
+.track-card:hover {
+  box-shadow:
+    0 0 25px rgba(0, 255, 65, 0.4),
+    inset 0 0 20px rgba(0, 0, 0, 0.9);
+  transform: translateY(-5px);
+}
+
+/* Track Header */
+.track-header {
+  background: var(--color-bg-charcoal);
+  border-bottom: 2px solid var(--color-terminal-green);
+  padding: 0.8rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.track-number {
+  font-family: var(--font-retro);
+  color: var(--color-neon-orange);
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+}
+
+.track-led {
+  width: 12px;
+  height: 12px;
+  background: var(--color-red-error);
+  border-radius: 50%;
+  box-shadow: 0 0 5px var(--color-red-error);
+}
+
+.track-led.active {
+  background: var(--color-terminal-green);
+  box-shadow: 0 0 15px var(--color-terminal-green);
+  animation: pulse-led 1.5s infinite;
+}
+
+/* Track Info */
+.track-info {
+  padding: 1.5rem;
+  font-family: var(--font-mono);
+}
+
+.track-title-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-earth-olive);
+}
+
+.track-label {
+  color: var(--color-neon-orange);
+  font-size: 0.9rem;
+}
+
+.track-value {
+  color: var(--color-terminal-green);
+  font-size: 0.9rem;
+  text-shadow: 0 0 5px var(--color-terminal-green);
+}
+
+.track-description {
+  color: var(--color-terminal-green);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  max-height: 120px;
+  overflow: hidden;
+}
+
+.track-description.expanded {
+  max-height: none;
+}
+
+.desc-prompt {
+  color: var(--color-neon-orange);
+  margin-right: 0.5rem;
+}
+
+.desc-text {
+  color: var(--color-terminal-green);
+}
+
+.expand-btn {
   background: none;
   border: none;
-  color: rgba(163, 255, 187, 0.9);
+  color: var(--color-neon-teal);
+  font-family: var(--font-mono);
   cursor: pointer;
-  padding: 0;
-  font-size: 0.9rem;
-  margin-left: 0.5rem;
-  transition: color 0.3s ease;
-  display: inline;
-  text-decoration: underline;
+  padding: 0.5rem 0;
+  font-size: 0.8rem;
+  transition: all 0.1s;
+  display: block;
+  margin-bottom: 1rem;
 }
 
-.read-more-btn:hover {
-  color: rgba(163, 255, 187, 1);
+.expand-btn:hover {
+  color: var(--color-yellow-highlight);
+  text-shadow: 0 0 5px var(--color-yellow-highlight);
 }
 
-.tech-stack {
+/* Tech Display */
+.tech-display {
+  margin: 1rem 0;
+}
+
+.tech-label {
+  color: var(--color-neon-orange);
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.tech-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 0;
 }
 
-.tech-tag {
-  background: rgba(163, 255, 187, 0.1);
-  color: rgba(163, 255, 187, 0.9);
-  padding: 0.2rem 0.6rem;
-  border-radius: 15px;
-  font-size: 0.8rem;
-  border: 1px solid rgba(163, 255, 187, 0.2);
+.tech-chip {
+  background: var(--color-bg-charcoal);
+  border: 1px solid var(--color-earth-olive);
+  color: var(--color-terminal-green);
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
 }
 
+/* Track Actions */
+.track-actions {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-earth-olive);
+}
+
+.action-btn {
+  background: var(--color-bg-charcoal);
+  border: 2px solid var(--color-terminal-green);
+  color: var(--color-terminal-green);
+  padding: 0.6rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.action-btn:hover {
+  background: var(--color-terminal-green);
+  color: var(--color-bg-dark);
+  box-shadow: 0 0 15px var(--color-terminal-green);
+}
+
+.btn-bracket {
+  color: var(--color-neon-orange);
+}
+
+/* Tape Hiss Effect */
+.tape-hiss {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-amber);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.track-card:hover .tape-hiss {
+  opacity: 0.7;
+  animation: tape-scroll 2s linear infinite;
+}
+
+@keyframes tape-scroll {
+  0% { background-position: 0 0; }
+  100% { background-position: 20px 0; }
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
   .projects-container {
-    padding: 4rem 1rem;
+    padding: 8rem 1rem 2rem;
   }
 
-  .section-title {
-    font-size: 2rem;
+  .cassette-player {
+    padding: 1rem;
   }
 
-  .project-card {
+  .player-header {
     flex-direction: column;
-    height: auto;
+    gap: 1rem;
   }
 
-  .project-image {
-    width: 100%;
-    height: 200px;
-    min-width: unset;
-    padding: 0.75rem;
+  .player-title {
+    font-size: 1.2rem;
   }
 
-  .project-image img {
-    width: calc(100% - 1.5rem);
-    height: calc(100% - 1.5rem);
+  .control-button {
+    width: 40px;
+    height: 40px;
   }
 
-  .project-content {
-    padding: 1.5rem;
+  .track-counter {
+    font-size: 1rem;
   }
 
-  .project-header {
+  .track-card {
+    min-width: 320px;
+    max-width: 320px;
+  }
+
+  .track-info {
+    padding: 1rem;
+  }
+
+  .track-title-bar {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+    gap: 0.3rem;
   }
 
-  .github-link {
+  .track-description {
     font-size: 0.8rem;
+    max-height: 100px;
+  }
+
+  .tech-chip {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
   }
 }
 </style> 
