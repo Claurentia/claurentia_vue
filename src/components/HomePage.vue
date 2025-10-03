@@ -24,14 +24,16 @@
           Copied to clipboard!
         </div>
         <p>
-          Software Engineer with expertise in full-stack development and a strong foundation in computer science. Currently pursuing a Master's degree at Seattle University, with a keen interest in exploring innovative solutions at the intersection of AI and customer experience.
+          Software Engineer pursuing my Master's in Computer Science at Seattle University, where I'm also serving as a Teaching Assistant. Most recently, I led cross-functional development teams at MyStage Music, a startup focused on empowering local artists through technology.
         </p>
-        <p className="leading-relaxed">
-          Through my experience developing a customer feedback analysis platform at Amazon, I discovered my passion for creating technology that enhances user experiences. I'm particularly interested in leveraging AI and modern technologies to build scalable solutions that drive meaningful impact in how people interact with software.
+        <p>
+          My journey into tech leadership started with hands-on full-stack development—from building AI-powered customer feedback systems at Amazon to gaining hands-on experience in penetration testing and vulnerability assessment at PT Astra Honda Motor. Leading a team at an early-stage startup showed me the impact that small, driven teams can have when building mission-driven products.
         </p>
-        
-        <p className="leading-relaxed">
-          With a diverse technical toolkit spanning C/C++, Python, and modern web technologies, I pride myself on my adaptability and quick learning ability. My experience in both academic and professional settings has honed my skills in areas ranging from penetration testing to full-stack application development.
+        <p>
+          I specialize in modern web technologies (React, Node.js, Python) and cloud platforms (AWS, Azure), but my real strength is adaptability—quickly learning new tools and translating complex business needs into scalable technical solutions. Whether it's sprint planning, code reviews, or stakeholder collaboration, I thrive at the intersection of technical excellence and meaningful impact.
+        </p>
+        <p>
+          Beyond code, I'm passionate about technology's transformative potential—a perspective shaped by my father's stories of workplace innovation and reinforced by my family's unwavering support. Currently seeking opportunities in early-stage startups where I can contribute to mission-driven products while growing as both an engineer and leader.
         </p>
       </div>
       <div class="profile-circle">
