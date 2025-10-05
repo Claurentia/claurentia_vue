@@ -1,3 +1,4 @@
+<!-- src/components/GameModal.vue -->
 <template>
   <div class="modal-backdrop" @click="$emit('close')">
     <div class="modal-content" @click.stop>
@@ -50,12 +51,17 @@ export default {
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  padding: 1rem;
+  overflow-y: auto;
 }
 
 .modal-content {
   width: 100%;
-  max-width: 800px;
-  margin: 2rem;
+  max-width: 1400px;
+  max-height: 95vh;
+  /* overflow-y: auto; */
+  display: flex;
+  flex-direction: column;
   animation: modal-in 0.3s ease-out;
 }
 
@@ -71,8 +77,12 @@ export default {
 }
 
 @media (max-width: 768px) {
+  .modal-backdrop {
+    padding: 0.5rem;
+  }
+
   .modal-content {
-    margin: 1rem;
+    max-height: 98vh;
   }
 }
 </style> 

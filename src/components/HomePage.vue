@@ -10,10 +10,23 @@
     </div>
 
     <div class="content-wrapper">
-      <!-- Terminal Data Cards Grid -->
-      <div class="data-cards-grid">
-        <!-- Identity Card -->
-        <div class="terminal-card">
+      <div class="bento-grid">
+        <div class="terminal-card profile-card">
+          <div class="card-header">
+            <span class="card-led active"></span>
+            <span class="card-title">[PROFILE.IMG]</span>
+          </div>
+          <div class="card-body profile-body">
+            <div class="crt-frame">
+              <div class="profile-image-container">
+                <img src="../assets/profile.jpg" alt="Profile" class="profile-image">
+              </div>
+              <div class="scan-overlay"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="terminal-card identity-card">
           <div class="card-header">
             <span class="card-led active"></span>
             <span class="card-title">[IDENTITY]</span>
@@ -38,8 +51,7 @@
           </div>
         </div>
 
-        <!-- Contact Card -->
-        <div class="terminal-card">
+        <div class="terminal-card contact-card">
           <div class="card-header">
             <span class="card-led active"></span>
             <span class="card-title">[CONTACT]</span>
@@ -66,34 +78,52 @@
           </div>
         </div>
 
-        <!-- Skills Card -->
-        <div class="terminal-card">
+        <div class="terminal-card skills-card">
           <div class="card-header">
             <span class="card-led active"></span>
             <span class="card-title">[SKILLS]</span>
           </div>
           <div class="card-body">
-            <div class="skill-bar">
-              <span class="skill-label">FULLSTACK_DEV</span>
-              <div class="bar"><div class="fill" style="width: 95%"></div></div>
+            <div class="skill-column">
+              <div class="skill-bar">
+                <span class="skill-label">FULLSTACK_DEV</span>
+                <div class="bar"><div class="fill" style="width: 95%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">CLOUD_ARCH___</span>
+                <div class="bar"><div class="fill" style="width: 85%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">TEAM_LEAD____</span>
+                <div class="bar"><div class="fill" style="width: 90%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">ADAPTABILITY_</span>
+                <div class="bar"><div class="fill" style="width: 98%"></div></div>
+              </div>
             </div>
-            <div class="skill-bar">
-              <span class="skill-label">CLOUD_ARCH___</span>
-              <div class="bar"><div class="fill" style="width: 85%"></div></div>
-            </div>
-            <div class="skill-bar">
-              <span class="skill-label">TEAM_LEAD____</span>
-              <div class="bar"><div class="fill" style="width: 90%"></div></div>
-            </div>
-            <div class="skill-bar">
-              <span class="skill-label">ADAPTABILITY_</span>
-              <div class="bar"><div class="fill" style="width: 98%"></div></div>
+            <div class="skill-column">
+              <div class="skill-bar">
+                <span class="skill-label">PYTHON/AI_ML_</span>
+                <div class="bar"><div class="fill" style="width: 88%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">DEVOPS/CI_CD_</span>
+                <div class="bar"><div class="fill" style="width: 80%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">CYBERSECURITY</span>
+                <div class="bar"><div class="fill" style="width: 75%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">UX/UI_DESIGN</span>
+                <div class="bar"><div class="fill" style="width: 82%"></div></div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Experience Card -->
-        <div class="terminal-card">
+        <div class="terminal-card experience-card">
           <div class="card-header">
             <span class="card-led active"></span>
             <span class="card-title">[EXPERIENCE]</span>
@@ -119,7 +149,6 @@
         </div>
       </div>
 
-      <!-- Bio Terminal Section -->
       <div class="bio-terminal">
         <div class="terminal-screen">
           <div class="screen-header">
@@ -153,7 +182,6 @@
       </div>
     </div>
 
-    <!-- Copy Notification -->
     <div class="copy-notification" :class="{ show: showNotification }">
       <span class="notif-icon">[√]</span> DATA COPIED TO BUFFER
     </div>
@@ -207,22 +235,20 @@ export default {
   flex-direction: column;
   align-items: center;
   position: relative;
-  padding-top: 180px;
+  padding-top: 10rem;
+  padding-bottom: 2rem;
   overflow-y: auto;
 }
 
-/* Terminal Header */
+/* Terminal Header - Non-sticky */
 .terminal-header {
-  position: fixed;
-  top: 150px;
-  left: 50%;
-  transform: translateX(-50%);
   background: var(--color-bg-charcoal);
   border: 2px solid var(--color-terminal-green);
   padding: 1rem 2rem;
-  z-index: 100;
   box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
-  min-width: 600px;
+  margin-bottom: 2rem;
+  max-width: 1400px;
+  width: 100%;
 }
 
 .terminal-title {
@@ -257,16 +283,49 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  margin-top: 80px;
 }
 
-/* Terminal Data Cards Grid */
-.data-cards-grid {
+/* --- BENTO GRID LAYOUT --- */
+.bento-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(160px, auto);
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
+
+/* --- MODIFIED: CARD GRID POSITIONING (Desktop) --- */
+/* Profile Card: 1x2 (tall) */
+.profile-card {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3; /* Spans 2 rows */
+}
+
+/* Identity Card: 1x1 */
+.identity-card {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+/* Contact Card: 1x1 */
+.contact-card {
+  grid-column: 3 / 4;
+  grid-row: 1 / 2;
+}
+
+/* Experience Card: 2x1 */
+.experience-card {
+  grid-column: 2 / 4; /* Spans 2 columns */
+  grid-row: 2 / 3;
+}
+
+/* Skills Card: 3x1 (full width) */
+.skills-card {
+  grid-column: 1 / 4; /* Spans 3 columns */
+  grid-row: 3 / 4;
+}
+/* --- END MODIFICATIONS --- */
+
 
 .terminal-card {
   background: var(--color-bg-dark);
@@ -275,6 +334,8 @@ export default {
     0 0 15px rgba(0, 255, 65, 0.2),
     inset 0 0 20px rgba(0, 0, 0, 0.8);
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-header {
@@ -315,6 +376,10 @@ export default {
 .card-body {
   padding: 1rem;
   font-family: var(--font-mono);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .terminal-line {
@@ -375,6 +440,22 @@ export default {
   text-shadow: 0 0 5px var(--color-terminal-green);
 }
 
+/* --- MODIFIED: Skills Card Styling --- */
+.skills-card .card-body {
+  flex-direction: row; /* Overrides default column direction */
+  gap: 2rem; /* Space between the two columns */
+  justify-content: space-around;
+}
+
+.skill-column {
+  flex: 1; /* Each column takes up equal space */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* Space between skill bars within a column */
+}
+/* --- END MODIFICATIONS --- */
+
+
 /* Skill Bars */
 .skill-bar {
   margin: 0.5rem 0;
@@ -417,6 +498,68 @@ export default {
     rgba(0, 0, 0, 0.3) 2px,
     rgba(0, 0, 0, 0.3) 4px
   );
+}
+
+/* Profile Picture Card */
+.profile-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 1rem;
+}
+
+.crt-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-charcoal);
+  border: 3px solid var(--color-earth-olive);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+}
+
+.profile-image-container {
+  width: 80%;
+  height: 80%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 2px solid var(--color-terminal-green);
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+  filter: contrast(1.1) brightness(0.9);
+  border-radius: 4px;
+}
+
+.scan-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(0, 255, 65, 0.05) 3px,
+    rgba(0, 255, 65, 0.05) 6px
+  );
+  pointer-events: none;
+  animation: scan 8s linear infinite;
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
 }
 
 /* Bio Terminal */
@@ -543,15 +686,39 @@ export default {
   font-weight: bold;
 }
 
-/* Responsive Design */
+/* --- RESPONSIVE DESIGN --- */
+
+/* Tablet Layout (769px - 1024px) */
+@media (max-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(140px, auto);
+  }
+
+  /* Reset all cards to span 1 column/row */
+  .profile-card,
+  .identity-card,
+  .contact-card,
+  .skills-card {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+  
+  /* Experience card spans full width (2 columns) */
+  .experience-card {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+}
+
+
+/* Mobile Layout (< 768px) */
 @media (max-width: 768px) {
   .home-container {
-    padding-top: 280px;
+    padding-top: 8rem;
   }
 
   .terminal-header {
-    top: 230px;
-    min-width: auto;
     width: 90%;
     padding: 0.8rem 1rem;
   }
@@ -562,11 +729,31 @@ export default {
 
   .content-wrapper {
     padding: 1rem;
-    margin-top: 40px;
   }
 
-  .data-cards-grid {
+  .bento-grid {
     grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    gap: 1rem;
+  }
+
+  .profile-card,
+  .identity-card,
+  .contact-card,
+  .skills-card,
+  .experience-card {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .profile-card {
+    min-height: 200px;
+  }
+  
+  /* MODIFIED: Merge skill columns on mobile */
+  .skills-card .card-body {
+    flex-direction: column;
+    gap: 0;
   }
 
   .screen-content {
