@@ -81,42 +81,82 @@
         <div class="terminal-card skills-card">
           <div class="card-header">
             <span class="card-led active"></span>
-            <span class="card-title">[SKILLS]</span>
+            <span class="card-title">[TECH_STACK]</span>
           </div>
           <div class="card-body">
             <div class="skill-column">
+              <div class="skill-category">LANGUAGES</div>
               <div class="skill-bar">
-                <span class="skill-label">FULLSTACK_DEV</span>
-                <div class="bar"><div class="fill" style="width: 95%"></div></div>
-              </div>
-              <div class="skill-bar">
-                <span class="skill-label">CLOUD_ARCH___</span>
-                <div class="bar"><div class="fill" style="width: 85%"></div></div>
-              </div>
-              <div class="skill-bar">
-                <span class="skill-label">TEAM_LEAD____</span>
+                <span class="skill-label">PYTHON______</span>
                 <div class="bar"><div class="fill" style="width: 90%"></div></div>
               </div>
               <div class="skill-bar">
-                <span class="skill-label">ADAPTABILITY_</span>
-                <div class="bar"><div class="fill" style="width: 98%"></div></div>
+                <span class="skill-label">JS/TS_______</span>
+                <div class="bar"><div class="fill" style="width: 92%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">C/C++/C#____</span>
+                <div class="bar"><div class="fill" style="width: 85%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">HTML/CSS____</span>
+                <div class="bar"><div class="fill" style="width: 93%"></div></div>
               </div>
             </div>
             <div class="skill-column">
+              <div class="skill-category">FRAMEWORKS</div>
               <div class="skill-bar">
-                <span class="skill-label">PYTHON/AI_ML_</span>
+                <span class="skill-label">FLUTTER_____</span>
+                <div class="bar"><div class="fill" style="width: 95%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">REACT_______</span>
+                <div class="bar"><div class="fill" style="width: 90%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">NODE.JS_____</span>
                 <div class="bar"><div class="fill" style="width: 88%"></div></div>
               </div>
               <div class="skill-bar">
-                <span class="skill-label">DEVOPS/CI_CD_</span>
+                <span class="skill-label">.NET________</span>
                 <div class="bar"><div class="fill" style="width: 80%"></div></div>
               </div>
+            </div>
+            <div class="skill-column">
+              <div class="skill-category">DATABASE</div>
               <div class="skill-bar">
-                <span class="skill-label">CYBERSECURITY</span>
-                <div class="bar"><div class="fill" style="width: 75%"></div></div>
+                <span class="skill-label">MONGODB_____</span>
+                <div class="bar"><div class="fill" style="width: 85%"></div></div>
               </div>
               <div class="skill-bar">
-                <span class="skill-label">UX/UI_DESIGN</span>
+                <span class="skill-label">MYSQL_______</span>
+                <div class="bar"><div class="fill" style="width: 83%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">FIREBASE____</span>
+                <div class="bar"><div class="fill" style="width: 87%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">SQLITE______</span>
+                <div class="bar"><div class="fill" style="width: 80%"></div></div>
+              </div>
+            </div>
+            <div class="skill-column">
+              <div class="skill-category">CLOUD/TOOLS</div>
+              <div class="skill-bar">
+                <span class="skill-label">GOOGLE CLOUD_</span>
+                <div class="bar"><div class="fill" style="width: 92%"></div></div>
+              </div>
+                <div class="skill-bar">
+                <span class="skill-label">AWS/AZURE___</span>
+                <div class="bar"><div class="fill" style="width: 85%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">GIT_________</span>
+                <div class="bar"><div class="fill" style="width: 90%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">FIGMA_______</span>
                 <div class="bar"><div class="fill" style="width: 82%"></div></div>
               </div>
             </div>
@@ -443,7 +483,7 @@ export default {
 /* --- MODIFIED: Skills Card Styling --- */
 .skills-card .card-body {
   flex-direction: row; /* Overrides default column direction */
-  gap: 2rem; /* Space between the two columns */
+  gap: 2rem; /* Space between the four columns */
   justify-content: space-around;
 }
 
@@ -452,6 +492,17 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 0.5rem; /* Space between skill bars within a column */
+}
+
+.skill-category {
+  color: var(--color-neon-teal);
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--color-earth-olive);
+  text-shadow: 0 0 5px var(--color-neon-teal);
 }
 /* --- END MODIFICATIONS --- */
 
@@ -519,6 +570,7 @@ export default {
   background: var(--color-bg-charcoal);
   border: 3px solid var(--color-earth-olive);
   box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
 }
 
 .profile-image-container {
@@ -698,16 +750,25 @@ export default {
   /* Reset all cards to span 1 column/row */
   .profile-card,
   .identity-card,
-  .contact-card,
-  .skills-card {
+  .contact-card {
     grid-column: span 1;
     grid-row: span 1;
   }
-  
-  /* Experience card spans full width (2 columns) */
+
+  /* Skills and Experience cards span full width (2 columns) */
+  .skills-card,
   .experience-card {
     grid-column: span 2;
     grid-row: span 1;
+  }
+
+  /* Skills: 2 columns on tablet */
+  .skills-card .card-body {
+    flex-wrap: wrap;
+  }
+
+  .skills-card .skill-column {
+    flex-basis: calc(50% - 1rem);
   }
 }
 

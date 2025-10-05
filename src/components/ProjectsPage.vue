@@ -1,7 +1,7 @@
 <template>
   <div class="projects-container" id="projects">
     <!-- Cassette Player Header -->
-    <div class="cassette-player">
+    <!-- <div class="cassette-player">
       <div class="player-header">
         <div class="player-title">[TRACK LIST]</div>
         <div class="player-controls">
@@ -22,7 +22,7 @@
       <div class="track-counter">
         TRACK {{ currentTrack.toString().padStart(2, '0') }} / {{ projects.length.toString().padStart(2, '0') }}
       </div>
-    </div>
+    </div> -->
 
     <!-- Horizontal Scrolling Track List -->
     <div class="tracks-wrapper">

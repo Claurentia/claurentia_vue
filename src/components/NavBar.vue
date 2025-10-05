@@ -11,7 +11,7 @@
           <circle cx="25" cy="30" r="5" fill="var(--color-terminal-green)"/>
           <!-- Right reel -->
           <circle cx="75" cy="30" r="12" fill="var(--color-bg-dark)" stroke="var(--color-terminal-green)" stroke-width="2"/>
-          <circle cx="75" cy="30" r="5" fill="var(--color-terminal-green)" class="spinning-reel"/>
+          <circle cx="75" cy="30" r="5" fill="var(--color-terminal-green)"/>
           <!-- Tape -->
           <path d="M 25 30 Q 50 25 75 30" stroke="var(--color-amber)" stroke-width="2" fill="none"/>
           <!-- Label window -->
@@ -104,12 +104,6 @@ export default {
       rgba(255, 255, 255, 0.03) 4px
     );
   opacity: 0.1;
-  animation: static-drift 2s infinite linear;
-}
-
-@keyframes static-drift {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(4px); }
 }
 
 .cassette-logo {
@@ -121,16 +115,6 @@ export default {
 .cassette-icon {
   width: 100%;
   height: 100%;
-}
-
-.spinning-reel {
-  animation: spin 3s linear infinite;
-  transform-origin: center;
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
 
 .site-title {

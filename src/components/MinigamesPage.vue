@@ -224,7 +224,6 @@ export default defineComponent({
   height: 120px;
   filter: drop-shadow(0 0 10px rgba(0, 255, 65, 0.5));
   transition: transform 0.3s ease;
-  transform: translateX(-24px);
 }
 
 .game-card:hover .game-icon > :deep(svg) {

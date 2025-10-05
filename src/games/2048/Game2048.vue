@@ -306,14 +306,15 @@ export default {
 
 <style scoped>
 .game-container {
-  background: rgba(1, 0, 18, 0.95);
-  border-radius: 15px;
+  background: var(--color-bg-charcoal, #2b2b2b);
+  border-radius: 4px;
   padding: 2rem;
-  max-width: 600px;
+  max-width: 480px;
   margin: 0 auto;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(163, 255, 187, 0.1);
-  backdrop-filter: blur(8px);
+  box-shadow: 0 0 20px rgba(67, 198, 195, 0.3);
+  border: 2px solid var(--color-teal, #43C6C3);
+  position: relative;
+  font-family: var(--font-mono, 'Share Tech Mono', monospace);
 }
 
 .game-header {
@@ -322,46 +323,55 @@ export default {
 }
 
 .game-header h2 {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--color-teal, #43C6C3);
   margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px var(--color-teal, #43C6C3);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-family: var(--font-retro, 'VT323', monospace);
 }
 
 .game-status {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  color: rgba(163, 255, 187, 0.9);
+  color: var(--color-gold, #F2C749);
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
+  text-shadow: 0 0 5px var(--color-gold, #F2C749);
 }
 
 .game-board {
   display: grid;
   gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-bg-dark, #1a1a1a);
   padding: 0.5rem;
-  border-radius: 8px;
+  border-radius: 2px;
   margin-bottom: 2rem;
   aspect-ratio: 1;
   outline: none;
   position: relative;
   transition: all 0.15s ease-in-out;
-  touch-action: none; /* Prevent browser default touch actions */
+  touch-action: none;
+  border: 2px solid var(--color-teal, #43C6C3);
+  box-shadow: inset 0 0 10px rgba(67, 198, 195, 0.2);
 }
 
 .tile {
   aspect-ratio: 1;
-  background: rgba(1, 0, 18, 0.95);
-  border-radius: 4px;
+  background: var(--color-bg-charcoal, #2b2b2b);
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
   font-weight: bold;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--color-bg-dark, #1a1a1a);
   transition: all 0.15s ease-in-out;
   position: relative;
   animation: tile-appear 0.2s ease-in-out;
+  font-family: var(--font-retro, 'VT323', monospace);
+  border: 1px solid var(--color-bg-dark, #1a1a1a);
 }
 
 @keyframes tile-appear {
@@ -406,31 +416,77 @@ export default {
   animation: tile-appear 0.2s ease-in-out;
 }
 
-.tile-2 { background: rgba(163, 255, 187, 0.1); }
-.tile-4 { background: rgba(163, 255, 187, 0.2); }
-.tile-8 { background: rgba(163, 255, 187, 0.3); }
-.tile-16 { background: rgba(163, 255, 187, 0.4); }
-.tile-32 { background: rgba(163, 255, 187, 0.5); }
-.tile-64 { background: rgba(163, 255, 187, 0.6); }
-.tile-128 { 
-  background: rgba(163, 255, 187, 0.7);
+.tile-2 {
+  background: var(--color-brown, #804D37);
+  color: var(--color-cream, #F5F4ED);
+  box-shadow: 0 0 5px var(--color-brown, #804D37);
+}
+.tile-4 {
+  background: var(--color-brown, #804D37);
+  color: var(--color-cream, #F5F4ED);
+  box-shadow: 0 0 8px var(--color-brown, #804D37);
+  filter: brightness(1.1);
+}
+.tile-8 {
+  background: var(--color-gold, #F2C749);
+  color: var(--color-bg-dark, #1a1a1a);
+  box-shadow: 0 0 10px var(--color-gold, #F2C749);
+}
+.tile-16 {
+  background: var(--color-gold, #F2C749);
+  color: var(--color-bg-dark, #1a1a1a);
+  box-shadow: 0 0 12px var(--color-gold, #F2C749);
+  filter: brightness(1.1);
+}
+.tile-32 {
+  background: var(--color-orange, #F75A33);
+  color: var(--color-cream, #F5F4ED);
+  box-shadow: 0 0 15px var(--color-orange, #F75A33);
+}
+.tile-64 {
+  background: var(--color-orange, #F75A33);
+  color: var(--color-cream, #F5F4ED);
+  box-shadow: 0 0 18px var(--color-orange, #F75A33);
+  filter: brightness(1.15);
+}
+.tile-128 {
+  background: var(--color-teal, #43C6C3);
+  color: var(--color-bg-dark, #1a1a1a);
+  box-shadow: 0 0 20px var(--color-teal, #43C6C3);
   font-size: 1.3rem;
 }
-.tile-256 { 
-  background: rgba(163, 255, 187, 0.8);
+.tile-256 {
+  background: var(--color-teal, #43C6C3);
+  color: var(--color-bg-dark, #1a1a1a);
+  box-shadow: 0 0 22px var(--color-teal, #43C6C3);
   font-size: 1.3rem;
+  filter: brightness(1.2);
 }
-.tile-512 { 
-  background: rgba(163, 255, 187, 0.9);
+.tile-512 {
+  background: var(--color-gold, #F2C749);
+  color: var(--color-bg-dark, #1a1a1a);
+  box-shadow: 0 0 25px var(--color-gold, #F2C749);
   font-size: 1.3rem;
+  filter: brightness(1.3);
 }
-.tile-1024 { 
-  background: rgba(115, 255, 160, 0.9);
+.tile-1024 {
+  background: var(--color-orange, #F75A33);
+  color: var(--color-cream, #F5F4ED);
+  box-shadow: 0 0 30px var(--color-orange, #F75A33);
   font-size: 1.1rem;
+  animation: pulse-glow 1s infinite;
 }
-.tile-2048 { 
-  background: rgba(36, 243, 200, 0.9);
+.tile-2048 {
+  background: var(--color-teal, #43C6C3);
+  color: var(--color-bg-dark, #1a1a1a);
+  box-shadow: 0 0 35px var(--color-teal, #43C6C3);
   font-size: 1.1rem;
+  animation: pulse-glow 1s infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { filter: brightness(1.2); }
+  50% { filter: brightness(1.5); }
 }
 
 .mobile-controls {
@@ -449,21 +505,27 @@ export default {
 .direction-button {
   width: 3rem;
   height: 3rem;
-  background: rgba(163, 255, 187, 0.1);
-  border: 1px solid rgba(163, 255, 187, 0.3);
-  color: rgba(163, 255, 187, 0.9);
-  border-radius: 8px;
+  background: var(--color-bg-charcoal, #2b2b2b);
+  border: 2px solid var(--color-teal, #43C6C3);
+  color: var(--color-teal, #43C6C3);
+  border-radius: 0;
   font-size: 1.5rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.1s;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: var(--font-mono, 'Share Tech Mono', monospace);
 }
 
 .direction-button:hover {
-  background: rgba(163, 255, 187, 0.2);
-  transform: translateY(-2px);
+  background: var(--color-teal, #43C6C3);
+  color: var(--color-bg-dark, #1a1a1a);
+  box-shadow: 0 0 10px var(--color-teal, #43C6C3);
+}
+
+.direction-button:active {
+  transform: translateY(2px);
 }
 
 .game-controls {
@@ -473,31 +535,31 @@ export default {
 }
 
 .control-button {
-  background: linear-gradient(
-    to right,
-    rgba(163, 255, 187, 0.2),
-    rgba(115, 255, 160, 0.2)
-  );
-  border: 1px solid rgba(163, 255, 187, 0.3);
-  color: rgba(163, 255, 187, 0.9);
+  background: var(--color-bg-charcoal, #2b2b2b);
+  border: 2px solid var(--color-teal, #43C6C3);
+  color: var(--color-teal, #43C6C3);
   padding: 0.8rem 1.5rem;
-  border-radius: 25px;
+  border-radius: 0;
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.1s;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: var(--font-mono, 'Share Tech Mono', monospace);
 }
 
 .control-button:hover {
-  background: linear-gradient(
-    to right,
-    rgba(163, 255, 187, 0.3),
-    rgba(115, 255, 160, 0.3)
-  );
-  transform: translateY(-2px);
+  background: var(--color-teal, #43C6C3);
+  color: var(--color-bg-dark, #1a1a1a);
+  box-shadow: 0 0 10px var(--color-teal, #43C6C3);
+}
+
+.control-button:active {
+  transform: translateY(2px);
 }
 
 .game-instructions {
-  color: rgba(163, 255, 187, 0.9);
+  color: var(--color-cream, #F5F4ED);
   font-size: 1rem;
   margin-top: 0.5rem;
 }
@@ -515,11 +577,12 @@ export default {
 }
 
 .key {
-  background: rgba(163, 255, 187, 0.1);
-  border: 1px solid rgba(163, 255, 187, 0.3);
+  background: var(--color-bg-charcoal, #2b2b2b);
+  border: 2px solid var(--color-teal, #43C6C3);
   padding: 0.3rem 0.6rem;
-  border-radius: 4px;
+  border-radius: 0;
   font-size: 0.8rem;
+  color: var(--color-teal, #43C6C3);
 }
 
 .game-over-overlay {
@@ -528,12 +591,12 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(1, 0, 18, 0.98);
+  background: rgba(26, 26, 26, 0.95);
   display: flex;
   align-items: center;
   justify-content: center;
   animation: fadeIn 0.3s ease-out;
-  border-radius: 15px;
+  border-radius: 4px;
   z-index: 100;
   backdrop-filter: blur(4px);
 }
@@ -541,30 +604,35 @@ export default {
 .game-over-content {
   text-align: center;
   padding: 2rem;
-  background: rgba(1, 0, 18, 0.95);
-  border-radius: 15px;
-  border: 1px solid rgba(163, 255, 187, 0.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  background: var(--color-bg-charcoal, #2b2b2b);
+  border-radius: 0;
+  border: 2px solid var(--color-orange, #F75A33);
+  box-shadow: 0 0 20px rgba(247, 90, 51, 0.5);
   min-width: 280px;
 }
 
 .game-over-content h3 {
-  color: #ff6b6b;
+  color: var(--color-orange, #F75A33);
   font-size: 2rem;
   margin-bottom: 1rem;
-  text-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+  text-shadow: 0 0 10px var(--color-orange, #F75A33);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-family: var(--font-retro, 'VT323', monospace);
 }
 
 .final-score {
-  color: rgba(163, 255, 187, 0.9);
+  color: var(--color-gold, #F2C749);
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
+  text-shadow: 0 0 5px var(--color-gold, #F2C749);
 }
 
 .best-score {
-  color: rgba(163, 255, 187, 0.7);
+  color: var(--color-teal, #43C6C3);
   font-size: 1.2rem;
   margin-bottom: 2rem;
+  text-shadow: 0 0 5px var(--color-teal, #43C6C3);
 }
 
 .game-over-controls {
@@ -589,6 +657,7 @@ export default {
 
   .game-status {
     font-size: 1rem;
+    gap: 1rem;
   }
 
   .tile {
@@ -616,6 +685,57 @@ export default {
 
   .best-score {
     font-size: 1rem;
+  }
+
+  .game-controls {
+    flex-wrap: wrap;
+  }
+
+  .control-button {
+    flex: 1;
+    min-width: 120px;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-container {
+    padding: 0.75rem;
+  }
+
+  .game-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .game-status {
+    font-size: 0.9rem;
+    gap: 0.8rem;
+  }
+
+  .tile {
+    font-size: 1rem;
+  }
+
+  .tile-128,
+  .tile-256,
+  .tile-512 {
+    font-size: 0.85rem;
+  }
+
+  .tile-1024,
+  .tile-2048 {
+    font-size: 0.75rem;
+  }
+
+  .direction-button {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.3rem;
+  }
+
+  .game-board {
+    margin-bottom: 1.5rem;
   }
 }
 </style> 
