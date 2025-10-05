@@ -1,46 +1,229 @@
 <!-- src/components/Home.vue -->
 <template>
   <div class="home-container" id="home">
+    <div class="terminal-header">
+      <div class="terminal-title">
+        <span class="prompt">C:\USERS\VISITOR></span>
+        <span class="command typing-text">RUN PROFILE.EXE</span>
+        <span class="cursor">_</span>
+      </div>
+    </div>
+
     <div class="content-wrapper">
-      <div class="summary-box">
-        <h1>Carmel Laurentia</h1>
-        <div class="contact-info">
-          <button @click="copyToClipboard('carmel.laurentia@gmail.com')" class="contact-item">
-            <i class="fas fa-envelope"></i> carmel.laurentia@gmail.com
-            <i class="fas fa-copy copy-icon"></i>
-          </button>
-          <button @click="copyToClipboard('+19099148520')" class="contact-item">
-            <i class="fas fa-phone"></i> +1 (909) 914-8520
-            <i class="fas fa-copy copy-icon"></i>
-          </button>
-          <a href="https://linkedin.com/in/carmel-laurentia-385292225" target="_blank" class="contact-item">
-            <i class="fab fa-linkedin"></i> LinkedIn
-          </a>
-          <a href="https://github.com/claurentia" target="_blank" class="contact-item">
-            <i class="fab fa-github"></i> GitHub
-          </a>
+      <div class="bento-grid">
+        <div class="terminal-card profile-card">
+          <div class="card-header">
+            <span class="card-led active"></span>
+            <span class="card-title">[PROFILE.IMG]</span>
+          </div>
+          <div class="card-body profile-body">
+            <div class="crt-frame">
+              <div class="profile-image-container">
+                <img src="../assets/profile.jpg" alt="Profile" class="profile-image">
+              </div>
+              <div class="scan-overlay"></div>
+            </div>
+          </div>
         </div>
-        <div class="copy-notification" :class="{ show: showNotification }">
-          Copied to clipboard!
+
+        <div class="terminal-card identity-card">
+          <div class="card-header">
+            <span class="card-led active"></span>
+            <span class="card-title">[IDENTITY]</span>
+          </div>
+          <div class="card-body">
+            <div class="terminal-line">
+              <span class="label">NAME:</span>
+              <span class="value glow-text">CARMEL LAURENTIA</span>
+            </div>
+            <div class="terminal-line">
+              <span class="label">ROLE:</span>
+              <span class="value">SOFTWARE ENGINEER</span>
+            </div>
+            <div class="terminal-line">
+              <span class="label">EDU_:</span>
+              <span class="value">MS COMPUTER SCIENCE</span>
+            </div>
+            <div class="terminal-line">
+              <span class="label">STAT:</span>
+              <span class="value status-active">[ ACTIVE ]</span>
+            </div>
+          </div>
         </div>
-        <p>
-          Software Engineer pursuing my Master's in Computer Science at Seattle University, where I'm also serving as a Teaching Assistant. Most recently, I led cross-functional development teams at MyStage Music, a startup focused on empowering local artists through technology.
-        </p>
-        <p>
-          My journey into tech leadership started with hands-on full-stack development—from building AI-powered customer feedback systems at Amazon to gaining hands-on experience in penetration testing and vulnerability assessment at PT Astra Honda Motor. Leading a team at an early-stage startup showed me the impact that small, driven teams can have when building mission-driven products.
-        </p>
-        <p>
-          I specialize in modern web technologies (React, Node.js, Python) and cloud platforms (AWS, Azure), but my real strength is adaptability—quickly learning new tools and translating complex business needs into scalable technical solutions. Whether it's sprint planning, code reviews, or stakeholder collaboration, I thrive at the intersection of technical excellence and meaningful impact.
-        </p>
-        <p>
-          Beyond code, I'm passionate about technology's transformative potential—a perspective shaped by my father's stories of workplace innovation and reinforced by my family's unwavering support. Currently seeking opportunities in early-stage startups where I can contribute to mission-driven products while growing as both an engineer and leader.
-        </p>
+
+        <div class="terminal-card contact-card">
+          <div class="card-header">
+            <span class="card-led active"></span>
+            <span class="card-title">[CONTACT]</span>
+          </div>
+          <div class="card-body">
+            <button @click="copyToClipboard('carmel.laurentia@gmail.com')" class="terminal-line clickable">
+              <span class="label">MAIL:</span>
+              <span class="value">carmel.laurentia@gmail.com</span>
+              <span class="copy-indicator">[ COPY ]</span>
+            </button>
+            <button @click="copyToClipboard('+19099148520')" class="terminal-line clickable">
+              <span class="label">TELE:</span>
+              <span class="value">+1 (909) 914-8520</span>
+              <span class="copy-indicator">[ COPY ]</span>
+            </button>
+            <a href="https://linkedin.com/in/carmel-laurentia-385292225" target="_blank" class="terminal-line clickable">
+              <span class="label">LINK:</span>
+              <span class="value">linkedin.com/carmel-laurentia</span>
+            </a>
+            <a href="https://github.com/claurentia" target="_blank" class="terminal-line clickable">
+              <span class="label">CODE:</span>
+              <span class="value">github.com/claurentia</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="terminal-card skills-card">
+          <div class="card-header">
+            <span class="card-led active"></span>
+            <span class="card-title">[TECH_STACK]</span>
+          </div>
+          <div class="card-body">
+            <div class="skill-column">
+              <div class="skill-category">LANGUAGES</div>
+              <div class="skill-bar">
+                <span class="skill-label">PYTHON______</span>
+                <div class="bar"><div class="fill" style="width: 90%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">JS/TS_______</span>
+                <div class="bar"><div class="fill" style="width: 92%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">C/C++/C#____</span>
+                <div class="bar"><div class="fill" style="width: 85%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">HTML/CSS____</span>
+                <div class="bar"><div class="fill" style="width: 93%"></div></div>
+              </div>
+            </div>
+            <div class="skill-column">
+              <div class="skill-category">FRAMEWORKS</div>
+              <div class="skill-bar">
+                <span class="skill-label">FLUTTER_____</span>
+                <div class="bar"><div class="fill" style="width: 95%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">REACT_______</span>
+                <div class="bar"><div class="fill" style="width: 90%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">NODE.JS_____</span>
+                <div class="bar"><div class="fill" style="width: 88%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">.NET________</span>
+                <div class="bar"><div class="fill" style="width: 80%"></div></div>
+              </div>
+            </div>
+            <div class="skill-column">
+              <div class="skill-category">DATABASE</div>
+              <div class="skill-bar">
+                <span class="skill-label">MONGODB_____</span>
+                <div class="bar"><div class="fill" style="width: 85%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">MYSQL_______</span>
+                <div class="bar"><div class="fill" style="width: 83%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">FIREBASE____</span>
+                <div class="bar"><div class="fill" style="width: 87%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">SQLITE______</span>
+                <div class="bar"><div class="fill" style="width: 80%"></div></div>
+              </div>
+            </div>
+            <div class="skill-column">
+              <div class="skill-category">CLOUD/TOOLS</div>
+              <div class="skill-bar">
+                <span class="skill-label">GOOGLE CLOUD_</span>
+                <div class="bar"><div class="fill" style="width: 92%"></div></div>
+              </div>
+                <div class="skill-bar">
+                <span class="skill-label">AWS/AZURE___</span>
+                <div class="bar"><div class="fill" style="width: 85%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">GIT_________</span>
+                <div class="bar"><div class="fill" style="width: 90%"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-label">FIGMA_______</span>
+                <div class="bar"><div class="fill" style="width: 82%"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="terminal-card experience-card">
+          <div class="card-header">
+            <span class="card-led active"></span>
+            <span class="card-title">[EXPERIENCE]</span>
+          </div>
+          <div class="card-body">
+            <div class="terminal-line">
+              <span class="label">CURR:</span>
+              <span class="value">SEATTLE UNIVERSITY (TA)</span>
+            </div>
+            <div class="terminal-line">
+              <span class="label">PREV:</span>
+              <span class="value">MYSTAGE MUSIC (LEAD)</span>
+            </div>
+            <div class="terminal-line">
+              <span class="label">PREV:</span>
+              <span class="value">AMAZON (SWE INTERN)</span>
+            </div>
+            <div class="terminal-line">
+              <span class="label">PREV:</span>
+              <span class="value">PT ASTRA HONDA (SECURITY)</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="profile-circle">
-        <div class="image-container">
-          <img src="../assets/profile.jpg" alt="Profile" class="profile-image">
+
+      <div class="bio-terminal">
+        <div class="terminal-screen">
+          <div class="screen-header">
+            <span>BIOGRAPHY.TXT</span>
+            <span class="screen-controls">
+              <span class="control-btn">─</span>
+              <span class="control-btn">□</span>
+              <span class="control-btn">×</span>
+            </span>
+          </div>
+          <div class="screen-content">
+            <p class="bio-paragraph">
+              > Software Engineer pursuing my Master's in Computer Science at Seattle University, where I'm also serving as a Teaching Assistant. Most recently, I led cross-functional development teams at MyStage Music, a startup focused on empowering local artists through technology.
+            </p>
+            <p class="bio-paragraph">
+              > My journey into tech leadership started with hands-on full-stack development—from building AI-powered customer feedback systems at Amazon to gaining hands-on experience in penetration testing and vulnerability assessment at PT Astra Honda Motor.
+            </p>
+            <p class="bio-paragraph">
+              > I specialize in modern web technologies (React, Node.js, Python) and cloud platforms (AWS, Azure), but my real strength is adaptability—quickly learning new tools and translating complex business needs into scalable technical solutions.
+            </p>
+            <p class="bio-paragraph">
+              > Currently seeking opportunities in early-stage startups where I can contribute to mission-driven products while growing as both an engineer and leader.
+            </p>
+            <div class="cassette-reel">
+              <div class="reel left-reel"></div>
+              <div class="tape-line"></div>
+              <div class="reel right-reel"></div>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+
+    <div class="copy-notification" :class="{ show: showNotification }">
+      <span class="notif-icon">[√]</span> DATA COPIED TO BUFFER
     </div>
   </div>
 </template>
@@ -79,124 +262,470 @@ export default {
 </script>
 
 <style scoped>
-
 .home-container {
-  background-image: url('../assets/foxhillaurora.png');
-  background-size: cover;
-  background-position: center;
+  background:
+    linear-gradient(45deg, transparent 48%, var(--color-earth-olive) 49%, var(--color-earth-olive) 51%, transparent 52%),
+    linear-gradient(-45deg, transparent 48%, var(--color-earth-olive) 49%, var(--color-earth-olive) 51%, transparent 52%),
+    var(--color-bg-dark);
+  background-size: 20px 20px, 20px 20px, 100% 100%;
+  background-position: 0 0, 10px 10px, 0 0;
   min-height: 100dvh;
   height: auto;
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   position: relative;
-  background-color: rgba(1, 0, 18, 1);
-  justify-content: center;
+  padding-top: 10rem;
+  padding-bottom: 2rem;
+  overflow-y: auto;
+}
+
+/* Terminal Header - Non-sticky */
+.terminal-header {
+  background: var(--color-bg-charcoal);
+  border: 2px solid var(--color-terminal-green);
+  padding: 1rem 2rem;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+  margin-bottom: 2rem;
+  max-width: 1400px;
+  width: 100%;
+}
+
+.terminal-title {
+  font-family: var(--font-mono);
+  color: var(--color-terminal-green);
+  font-size: 1rem;
+}
+
+.prompt {
+  color: var(--color-neon-orange);
+}
+
+.command {
+  color: var(--color-terminal-green);
+  margin-left: 0.5rem;
+}
+
+.cursor {
+  animation: blink-cursor 1s infinite;
+  color: var(--color-terminal-green);
+}
+
+@keyframes blink-cursor {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
 }
 
 .content-wrapper {
-  max-width: 1200px;
+  max-width: 1400px;
   width: 100%;
-  margin-top: 20dvh;
+  padding: 2rem;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 0 2rem;
-  flex-wrap: wrap;
-  gap: 4rem;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.summary-box {
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 1.5rem;
-  border-radius: 10px;
-  max-width: 700px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* --- BENTO GRID LAYOUT --- */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(160px, auto);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-.summary-box h1 {
-  color: #2c3e50;
+/* --- MODIFIED: CARD GRID POSITIONING (Desktop) --- */
+/* Profile Card: 1x2 (tall) */
+.profile-card {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3; /* Spans 2 rows */
 }
 
-.summary-box p {
-  line-height: 1.6;
-  color: #34495e;
+/* Identity Card: 1x1 */
+.identity-card {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
 }
 
-.contact-info {
+/* Contact Card: 1x1 */
+.contact-card {
+  grid-column: 3 / 4;
+  grid-row: 1 / 2;
+}
+
+/* Experience Card: 2x1 */
+.experience-card {
+  grid-column: 2 / 4; /* Spans 2 columns */
+  grid-row: 2 / 3;
+}
+
+/* Skills Card: 3x1 (full width) */
+.skills-card {
+  grid-column: 1 / 4; /* Spans 3 columns */
+  grid-row: 3 / 4;
+}
+/* --- END MODIFICATIONS --- */
+
+
+.terminal-card {
+  background: var(--color-bg-dark);
+  border: 2px solid var(--color-terminal-green);
+  box-shadow:
+    0 0 15px rgba(0, 255, 65, 0.2),
+    inset 0 0 20px rgba(0, 0, 0, 0.8);
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  flex-direction: column;
 }
 
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-  color: #34495e;
+.card-header {
+  background: var(--color-bg-charcoal);
+  border-bottom: 1px solid var(--color-terminal-green);
   padding: 0.5rem 1rem;
-  border-radius: 25px;
-  background: rgba(163, 255, 187, 0.1);
-  border: 1px solid rgba(163, 255, 187, 0.2);
-  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-led {
+  width: 8px;
+  height: 8px;
+  background: var(--color-red-error);
+  border-radius: 50%;
+  box-shadow: 0 0 5px var(--color-red-error);
+}
+
+.card-led.active {
+  background: var(--color-terminal-green);
+  box-shadow: 0 0 10px var(--color-terminal-green);
+  animation: pulse-led 2s infinite;
+}
+
+@keyframes pulse-led {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.card-title {
+  font-family: var(--font-mono);
+  color: var(--color-terminal-green);
   font-size: 0.9rem;
+  letter-spacing: 2px;
+}
+
+.card-body {
+  padding: 1rem;
+  font-family: var(--font-mono);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.terminal-line {
+  display: flex;
+  gap: 1rem;
+  padding: 0.4rem 0;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-mono);
+  cursor: default;
+  position: relative;
+  align-items: center;
+}
+
+.terminal-line.clickable {
   cursor: pointer;
+  transition: all 0.1s;
+}
+
+.terminal-line.clickable:hover {
+  background: var(--color-earth-olive);
+  padding-left: 1rem;
+  text-decoration: none;
+}
+
+.terminal-line .label {
+  color: var(--color-neon-orange);
+  min-width: 50px;
+  font-size: 0.85rem;
+}
+
+.terminal-line .value {
+  color: var(--color-terminal-green);
+  font-size: 0.85rem;
+  flex: 1;
+}
+
+.terminal-line a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.copy-indicator {
+  color: var(--color-neon-teal);
+  font-size: 0.75rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.terminal-line.clickable:hover .copy-indicator {
+  opacity: 1;
+}
+
+.status-active {
+  color: var(--color-terminal-green) !important;
+  text-shadow: 0 0 5px var(--color-terminal-green);
+}
+
+/* --- MODIFIED: Skills Card Styling --- */
+.skills-card .card-body {
+  flex-direction: row; /* Overrides default column direction */
+  gap: 2rem; /* Space between the four columns */
+  justify-content: space-around;
+}
+
+.skill-column {
+  flex: 1; /* Each column takes up equal space */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* Space between skill bars within a column */
+}
+
+.skill-category {
+  color: var(--color-neon-teal);
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--color-earth-olive);
+  text-shadow: 0 0 5px var(--color-neon-teal);
+}
+/* --- END MODIFICATIONS --- */
+
+
+/* Skill Bars */
+.skill-bar {
+  margin: 0.5rem 0;
+}
+
+.skill-label {
+  color: var(--color-neon-orange);
+  font-size: 0.8rem;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.bar {
+  background: var(--color-bg-charcoal);
+  height: 12px;
+  border: 1px solid var(--color-earth-olive);
+  position: relative;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  background: var(--color-terminal-green);
+  box-shadow: 0 0 10px var(--color-terminal-green);
+  transition: width 1s ease;
   position: relative;
 }
 
-.contact-item i {
-  font-size: 1rem;
-  color: rgba(36, 100, 50, 0.9);
-  transition: transform 0.3s ease;
-}
-
-.contact-item:hover {
-  background: rgba(163, 255, 187, 0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Only apply padding-right expansion to copyable items (buttons) */
-button.contact-item:hover {
-  padding-right: 2.5rem;
-}
-
-.contact-item:hover i {
-  transform: scale(1.1);
-}
-
-.copy-icon {
+.fill::after {
+  content: '';
   position: absolute;
-  right: 1rem;
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: all 0.3s ease;
-  color: rgba(36, 100, 50, 0.9);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.3) 2px,
+    rgba(0, 0, 0, 0.3) 4px
+  );
+}
+
+/* Profile Picture Card */
+.profile-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 1rem;
+}
+
+.crt-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-charcoal);
+  border: 3px solid var(--color-earth-olive);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+}
+
+.profile-image-container {
+  width: 80%;
+  height: 80%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 2px solid var(--color-terminal-green);
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+  filter: contrast(1.1) brightness(0.9);
+  border-radius: 4px;
+}
+
+.scan-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(0, 255, 65, 0.05) 3px,
+    rgba(0, 255, 65, 0.05) 6px
+  );
+  pointer-events: none;
+  animation: scan 8s linear infinite;
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* Bio Terminal */
+.bio-terminal {
+  width: 100%;
+}
+
+.terminal-screen {
+  background: var(--color-bg-dark);
+  border: 3px solid var(--color-terminal-green);
+  box-shadow:
+    0 0 20px rgba(0, 255, 65, 0.3),
+    inset 0 0 30px rgba(0, 0, 0, 0.9);
+}
+
+.screen-header {
+  background: var(--color-bg-charcoal);
+  border-bottom: 2px solid var(--color-terminal-green);
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  color: var(--color-terminal-green);
   font-size: 0.9rem;
 }
 
-button.contact-item:hover .copy-icon {
-  opacity: 1;
-  transform: translateX(0);
+.screen-controls {
+  display: flex;
+  gap: 0.5rem;
 }
 
+.control-btn {
+  color: var(--color-neon-orange);
+  cursor: pointer;
+}
+
+.screen-content {
+  padding: 1.5rem;
+  font-family: var(--font-mono);
+  color: var(--color-terminal-green);
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+.bio-paragraph {
+  margin-bottom: 1rem;
+  text-align: justify;
+}
+
+/* Animated Cassette Reel */
+.cassette-reel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 2rem;
+  padding: 1rem 0;
+}
+
+.reel {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--color-terminal-green);
+  border-radius: 50%;
+  position: relative;
+}
+
+.reel::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 15px;
+  height: 15px;
+  background: var(--color-terminal-green);
+  border-radius: 50%;
+}
+
+.right-reel {
+  animation: spin-reel 3s linear infinite;
+}
+
+@keyframes spin-reel {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.tape-line {
+  width: 100px;
+  height: 3px;
+  background: var(--color-amber);
+  box-shadow: 0 0 5px var(--color-amber);
+}
+
+/* Copy Notification */
 .copy-notification {
   position: fixed;
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%) translateY(20px);
-  background: rgba(28, 36, 54, 0.95);
-  color: rgba(163, 255, 187, 0.9);
+  background: var(--color-bg-charcoal);
+  color: var(--color-terminal-green);
   padding: 0.8rem 1.5rem;
-  border-radius: 25px;
+  font-family: var(--font-mono);
   font-size: 0.9rem;
   opacity: 0;
   transition: all 0.3s ease;
   pointer-events: none;
-  border: 1px solid rgba(163, 255, 187, 0.2);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
+  border: 2px solid var(--color-terminal-green);
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+  z-index: 10000;
+  letter-spacing: 1px;
 }
 
 .copy-notification.show {
@@ -204,183 +733,106 @@ button.contact-item:hover .copy-icon {
   transform: translateX(-50%) translateY(0);
 }
 
-.profile-circle {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background: linear-gradient(
-    to bottom,
-    rgba(28, 36, 54, 0.95),
-    rgba(18, 24, 38, 0.95)
-  );
-  position: relative;
-  box-shadow: 
-    0 4px 12px rgba(0, 0, 0, 0.3),
-    0 1px 3px rgba(163, 255, 187, 0.2);
-  border: 2px solid rgba(163, 255, 187, 0.25);
-  overflow: visible;
+.notif-icon {
+  color: var(--color-terminal-green);
+  font-weight: bold;
 }
 
-.image-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  overflow: hidden;
-  z-index: 2;
-}
+/* --- RESPONSIVE DESIGN --- */
 
-.profile-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 50%;
-}
-
-.profile-circle::before,
-.profile-circle::after {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  border-radius: 50%;
-  border: 1px solid rgba(36, 243, 200, 0.3);
-  filter: blur(5px);
-  box-shadow: 
-    0 0 12px rgba(36, 243, 200, 0.4),
-    inset 0 0 12px rgba(36, 243, 200, 0.4);
-  pointer-events: none;
-  background: radial-gradient(
-    circle at center,
-    rgba(36, 243, 200, 0.2) 0%,
-    transparent 70%
-  );
-  z-index: 1;
-}
-
-.profile-circle::before {
-  animation: sineWave1 8s ease-in-out infinite;
-}
-
-.profile-circle::after {
-  animation: sineWave2 10s ease-in-out infinite;
-  filter: blur(8px);
-  animation-delay: 2.5s;
-}
-
-@keyframes sineWave1 {
-  0% {
-    transform: scale(1.05);
-    opacity: 0.9;
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+/* Tablet Layout (769px - 1024px) */
+@media (max-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(140px, auto);
   }
-  25% {
-    transform: scale(1.15);
-    opacity: 0.7;
-    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+
+  /* Reset all cards to span 1 column/row */
+  .profile-card,
+  .identity-card,
+  .contact-card {
+    grid-column: span 1;
+    grid-row: span 1;
   }
-  50% {
-    transform: scale(1.25);
-    opacity: 0.5;
-    border-radius: 40% 60% 30% 70% / 70% 30% 50% 40%;
+
+  /* Skills and Experience cards span full width (2 columns) */
+  .skills-card,
+  .experience-card {
+    grid-column: span 2;
+    grid-row: span 1;
   }
-  75% {
-    transform: scale(1.15);
-    opacity: 0.7;
-    border-radius: 70% 30% 50% 40% / 30% 50% 60% 70%;
+
+  /* Skills: 2 columns on tablet */
+  .skills-card .card-body {
+    flex-wrap: wrap;
   }
-  100% {
-    transform: scale(1.05);
-    opacity: 0.9;
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+
+  .skills-card .skill-column {
+    flex-basis: calc(50% - 1rem);
   }
 }
 
-@keyframes sineWave2 {
-  0% {
-    transform: scale(1.05);
-    opacity: 0.9;
-    border-radius: 70% 30% 50% 40% / 30% 60% 40% 70%;
-  }
-  25% {
-    transform: scale(1.15);
-    opacity: 0.7;
-    border-radius: 40% 70% 30% 60% / 60% 30% 70% 40%;
-  }
-  50% {
-    transform: scale(1.25);
-    opacity: 0.5;
-    border-radius: 30% 60% 70% 40% / 40% 70% 30% 60%;
-  }
-  75% {
-    transform: scale(1.15);
-    opacity: 0.7;
-    border-radius: 60% 30% 40% 70% / 50% 40% 60% 30%;
-  }
-  100% {
-    transform: scale(1.05);
-    opacity: 0.9;
-    border-radius: 70% 30% 50% 40% / 30% 60% 40% 70%;
-  }
-}
 
-/* Third wave animation */
-.profile-circle::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: 50%;
-  border: 1px solid rgba(36, 243, 200, 0.3);
-  filter: blur(6px);
-  animation: sineWave3 9s ease-in-out infinite;
-  animation-delay: 5s;
-  opacity: 0.8;
-  box-shadow: 
-    0 0 15px rgba(36, 243, 200, 0.5),
-    inset 0 0 15px rgba(36, 243, 200, 0.5);
-}
-
-@keyframes sineWave3 {
-  0% {
-    transform: scale(1.05);
-    border-radius: 50% 60% 40% 70% / 40% 70% 30% 60%;
-  }
-  25% {
-    transform: scale(1.15);
-    border-radius: 40% 70% 50% 30% / 70% 30% 60% 40%;
-  }
-  50% {
-    transform: scale(1.25);
-    border-radius: 30% 50% 70% 40% / 50% 60% 30% 70%;
-  }
-  75% {
-    transform: scale(1.15);
-    border-radius: 60% 30% 40% 70% / 30% 70% 50% 40%;
-  }
-  100% {
-    transform: scale(1.05);
-    border-radius: 50% 60% 40% 70% / 40% 70% 30% 60%;
-  }
-}
-
-/* Responsive design */
+/* Mobile Layout (< 768px) */
 @media (max-width: 768px) {
+  .home-container {
+    padding-top: 8rem;
+  }
+
+  .terminal-header {
+    width: 90%;
+    padding: 0.8rem 1rem;
+  }
+
+  .terminal-title {
+    font-size: 0.8rem;
+  }
+
   .content-wrapper {
-    flex-direction: column-reverse;
-    justify-content: center;
-    gap: 2rem;
+    padding: 1rem;
   }
 
-  .summary-box {
-    max-width: 100%;
+  .bento-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    gap: 1rem;
   }
 
-  .profile-circle {
-    width: 200px;
-    height: 200px;
+  .profile-card,
+  .identity-card,
+  .contact-card,
+  .skills-card,
+  .experience-card {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .profile-card {
+    min-height: 200px;
+  }
+  
+  /* MODIFIED: Merge skill columns on mobile */
+  .skills-card .card-body {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .screen-content {
+    padding: 1rem;
+    font-size: 0.8rem;
+  }
+
+  .cassette-reel {
+    gap: 1.5rem;
+  }
+
+  .reel {
+    width: 30px;
+    height: 30px;
+  }
+
+  .tape-line {
+    width: 60px;
   }
 }
 </style>

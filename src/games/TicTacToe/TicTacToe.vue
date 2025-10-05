@@ -96,14 +96,14 @@ export default {
 
 <style scoped>
 .game-container {
-  background: rgba(1, 0, 18, 0.95);
-  border-radius: 15px;
+  background: var(--color-bg-charcoal, #2b2b2b);
+  border-radius: 4px;
   padding: 2rem;
-  max-width: 500px;
+  max-width: 400px;
   margin: 0 auto;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(163, 255, 187, 0.1);
-  backdrop-filter: blur(8px);
+  box-shadow: 0 0 20px rgba(67, 198, 195, 0.3);
+  border: 2px solid var(--color-teal, #43C6C3);
+  font-family: var(--font-mono, 'Share Tech Mono', monospace);
 }
 
 .game-header {
@@ -112,13 +112,18 @@ export default {
 }
 
 .game-header h2 {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--color-teal, #43C6C3);
   margin-bottom: 1rem;
+  text-shadow: 0 0 10px var(--color-teal, #43C6C3);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-family: var(--font-retro, 'VT323', monospace);
 }
 
 .game-status {
-  color: rgba(163, 255, 187, 0.9);
+  color: var(--color-gold, #F2C749);
   font-size: 1.2rem;
+  text-shadow: 0 0 5px var(--color-gold, #F2C749);
 }
 
 .game-board {
@@ -135,32 +140,41 @@ export default {
 
 .board-cell {
   aspect-ratio: 1;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(163, 255, 187, 0.2);
-  border-radius: 8px;
-  color: rgba(255, 255, 255, 0.9);
+  background: var(--color-bg-dark, #1a1a1a);
+  border: 2px solid var(--color-teal, #43C6C3);
+  border-radius: 0;
+  color: var(--color-cream, #F5F4ED);
   font-size: 2rem;
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.1s;
+  font-family: var(--font-retro, 'VT323', monospace);
+  text-shadow: 0 0 8px currentColor;
 }
 
 .board-cell:not(:disabled):hover {
-  background: rgba(163, 255, 187, 0.1);
-  transform: translateY(-2px);
+  background: var(--color-teal, #43C6C3);
+  color: var(--color-bg-dark, #1a1a1a);
+  box-shadow: 0 0 15px var(--color-teal, #43C6C3);
+}
+
+.board-cell:not(:disabled):active {
+  transform: translateY(2px);
 }
 
 .board-cell:disabled {
   cursor: not-allowed;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .board-cell.x {
-  color: #ff6b6b;
+  color: var(--color-orange, #F75A33);
+  text-shadow: 0 0 10px var(--color-orange, #F75A33);
 }
 
 .board-cell.o {
-  color: #4ecdc4;
+  color: var(--color-teal, #43C6C3);
+  text-shadow: 0 0 10px var(--color-teal, #43C6C3);
 }
 
 .game-controls {
@@ -170,26 +184,78 @@ export default {
 }
 
 .control-button {
-  background: linear-gradient(
-    to right,
-    rgba(163, 255, 187, 0.2),
-    rgba(115, 255, 160, 0.2)
-  );
-  border: 1px solid rgba(163, 255, 187, 0.3);
-  color: rgba(163, 255, 187, 0.9);
+  background: var(--color-bg-charcoal, #2b2b2b);
+  border: 2px solid var(--color-teal, #43C6C3);
+  color: var(--color-teal, #43C6C3);
   padding: 0.8rem 1.5rem;
-  border-radius: 25px;
+  border-radius: 0;
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.1s;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: var(--font-mono, 'Share Tech Mono', monospace);
 }
 
 .control-button:hover {
-  background: linear-gradient(
-    to right,
-    rgba(163, 255, 187, 0.3),
-    rgba(115, 255, 160, 0.3)
-  );
-  transform: translateY(-2px);
+  background: var(--color-teal, #43C6C3);
+  color: var(--color-bg-dark, #1a1a1a);
+  box-shadow: 0 0 10px var(--color-teal, #43C6C3);
+}
+
+.control-button:active {
+  transform: translateY(2px);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .game-container {
+    padding: 1.5rem;
+  }
+
+  .game-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .game-status {
+    font-size: 1rem;
+  }
+
+  .board-cell {
+    font-size: 1.8rem;
+  }
+
+  .game-controls {
+    flex-wrap: wrap;
+  }
+
+  .control-button {
+    flex: 1;
+    min-width: 120px;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-container {
+    padding: 1rem;
+  }
+
+  .game-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .board-cell {
+    font-size: 1.5rem;
+  }
+
+  .board-row {
+    gap: 0.4rem;
+  }
+
+  .game-board {
+    gap: 0.4rem;
+  }
 }
 </style> 
