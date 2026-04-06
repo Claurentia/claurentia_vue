@@ -24,6 +24,13 @@
       </div>
     </div> -->
 
+    <!-- Section Header -->
+    <div class="arcade-header">
+      <div class="header-line"></div>
+      <h2 class="section-title glow-text">[ TRACK_LIST.SYS ]</h2>
+      <div class="header-line"></div>
+    </div>
+
     <!-- Horizontal Scrolling Track List -->
     <div class="tracks-wrapper">
       <div class="projects-grid" ref="projectsGrid">
@@ -50,7 +57,7 @@
             <div class="track-description" :class="{ expanded: expandedProjects[index] }">
               <span class="desc-prompt">></span>
               <span class="desc-text">
-                {{ expandedProjects[index] ? project.description : truncateText(project.description) }}
+                {{ project.description }}
               </span>
             </div>
 
@@ -95,95 +102,15 @@
 </template>
 
 <script>
+import projects from '@/data/projects'
+
 export default {
   name: 'ProjectsPage',
   data() {
     return {
-      expandedProjects: Array(10).fill(false),
+      expandedProjects: Array(projects.length).fill(false),
       currentTrack: 1,
-      projects: [
-        {
-          title: 'Personal Website',
-          description: 'A responsive portfolio website built with Vue.js, featuring a modern UI design with smooth animations and dark theme. Showcases my projects, skills, and professional experience.',
-          image: require('@/assets/Cl_brand.png'),
-          color: '#2c3e50',
-          technologies: ['Vue.js', 'JavaScript', 'CSS'],
-          github: 'https://github.com/Claurentia/claurentia_vue',
-          repo: 'GitHub'
-        },
-        {
-          title: 'Customer Feedback Analysis',
-          description: 'An automated social media monitoring system that analyzes user feedback to identify potential trust and safety concerns. Built with AWS services, the application processes social media posts using natural language processing for sentiment analysis and topic classification. Features an interactive dashboard that displays trending keywords, topic distributions, and sentiment patterns. The system enables proactive identification of user concerns through automated monitoring, replacing manual review processes.',
-          image: require('@/assets/SeattleU.png'),
-          color: '#eeebe3',
-          technologies: ['Python', 'React.js', 'JavaScript', 'HTML', 'CSS', 'AWS Services (Lambda, Comprehend, DynamoDB, S3)'],
-          repo: 'GitHub'
-        },
-        {
-          title: 'Gourmet App UI/UX Design',
-          description: 'A comprehensive UI/UX design project for a mobile application focused on discovering local eateries in Indonesia. The app features personalized \'food journeys\' with an intuitive interface designed through extensive user research and iterative prototyping. Key features include personalized recommendations, nearby restaurant discovery, and detailed review systems. The design process encompassed user personas, sketches, information architecture, paper prototypes, and high-fidelity wireframes to create a user-centered solution for both locals and tourists.',
-          image: require('@/assets/Gourmet.png'),
-          color: '#fff4ef',
-          technologies: ['Figma', 'User research methodologies', 'Interactive prototyping', 'Information architecture design'],
-          github: 'https://github.com/ThePandaGroup/GourmetAppUXDesign',
-          repo: 'GitHub'
-        },
-        {
-          title: 'Eco-Panda',
-          description: 'Eco Panda is a Flutter-based mobile application designed to encourage environmentally friendly transportation choices and track users\' carbon footprint. The app gamifies eco-friendly travel by rewarding users with points for choosing sustainable transportation options. It features route planning and navigation, carbon footprint tracking, challenges and rewards, a leaderboard system, and a customizable user profile. The app is built with Flutter for cross-platform compatibility, integrates Firebase for authentication and cloud functions, and uses a local SQLite database for data persistence.',
-          image: require('@/assets/EcoPanda.png'),
-          color: '#f3fce5',
-          technologies: ['Flutter', 'Dart', 'Firebase'],
-          github: 'https://github.com/ThePandaGroup/Eco-Panda',
-          repo: 'GitHub'
-        },
-        {
-          title: 'Health Recorder Mobile App',
-          description: 'A comprehensive Flutter application for tracking personal health and wellness activities, featuring emotion logging, diet tracking, and workout recording capabilities. It includes gamification elements, multi-language support, and a provider-based architecture for efficient data management and user experience.',
-          image: require('@/assets/Cl_brand.png'),
-          color: '#34495e',
-          technologies: ['Flutter', 'Dart', 'JavaScript', 'Firebase'],
-          github: 'https://github.com/Claurentia/health-recorder',
-          repo: 'GitHub'
-        },
-        {
-          title: 'Panda-S E-commerce',
-          description: 'Description of project 1. Add details about what the project does and its key features.',
-          image: require('@/assets/Panda-S.png'),
-          color: '#fcfaeb',
-          technologies: ['Angular', 'TypeScript', 'MongoDB', 'HTML'],
-          github: 'https://github.com/ThePandaGroup/Panda-S-Angular',
-          repo: 'GitHub'
-        },
-        {
-          title: 'Simple Shell',
-          description: 'A custom Unix-like shell implemented in C++ that demonstrates fundamental operating system concepts. The shell supports basic command execution and advanced pipe operations for command chaining. Key features include input parsing, process creation using fork(), pipe communication between processes, and proper memory management. The program handles multiple commands connected by pipes while maintaining parent-child process relationships.',
-          image: require('@/assets/Cl_brand.png'),
-          color: '#34495e',
-          technologies: ['C++', 'System calls (fork, pipe, execvp)', 'Process management', 'Input/output redirection'],
-          github: 'https://github.com/Claurentia/Simple-Shell',
-          repo: 'GitHub'
-        },
-        {
-          title: 'Covid Database',
-          description: 'A C++ program implementing a custom hash table data structure to track and manage COVID-19 data records. The application features a hash table with separate chaining for collision resolution, allowing efficient storage and retrieval of COVID-19 statistics by country. Key features include file I/O operations for data loading, a command-line interface for database operations (add, remove, get, display), and data management capabilities with date-based updates.',
-          image: require('@/assets/Cl_brand.png'),
-          color: '#34495e',
-          technologies: ['C++', 'STL (vectors)', 'File I/O operations', 'Hash table', 'Object-oriented programming'],
-          github: 'https://github.com/Claurentia/Covid-Database',
-          repo: 'GitHub'
-        },
-        {
-          title: 'Trivia Game',
-          description: 'A C++ command-line trivia game that fetches random questions from the Open Trivia Database API. The application features multiple-choice and true/false questions across various categories with different difficulty levels. The program processes JSON data, randomizes answer choices, tracks user scores, and provides immediate feedback with fun ASCII art rewards based on performance.',
-          image: require('@/assets/Cl_brand.png'),
-          color: '#34495e',
-          technologies: ['C++', 'CURL for API requests', 'JSON processing (nlohmann/json library)', 'STL (vectors, strings)', 'Object-oriented programming'],
-          github: 'https://github.com/Claurentia/Trivia',
-          repo: 'GitHub'
-        },
-        
-      ]
+      projects
     }
   },
   methods: {
@@ -193,12 +120,11 @@ export default {
       this.expandedProjects = newExpandedProjects
     },
     shouldShowReadMore(description) {
-      return description.length > 200
+      // Show expand button for descriptions likely exceeding 5 lines (~75 chars/line)
+      return description.length > 375
     },
     truncateText(text) {
-      if (this.shouldShowReadMore(text)) {
-        return text.slice(0, 200) + '... '
-      }
+      // CSS line-clamp handles visual truncation; return full text always
       return text
     },
     scrollProjects(direction) {
@@ -307,6 +233,38 @@ export default {
   letter-spacing: 3px;
 }
 
+/* Section Header */
+.arcade-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 1400px;
+}
+
+.header-line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-terminal-green),
+    transparent
+  );
+  box-shadow: 0 0 10px var(--color-terminal-green);
+}
+
+.section-title {
+  font-family: var(--font-retro);
+  color: var(--color-terminal-green);
+  font-size: 2.5rem;
+  letter-spacing: 5px;
+  white-space: nowrap;
+  margin: 0;
+}
+
 /* Tracks Wrapper */
 .tracks-wrapper {
   width: 100%;
@@ -351,6 +309,8 @@ export default {
   transition: all 0.3s;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .track-card.expanded {
@@ -399,6 +359,9 @@ export default {
 .track-info {
   padding: 1.5rem;
   font-family: var(--font-mono);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .track-title-bar {
@@ -425,12 +388,16 @@ export default {
   font-size: 0.85rem;
   line-height: 1.6;
   margin-bottom: 1rem;
-  max-height: 120px;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 .track-description.expanded {
-  max-height: none;
+  display: block;
+  overflow: visible;
+  -webkit-line-clamp: unset;
 }
 
 .desc-prompt {
@@ -488,7 +455,7 @@ export default {
 
 /* Track Actions */
 .track-actions {
-  margin-top: 1rem;
+  margin-top: auto;
   padding-top: 1rem;
   border-top: 1px solid var(--color-earth-olive);
 }

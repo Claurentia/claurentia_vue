@@ -7,31 +7,26 @@
 </template>
 
 <script>
-import TicTacToe from '../games/TicTacToe/TicTacToe.vue'
-import SnakeGame from '../games/Snake/Snake.vue'
-import TwentyFortyEight from '../games/2048/Game2048.vue'
+import { defineAsyncComponent } from 'vue'
 
 export default {
   name: 'GameModal',
-  components: {
-    TicTacToe,
-    SnakeGame,
-    TwentyFortyEight
-  },
   props: {
-    gameName: {
-      type: String,
-      required: true
+    // Accept either a string name (legacy) or a component loader function
+    gameComponent: {
+      type: [Function, Object],
+      default: null
     }
   },
   computed: {
     currentGame() {
-      const games = {
-        'Tic Tac Toe': 'TicTacToe',
-        'Snake': 'SnakeGame',
-        '2048': 'TwentyFortyEight'
+      if (!this.gameComponent) return null
+      // If it's already a resolved component/object, use it directly.
+      // If it's a loader function, wrap with defineAsyncComponent.
+      if (typeof this.gameComponent === 'function') {
+        return defineAsyncComponent(this.gameComponent)
       }
-      return games[this.gameName]
+      return this.gameComponent
     }
   }
 }

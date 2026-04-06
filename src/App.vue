@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import HomePage from './components/HomePage.vue'
+import HomePage from './views/HomePage.vue'
 import NavBar from './components/NavBar.vue'
-import ProjectsPage from './components/ProjectsPage.vue'
-import MinigamesPage from './components/MinigamesPage.vue'
+import ProjectsPage from './views/ProjectsPage.vue'
+import MinigamesPage from './views/MinigamesPage.vue'
 import FooterSection from './components/FooterSection.vue'
 
 export default {
@@ -35,7 +35,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap');
 
 :root {
-  /* New Color Palette */
+  /* Primary Palette */
   --color-bg-dark: #1a1a1a;
   --color-bg-charcoal: #2b2b2b;
   --color-brown: #804D37;
@@ -44,20 +44,18 @@ export default {
   --color-gold: #F2C749;
   --color-orange: #F75A33;
 
-  /* Legacy color mappings for compatibility */
-  --color-earth-olive: #804D37;
-  --color-earth-mustard: #F2C749;
-  --color-neon-orange: #F75A33;
-  --color-neon-teal: #43C6C3;
-  --color-crt-green: #43C6C3;
-  --color-terminal-green: #43C6C3;
-  --color-amber: #F2C749;
-  --color-red-error: #F75A33;
-  --color-yellow-highlight: #F2C749;
-
-  /* CRT Display Colors */
-  --color-phosphor-green: #43C6C3;
-  --color-phosphor-amber: #F2C749;
+  /* Semantic aliases (all resolve to primary palette) */
+  --color-earth-olive: var(--color-brown);
+  --color-earth-mustard: var(--color-gold);
+  --color-neon-orange: var(--color-orange);
+  --color-neon-teal: var(--color-teal);
+  --color-crt-green: var(--color-teal);
+  --color-terminal-green: var(--color-teal);
+  --color-amber: var(--color-gold);
+  --color-red-error: var(--color-orange);
+  --color-yellow-highlight: var(--color-gold);
+  --color-phosphor-green: var(--color-teal);
+  --color-phosphor-amber: var(--color-gold);
   --color-scan-line: rgba(0, 0, 0, 0.1);
 
   /* Typography */
@@ -118,6 +116,21 @@ export default {
   0% { opacity: 0.97; }
   50% { opacity: 1; }
   100% { opacity: 0.97; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #app::after {
+    animation: none;
+  }
+  #app::before {
+    animation: none;
+  }
+  .scan-overlay {
+    animation: none;
+  }
+  .glow-text {
+    text-shadow: none;
+  }
 }
 
 html, body {

@@ -95,9 +95,10 @@ export default {
     window.addEventListener('resize', this.checkMobile)
     
     // Load best score from localStorage
-    const savedBestScore = localStorage.getItem('2048_best_score')
-    if (savedBestScore) {
-      this.bestScore = parseInt(savedBestScore)
+    try {
+      this.bestScore = parseInt(localStorage.getItem('2048_best_score') || '0')
+    } catch {
+      this.bestScore = 0
     }
   },
   beforeUnmount() {
@@ -191,7 +192,9 @@ export default {
         // Update best score
         if (this.score > this.bestScore) {
           this.bestScore = this.score
-          localStorage.setItem('2048_best_score', this.bestScore.toString())
+          try {
+            localStorage.setItem('2048_best_score', this.bestScore.toString())
+          } catch { /* ignore in private/incognito mode */ }
         }
         
         // Check for game over
