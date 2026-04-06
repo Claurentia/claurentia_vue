@@ -1,41 +1,15 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomePage from '../components/HomePage.vue'
-import ProjectsPage from '../components/ProjectsPage.vue'
-import MinigamesPage from '../components/MinigamesPage.vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: HomePage
-  },
-  {
-    path: '/projects',
-    name: 'Projects',
-    component: ProjectsPage
-  },
-  {
-    path: '/minigames',
-    name: 'Minigames',
-    component: MinigamesPage
-  }
-]
+// NOTE: Main navigation uses scroll-snap (see App.vue + NavBar.vue).
+// This router is kept for potential future route-based features only.
+// createWebHashHistory is used instead of createWebHistory to prevent
+// 404 errors on GitHub Pages when users refresh or deep-link.
+
+const routes = []
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes,
-  scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition
-    }
-    if (to.hash) {
-      return {
-        el: to.hash,
-        behavior: 'smooth'
-      }
-    }
-    return { top: 0, behavior: 'smooth' }
-  }
+  history: createWebHashHistory(),
+  routes
 })
 
 export default router
