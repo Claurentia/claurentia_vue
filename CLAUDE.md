@@ -34,10 +34,10 @@ The app uses a **single-page scroll-snap layout** rather than traditional routin
 
 ### Component Organization
 
-**Main Pages** ([src/components/](src/components/)):
-- [HomePage.vue](src/components/HomePage.vue) - Landing section with bio and contact info with clipboard copy functionality
-- [ProjectsPage.vue](src/components/ProjectsPage.vue) - Portfolio projects showcase
-- [MinigamesPage.vue](src/components/MinigamesPage.vue) - Interactive games grid with modal launcher
+**Main Pages** ([src/views/](src/views/)):
+- [HomePage.vue](src/views/HomePage.vue) - Landing section with bio and contact info with clipboard copy functionality
+- [ProjectsPage.vue](src/views/ProjectsPage.vue) - Portfolio projects showcase
+- [MinigamesPage.vue](src/views/MinigamesPage.vue) - Interactive games grid with modal launcher
 - [NavBar.vue](src/components/NavBar.vue) - Fixed navigation header
 - [FooterSection.vue](src/components/FooterSection.vue) - Footer with social links
 
@@ -78,7 +78,7 @@ The site deploys to GitHub Pages using the `gh-pages` package:
 
 When adding new games:
 1. Create game as standalone Vue component in [src/games/](src/games/)
-2. Add game entry to `games` array in [MinigamesPage.vue](src/components/MinigamesPage.vue)
+2. Add game entry to `games` array in [src/data/games.js](src/data/games.js)
 3. Import game component in [GameModal.vue](src/components/GameModal.vue) dynamic component mapping
 4. Game should handle its own state, controls, and rendering within the modal
 

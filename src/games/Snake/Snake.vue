@@ -134,6 +134,7 @@ import { getNextMove } from './SnakeAI.js'
 
 export default {
   name: 'SnakeGame',
+  emits: ['close'],
   data() {
     return {
       gridSize: 20,

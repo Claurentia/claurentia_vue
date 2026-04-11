@@ -57,23 +57,23 @@
             <span class="card-title">[CONTACT]</span>
           </div>
           <div class="card-body">
-            <button @click="copyToClipboard('carmel.laurentia@gmail.com')" class="terminal-line clickable">
+            <button @click="copyToClipboard(contacts.email)" class="terminal-line clickable">
               <span class="label">MAIL:</span>
-              <span class="value">carmel.laurentia@gmail.com</span>
+              <span class="value">{{ contacts.email }}</span>
               <span class="copy-indicator">[ COPY ]</span>
             </button>
-            <button @click="copyToClipboard('+19099148520')" class="terminal-line clickable">
+            <button @click="copyToClipboard(contacts.phone)" class="terminal-line clickable">
               <span class="label">TELE:</span>
-              <span class="value">+1 (909) 914-8520</span>
+              <span class="value">{{ contacts.phoneDisplay }}</span>
               <span class="copy-indicator">[ COPY ]</span>
             </button>
-            <a href="https://linkedin.com/in/carmel-laurentia-385292225" target="_blank" class="terminal-line clickable">
+            <a :href="contacts.linkedin" target="_blank" class="terminal-line clickable">
               <span class="label">LINK:</span>
-              <span class="value">linkedin.com/carmel-laurentia</span>
+              <span class="value">{{ contacts.linkedinDisplay }}</span>
             </a>
-            <a href="https://github.com/claurentia" target="_blank" class="terminal-line clickable">
+            <a :href="contacts.github" target="_blank" class="terminal-line clickable">
               <span class="label">CODE:</span>
-              <span class="value">github.com/claurentia</span>
+              <span class="value">{{ contacts.githubDisplay }}</span>
             </a>
           </div>
         </div>
@@ -84,80 +84,11 @@
             <span class="card-title">[TECH_STACK]</span>
           </div>
           <div class="card-body">
-            <div class="skill-column">
-              <div class="skill-category">LANGUAGES</div>
-              <div class="skill-bar">
-                <span class="skill-label">PYTHON______</span>
-                <div class="bar"><div class="fill" style="width: 90%"></div></div>
-              </div>
-              <div class="skill-bar">
-                <span class="skill-label">JS/TS_______</span>
-                <div class="bar"><div class="fill" style="width: 92%"></div></div>
-              </div>
-              <div class="skill-bar">
-                <span class="skill-label">C/C++/C#____</span>
-                <div class="bar"><div class="fill" style="width: 85%"></div></div>
-              </div>
-              <div class="skill-bar">
-                <span class="skill-label">HTML/CSS____</span>
-                <div class="bar"><div class="fill" style="width: 93%"></div></div>
-              </div>
-            </div>
-            <div class="skill-column">
-              <div class="skill-category">FRAMEWORKS</div>
-              <div class="skill-bar">
-                <span class="skill-label">FLUTTER_____</span>
-                <div class="bar"><div class="fill" style="width: 95%"></div></div>
-              </div>
-              <div class="skill-bar">
-                <span class="skill-label">REACT_______</span>
-                <div class="bar"><div class="fill" style="width: 90%"></div></div>
-              </div>
-              <div class="skill-bar">
-                <span class="skill-label">NODE.JS_____</span>
-                <div class="bar"><div class="fill" style="width: 88%"></div></div>
-              </div>
-              <div class="skill-bar">
-                <span class="skill-label">.NET________</span>
-                <div class="bar"><div class="fill" style="width: 80%"></div></div>
-              </div>
-            </div>
-            <div class="skill-column">
-              <div class="skill-category">DATABASE</div>
-              <div class="skill-bar">
-                <span class="skill-label">MONGODB_____</span>
-                <div class="bar"><div class="fill" style="width: 85%"></div></div>
-              </div>
-              <div class="skill-bar">
-                <span class="skill-label">MYSQL_______</span>
-                <div class="bar"><div class="fill" style="width: 83%"></div></div>
-              </div>
-              <div class="skill-bar">
-                <span class="skill-label">FIREBASE____</span>
-                <div class="bar"><div class="fill" style="width: 87%"></div></div>
-              </div>
-              <div class="skill-bar">
-                <span class="skill-label">SQLITE______</span>
-                <div class="bar"><div class="fill" style="width: 80%"></div></div>
-              </div>
-            </div>
-            <div class="skill-column">
-              <div class="skill-category">CLOUD/TOOLS</div>
-              <div class="skill-bar">
-                <span class="skill-label">GOOGLE CLOUD_</span>
-                <div class="bar"><div class="fill" style="width: 92%"></div></div>
-              </div>
-                <div class="skill-bar">
-                <span class="skill-label">AWS/AZURE___</span>
-                <div class="bar"><div class="fill" style="width: 85%"></div></div>
-              </div>
-              <div class="skill-bar">
-                <span class="skill-label">GIT_________</span>
-                <div class="bar"><div class="fill" style="width: 90%"></div></div>
-              </div>
-              <div class="skill-bar">
-                <span class="skill-label">FIGMA_______</span>
-                <div class="bar"><div class="fill" style="width: 82%"></div></div>
+            <div class="skill-column" v-for="group in skills" :key="group.category">
+              <div class="skill-category">{{ group.category }}</div>
+              <div class="skill-bar" v-for="skill in group.items" :key="skill.name">
+                <span class="skill-label">{{ skill.name }}</span>
+                <div class="bar"><div class="fill" :style="{ width: skill.level + '%' }"></div></div>
               </div>
             </div>
           </div>
@@ -229,10 +160,15 @@
 </template>
 
 <script>
+import contacts from '@/data/contacts'
+import skills from '@/data/skills'
+
 export default {
   name: 'HomePage',
   data() {
     return {
+      contacts,
+      skills,
       showNotification: false,
       notificationTimeout: null
     }

@@ -2,6 +2,9 @@
 node_modules
 /dist
 
+# Personal scratchpad
+notes.txt
+
 
 # local env files
 .env.local

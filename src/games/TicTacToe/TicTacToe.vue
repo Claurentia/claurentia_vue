@@ -30,6 +30,7 @@
 <script>
 export default {
   name: 'TicTacToe',
+  emits: ['close'],
   data() {
     return {
       board: Array(3).fill(null).map(() => Array(3).fill(null)),

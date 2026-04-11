@@ -70,6 +70,7 @@
 <script>
 export default {
   name: 'TwentyFortyEight',
+  emits: ['close'],
   data() {
     return {
       size: 4,

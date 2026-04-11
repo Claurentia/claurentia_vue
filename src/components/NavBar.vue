@@ -27,13 +27,13 @@
     </div>
     <div class="nav-content">
       <div class="nav-links">
-        <button @click="scrollToSection('home')" class="nav-link">
+        <button @click="scrollToSection('home')" class="nav-link" aria-label="Scroll to Home section">
           <span class="nav-bracket">[</span> HOME <span class="nav-bracket">]</span>
         </button>
-        <button @click="scrollToSection('projects')" class="nav-link">
+        <button @click="scrollToSection('projects')" class="nav-link" aria-label="Scroll to Projects section">
           <span class="nav-bracket">[</span> PROJECTS <span class="nav-bracket">]</span>
         </button>
-        <button @click="scrollToSection('minigames')" class="nav-link">
+        <button @click="scrollToSection('minigames')" class="nav-link" aria-label="Scroll to Games section">
           <span class="nav-bracket">[</span> GAMES <span class="nav-bracket">]</span>
         </button>
       </div>
@@ -44,17 +44,10 @@
 <script>
 export default {
   name: 'NavBar',
+  emits: ['scroll-to'],
   methods: {
     scrollToSection(sectionId) {
-      const mainElement = document.querySelector('main')
-      const section = document.getElementById(sectionId)
-      if (mainElement && section) {
-        const topOffset = section.offsetTop
-        mainElement.scrollTo({
-          top: topOffset,
-          behavior: 'smooth'
-        })
-      }
+      this.$emit('scroll-to', sectionId)
     }
   }
 }
@@ -194,11 +187,6 @@ export default {
   font-size: 1.2rem;
   padding: 0.6rem 1rem;
   animation: blink 1s infinite;
-}
-
-@keyframes blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
 }
 
 @media (max-width: 768px) {

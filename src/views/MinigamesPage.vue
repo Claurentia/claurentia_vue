@@ -45,10 +45,9 @@
 
 <script>
 import GameModal from '../components/GameModal.vue'
-import { defineComponent } from 'vue'
 import games from '@/data/games'
 
-export default defineComponent({
+export default {
   name: 'MinigamesPage',
   components: {
     GameModal
@@ -64,7 +63,7 @@ export default defineComponent({
       this.activeGame = game.component
     }
   }
-})
+}
 </script>
 
 <style scoped>

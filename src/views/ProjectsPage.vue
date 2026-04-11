@@ -1,29 +1,5 @@
 <template>
   <div class="projects-container" id="projects">
-    <!-- Cassette Player Header -->
-    <!-- <div class="cassette-player">
-      <div class="player-header">
-        <div class="player-title">[TRACK LIST]</div>
-        <div class="player-controls">
-          <button class="control-button" @click="scrollProjects('left')">
-            <span class="control-icon">◄◄</span>
-          </button>
-          <button class="control-button play-btn">
-            <span class="control-icon">▶</span>
-          </button>
-          <button class="control-button">
-            <span class="control-icon">■</span>
-          </button>
-          <button class="control-button" @click="scrollProjects('right')">
-            <span class="control-icon">►►</span>
-          </button>
-        </div>
-      </div>
-      <div class="track-counter">
-        TRACK {{ currentTrack.toString().padStart(2, '0') }} / {{ projects.length.toString().padStart(2, '0') }}
-      </div>
-    </div> -->
-
     <!-- Section Header -->
     <div class="arcade-header">
       <div class="header-line"></div>
@@ -54,7 +30,9 @@
             </div>
 
             <!-- Description with typewriter effect on hover -->
-            <div class="track-description" :class="{ expanded: expandedProjects[index] }">
+            <div class="track-description"
+                 :ref="el => { if (el) descRefs[index] = el }"
+                 :class="{ expanded: expandedProjects[index] }">
               <span class="desc-prompt">></span>
               <span class="desc-text">
                 {{ project.description }}
@@ -62,7 +40,7 @@
             </div>
 
             <button
-              v-if="shouldShowReadMore(project.description)"
+              v-if="overflowMap[index]"
               @click="toggleDescription(index)"
               class="expand-btn"
             >
@@ -109,23 +87,49 @@ export default {
   data() {
     return {
       expandedProjects: Array(projects.length).fill(false),
+      overflowMap: Array(projects.length).fill(false),
       currentTrack: 1,
-      projects
+      projects,
+      descRefs: []
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.setupOverflowObservers()
+    })
+  },
+  beforeUnmount() {
+    if (this._resizeObserver) {
+      this._resizeObserver.disconnect()
     }
   },
   methods: {
+    setupOverflowObservers() {
+      this._resizeObserver = new ResizeObserver(() => {
+        this.checkOverflow()
+      })
+      this.descRefs.forEach(el => {
+        if (el) this._resizeObserver.observe(el)
+      })
+      this.checkOverflow()
+    },
+    checkOverflow() {
+      const newMap = [...this.overflowMap]
+      this.descRefs.forEach((el, index) => {
+        if (el && !this.expandedProjects[index]) {
+          newMap[index] = el.scrollHeight > el.clientHeight
+        }
+      })
+      this.overflowMap = newMap
+    },
     toggleDescription(index) {
       const newExpandedProjects = [...this.expandedProjects]
       newExpandedProjects[index] = !newExpandedProjects[index]
       this.expandedProjects = newExpandedProjects
-    },
-    shouldShowReadMore(description) {
-      // Show expand button for descriptions likely exceeding 5 lines (~75 chars/line)
-      return description.length > 375
-    },
-    truncateText(text) {
-      // CSS line-clamp handles visual truncation; return full text always
-      return text
+      // Re-check overflow after collapsing
+      if (!newExpandedProjects[index]) {
+        this.$nextTick(() => this.checkOverflow())
+      }
     },
     scrollProjects(direction) {
       const grid = this.$refs.projectsGrid
@@ -160,77 +164,6 @@ export default {
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-}
-
-/* Cassette Player Controls */
-.cassette-player {
-  background: var(--color-bg-charcoal);
-  border: 3px solid var(--color-earth-olive);
-  padding: 1.5rem;
-  max-width: 800px;
-  width: 100%;
-  box-shadow:
-    0 0 20px rgba(0, 255, 65, 0.2),
-    inset 0 0 30px rgba(0, 0, 0, 0.8);
-}
-
-.player-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid var(--color-earth-olive);
-}
-
-.player-title {
-  font-family: var(--font-retro);
-  font-size: 1.5rem;
-  color: var(--color-terminal-green);
-  text-shadow: 0 0 10px var(--color-terminal-green);
-}
-
-.player-controls {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.control-button {
-  background: var(--color-bg-dark);
-  border: 2px solid var(--color-terminal-green);
-  color: var(--color-terminal-green);
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  font-family: var(--font-mono);
-  transition: all 0.1s;
-  position: relative;
-}
-
-.control-button:hover {
-  background: var(--color-earth-olive);
-  color: var(--color-yellow-highlight);
-  box-shadow: 0 0 15px var(--color-terminal-green);
-}
-
-.control-button:active {
-  transform: translateY(3px);
-}
-
-.control-icon {
-  font-size: 1.2rem;
-}
-
-.play-btn {
-  background: var(--color-earth-olive);
-}
-
-.track-counter {
-  font-family: var(--font-mono);
-  color: var(--color-neon-orange);
-  font-size: 1.2rem;
-  text-align: center;
-  letter-spacing: 3px;
 }
 
 /* Section Header */
@@ -509,28 +442,6 @@ export default {
 @media (max-width: 768px) {
   .projects-container {
     padding: 8rem 1rem 2rem;
-  }
-
-  .cassette-player {
-    padding: 1rem;
-  }
-
-  .player-header {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .player-title {
-    font-size: 1.2rem;
-  }
-
-  .control-button {
-    width: 40px;
-    height: 40px;
-  }
-
-  .track-counter {
-    font-size: 1rem;
   }
 
   .track-card {

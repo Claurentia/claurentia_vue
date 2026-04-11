@@ -1,14 +1,14 @@
 <template>
   <div id="app">
     <header>
-      <NavBar />
+      <NavBar @scroll-to="scrollToSection" />
     </header>
-    <main>
+    <main ref="mainScroll">
       <HomePage />
       <ProjectsPage />
       <MinigamesPage />
     </main>
-    <FooterSection />
+    <FooterSection @scroll-to-top="scrollToTop" />
   </div>
 </template>
 
@@ -27,6 +27,21 @@ export default {
     ProjectsPage,
     MinigamesPage,
     FooterSection
+  },
+  methods: {
+    scrollToSection(sectionId) {
+      const main = this.$refs.mainScroll
+      const section = document.getElementById(sectionId)
+      if (main && section) {
+        main.scrollTo({ top: section.offsetTop, behavior: 'smooth' })
+      }
+    },
+    scrollToTop() {
+      const main = this.$refs.mainScroll
+      if (main) {
+        main.scrollTo({ top: 0, behavior: 'smooth' })
+      }
+    }
   }
 }
 </script>
@@ -180,6 +195,12 @@ main > * {
 
 .retro-btn:active {
   transform: translateY(2px);
+}
+
+/* Shared utility animations */
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
 }
 
 /* Glowing Text Effect */

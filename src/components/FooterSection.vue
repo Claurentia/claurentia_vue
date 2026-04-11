@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <div class="footer-content">
-      <button @click="scrollToTop" class="scroll-top-button" :class="{ visible: showButton }">
+      <button @click="scrollToTop" class="scroll-top-button" :class="{ visible: showButton }" aria-label="Return to top">
         <span class="btn-icon">▲</span>
         <span class="btn-text">[ RETURN_TO_TOP ]</span>
       </button>
@@ -12,12 +12,14 @@
 <script>
 export default {
   name: 'FooterSection',
+  emits: ['scroll-to-top'],
   data() {
     return {
       showButton: false
     }
   },
   mounted() {
+    // Listen on the main scroll container for visibility toggling
     const mainElement = document.querySelector('main')
     if (mainElement) {
       mainElement.addEventListener('scroll', this.handleScroll)
@@ -34,13 +36,7 @@ export default {
       this.showButton = event.target.scrollTop > 200
     },
     scrollToTop() {
-      const mainElement = document.querySelector('main')
-      if (mainElement) {
-        mainElement.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        })
-      }
+      this.$emit('scroll-to-top')
     }
   }
 }

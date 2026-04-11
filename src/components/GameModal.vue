@@ -11,12 +11,19 @@ import { defineAsyncComponent } from 'vue'
 
 export default {
   name: 'GameModal',
+  emits: ['close'],
   props: {
     // Accept either a string name (legacy) or a component loader function
     gameComponent: {
       type: [Function, Object],
       default: null
     }
+  },
+  mounted() {
+    document.addEventListener('keydown', this.handleKeydown)
+  },
+  beforeUnmount() {
+    document.removeEventListener('keydown', this.handleKeydown)
   },
   computed: {
     currentGame() {
@@ -27,6 +34,11 @@ export default {
         return defineAsyncComponent(this.gameComponent)
       }
       return this.gameComponent
+    }
+  },
+  methods: {
+    handleKeydown(e) {
+      if (e.key === 'Escape') this.$emit('close')
     }
   }
 }
