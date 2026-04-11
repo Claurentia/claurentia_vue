@@ -150,8 +150,8 @@ export default {
 
 <style scoped>
 .projects-container {
-  min-height: 100dvh;
-  padding: 10rem 2rem 4rem;
+  min-height: 86dvh;
+  padding: 8rem 2rem 4rem;
   background:
     repeating-linear-gradient(
       90deg,
@@ -163,6 +163,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 2rem;
 }
 
@@ -172,7 +173,7 @@ export default {
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   width: 100%;
   max-width: 1400px;
 }
@@ -441,7 +442,7 @@ export default {
 /* Responsive Design */
 @media (max-width: 768px) {
   .projects-container {
-    padding: 8rem 1rem 2rem;
+    padding: 6rem 1rem 4rem;
   }
 
   .track-card {

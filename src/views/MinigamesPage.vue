@@ -68,12 +68,15 @@ export default {
 
 <style scoped>
 .minigames-container {
-  min-height: 100dvh;
-  padding: 10rem 2rem 4rem;
+  min-height: 86dvh;
+  padding: 8rem 2rem 4rem;
   background:
     radial-gradient(circle at 20% 50%, var(--color-bg-charcoal) 0%, transparent 50%),
     radial-gradient(circle at 80% 50%, var(--color-bg-charcoal) 0%, transparent 50%),
     var(--color-bg-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* Arcade Header */
@@ -82,7 +85,7 @@ export default {
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .header-line {
@@ -111,7 +114,7 @@ export default {
   font-family: var(--font-mono);
   color: var(--color-neon-orange);
   font-size: 1.2rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   letter-spacing: 2px;
   display: flex;
   align-items: center;
@@ -198,11 +201,14 @@ export default {
       rgba(0, 255, 65, 0.02) 8px
     );
   padding: 2rem;
+  box-sizing: border-box;
 }
 
 .game-icon > :deep(svg) {
   width: min(100%, 120px);
   height: 120px;
+  display: block;
+  margin: 0 auto;
   filter: drop-shadow(0 0 10px rgba(0, 255, 65, 0.5));
   transition: transform 0.3s ease;
 }
@@ -274,7 +280,7 @@ export default {
 /* Responsive */
 @media (max-width: 768px) {
   .minigames-container {
-    padding: 8rem 1rem 2rem;
+    padding: 6rem 1rem 4rem;
   }
 
   .arcade-header {

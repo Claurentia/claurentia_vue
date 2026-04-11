@@ -170,7 +170,7 @@ main {
 
 main > * {
   scroll-snap-align: start;
-  scroll-snap-stop: always;
+  scroll-snap-stop: normal;
 }
 
 /* Retro Button Styles */
