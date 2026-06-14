@@ -174,6 +174,16 @@ main {
 main > * {
   scroll-snap-align: start;
   scroll-snap-stop: normal;
+  /* Offset for fixed navbar so section headers aren't hidden beneath it */
+  scroll-margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  main {
+    /* Proximity snap on mobile: snaps only when already close to a boundary,
+       so fast swipes scroll freely but slow ones land cleanly on a section */
+    scroll-snap-type: y proximity;
+  }
 }
 
 /* Retro Button Styles */

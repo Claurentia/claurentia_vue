@@ -83,6 +83,8 @@ export default {
 .career-container {
   min-height: 80dvh;
   padding: 8rem 2rem 4rem;
+  /* Ensures the heading stays visible when the browser scrolls to #career */
+  scroll-margin-top: 0;
   background:
     linear-gradient(-45deg, transparent 48%, rgba(128, 77, 55, 0.15) 49%, rgba(128, 77, 55, 0.15) 51%, transparent 52%),
     linear-gradient(45deg, transparent 48%, rgba(128, 77, 55, 0.15) 49%, rgba(128, 77, 55, 0.15) 51%, transparent 52%),
@@ -333,25 +335,29 @@ export default {
 /* ── Mobile ── */
 @media (max-width: 768px) {
   .career-container {
-    padding: 7rem 1.2rem 3rem;
+    padding: 5.5rem 1rem 3rem;
   }
 
   .section-title {
-    font-size: 1.7rem;
-    letter-spacing: 3px;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
   }
 
   .career-header {
-    gap: 1rem;
+    gap: 0.75rem;
   }
 
   .log-entry {
-    grid-template-columns: 24px 1fr;
-    gap: 0 0.9rem;
+    grid-template-columns: 22px 1fr;
+    gap: 0 0.75rem;
   }
 
   .log-header-row {
-    gap: 0.5rem;
+    gap: 0.4rem;
+  }
+
+  .desc-item {
+    font-size: 0.74rem;
   }
 }
 </style>

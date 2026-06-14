@@ -442,12 +442,23 @@ export default {
 /* Responsive Design */
 @media (max-width: 768px) {
   .projects-container {
-    padding: 6rem 1rem 4rem;
+    padding: 4.5rem 0.75rem 3rem;
+    gap: 1rem;
   }
 
+  .arcade-header {
+    gap: 0.75rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+  }
+
+  /* Cards fill the viewport width minus padding */
   .track-card {
-    min-width: 320px;
-    max-width: 320px;
+    min-width: calc(100vw - 2.5rem);
+    max-width: calc(100vw - 2.5rem);
   }
 
   .track-info {
@@ -461,12 +472,16 @@ export default {
 
   .track-description {
     font-size: 0.8rem;
-    max-height: 100px;
   }
 
   .tech-chip {
     font-size: 0.7rem;
     padding: 0.2rem 0.5rem;
+  }
+
+  .projects-grid {
+    padding: 1rem 0.75rem;
+    gap: 1.25rem;
   }
 }
 </style> 

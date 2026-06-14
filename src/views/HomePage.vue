@@ -231,6 +231,9 @@ export default {
   font-family: var(--font-mono);
   color: var(--color-terminal-green);
   font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .prompt {
@@ -712,26 +715,38 @@ export default {
 /* Mobile Layout (< 768px) */
 @media (max-width: 768px) {
   .home-container {
-    padding-top: 8rem;
+    padding-top: 5rem;
   }
 
+  /* Redesign the terminal header as a slim inline prompt on mobile */
   .terminal-header {
-    width: 90%;
-    padding: 0.8rem 1rem;
+    background: none;
+    border: none;
+    border-left: 3px solid var(--color-neon-orange);
+    box-shadow: none;
+    padding: 0.4rem 0.75rem;
+    margin-bottom: 1rem;
+    width: auto;
+    align-self: flex-start;
+    margin-left: 0.75rem;
   }
 
   .terminal-title {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .content-wrapper {
-    padding: 1rem;
+    padding: 0.75rem;
   }
 
   .bento-grid {
     grid-template-columns: 1fr;
     grid-auto-rows: auto;
-    gap: 1rem;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
   }
 
   .profile-card,
@@ -744,18 +759,39 @@ export default {
   }
 
   .profile-card {
-    min-height: 200px;
+    min-height: 180px;
   }
-  
-  /* MODIFIED: Merge skill columns on mobile */
+
+  /* Skill columns: 2-up on mobile instead of 4-up or stacked */
   .skills-card .card-body {
-    flex-direction: column;
-    gap: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .skills-card .skill-column {
+    flex-basis: calc(50% - 0.4rem);
+    flex-shrink: 0;
+  }
+
+  /* Contact / identity values — allow wrapping */
+  .terminal-line {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .terminal-line .value {
+    font-size: 0.78rem;
+    word-break: break-all;
+  }
+
+  .terminal-line .label {
+    font-size: 0.78rem;
   }
 
   .screen-content {
     padding: 1rem;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
   }
 
   .cassette-reel {
@@ -763,8 +799,8 @@ export default {
   }
 
   .reel {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
   }
 
   .tape-line {

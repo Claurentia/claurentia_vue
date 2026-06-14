@@ -280,26 +280,27 @@ export default {
 /* Responsive */
 @media (max-width: 768px) {
   .minigames-container {
-    padding: 6rem 1rem 4rem;
+    padding: 4.5rem 1rem 3rem;
   }
 
   .arcade-header {
-    gap: 1rem;
+    gap: 0.75rem;
   }
 
   .section-title {
-    font-size: 1.8rem;
-    letter-spacing: 3px;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
   }
 
   .insert-coin {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.3rem;
   }
 
   .minigames-grid {
     grid-template-columns: 1fr;
+    padding: 0.5rem 0;
   }
 }
 </style>
