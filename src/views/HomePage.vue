@@ -102,19 +102,19 @@
           <div class="card-body">
             <div class="terminal-line">
               <span class="label">CURR:</span>
-              <span class="value">SEATTLE UNIVERSITY (TA)</span>
+              <span class="value">PLOOM, INC. (FE ENGINEER)</span>
+            </div>
+            <div class="terminal-line">
+              <span class="label">CURR:</span>
+              <span class="value">MYSTAGE MUSIC (SWE)</span>
             </div>
             <div class="terminal-line">
               <span class="label">PREV:</span>
-              <span class="value">MYSTAGE MUSIC (LEAD)</span>
+              <span class="value">AMAZON (SWE CAPSTONE)</span>
             </div>
             <div class="terminal-line">
               <span class="label">PREV:</span>
-              <span class="value">AMAZON (SWE INTERN)</span>
-            </div>
-            <div class="terminal-line">
-              <span class="label">PREV:</span>
-              <span class="value">PT ASTRA HONDA (SECURITY)</span>
+              <span class="value">PT ASTRA HONDA (INTERN)</span>
             </div>
           </div>
         </div>

@@ -6,6 +6,7 @@
     <main ref="mainScroll">
       <HomePage />
       <ProjectsPage />
+      <CareerPage />
       <MinigamesPage />
     </main>
     <FooterSection @scroll-to-top="scrollToTop" />
@@ -17,6 +18,7 @@ import HomePage from './views/HomePage.vue'
 import NavBar from './components/NavBar.vue'
 import ProjectsPage from './views/ProjectsPage.vue'
 import MinigamesPage from './views/MinigamesPage.vue'
+import CareerPage from './views/CareerPage.vue'
 import FooterSection from './components/FooterSection.vue'
 
 export default {
@@ -26,6 +28,7 @@ export default {
     NavBar,
     ProjectsPage,
     MinigamesPage,
+    CareerPage,
     FooterSection
   },
   methods: {

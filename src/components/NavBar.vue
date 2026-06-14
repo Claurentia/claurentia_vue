@@ -33,6 +33,9 @@
         <button @click="scrollToSection('projects')" class="nav-link" aria-label="Scroll to Projects section">
           <span class="nav-bracket">[</span> PROJECTS <span class="nav-bracket">]</span>
         </button>
+        <button @click="scrollToSection('career')" class="nav-link" aria-label="Scroll to Career section">
+          <span class="nav-bracket">[</span> CAREER <span class="nav-bracket">]</span>
+        </button>
         <button @click="scrollToSection('minigames')" class="nav-link" aria-label="Scroll to Games section">
           <span class="nav-bracket">[</span> GAMES <span class="nav-bracket">]</span>
         </button>
