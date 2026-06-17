@@ -87,9 +87,8 @@
           <div class="card-body">
             <div class="skill-column" v-for="group in skills" :key="group.category">
               <div class="skill-category">{{ group.category }}</div>
-              <div class="skill-bar" v-for="skill in group.items" :key="skill.name">
-                <span class="skill-label">{{ skill.name }}</span>
-                <div class="bar"><div class="fill" :style="{ width: skill.level + '%' }"></div></div>
+              <div class="skill-tags">
+                <span class="skill-tag" v-for="item in group.items" :key="item">{{ item }}</span>
               </div>
             </div>
           </div>
@@ -463,75 +462,54 @@ export default {
   text-shadow: 0 0 5px var(--color-terminal-green);
 }
 
-/* --- MODIFIED: Skills Card Styling --- */
+/* Skills Card — tag grid layout */
 .skills-card .card-body {
-  flex-direction: row; /* Overrides default column direction */
-  gap: 2rem; /* Space between the four columns */
-  justify-content: space-around;
+  flex-direction: row;
+  gap: 1.5rem;
+  align-items: flex-start;
 }
 
 .skill-column {
-  flex: 1; /* Each column takes up equal space */
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem; /* Space between skill bars within a column */
+  gap: 0.6rem;
 }
 
 .skill-category {
   color: var(--color-neon-teal);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: bold;
   letter-spacing: 2px;
-  margin-bottom: 0.5rem;
   padding-bottom: 0.3rem;
   border-bottom: 1px solid var(--color-earth-olive);
   text-shadow: 0 0 5px var(--color-neon-teal);
-}
-/* --- END MODIFICATIONS --- */
-
-
-/* Skill Bars */
-.skill-bar {
-  margin: 0.5rem 0;
+  white-space: nowrap;
 }
 
-.skill-label {
-  color: var(--color-neon-orange);
-  font-size: 0.8rem;
-  display: block;
-  margin-bottom: 0.3rem;
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
 }
 
-.bar {
+.skill-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-terminal-green);
   background: var(--color-bg-charcoal);
-  height: 12px;
   border: 1px solid var(--color-earth-olive);
-  position: relative;
-  overflow: hidden;
+  padding: 0.2rem 0.5rem;
+  letter-spacing: 0.03em;
+  transition: all 0.15s ease;
+  cursor: default;
 }
 
-.fill {
-  height: 100%;
-  background: var(--color-terminal-green);
-  box-shadow: 0 0 10px var(--color-terminal-green);
-  transition: width 1s ease;
-  position: relative;
-}
-
-.fill::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: repeating-linear-gradient(
-    90deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.3) 2px,
-    rgba(0, 0, 0, 0.3) 4px
-  );
+.skill-tag:hover {
+  border-color: var(--color-terminal-green);
+  background: rgba(0, 255, 65, 0.08);
+  box-shadow: 0 0 6px rgba(0, 255, 65, 0.25);
+  color: var(--color-neon-teal);
 }
 
 /* Profile Picture Card */
@@ -752,6 +730,7 @@ export default {
 
   .skills-card .skill-column {
     flex-basis: calc(50% - 1rem);
+    flex-grow: 0;
   }
 }
 
@@ -806,7 +785,7 @@ export default {
     min-height: 180px;
   }
 
-  /* Skill columns: 2-up on mobile instead of 4-up or stacked */
+  /* Skill columns: 2-up on mobile */
   .skills-card .card-body {
     flex-direction: row;
     flex-wrap: wrap;
@@ -816,6 +795,7 @@ export default {
   .skills-card .skill-column {
     flex-basis: calc(50% - 0.4rem);
     flex-shrink: 0;
+    flex-grow: 0;
   }
 
   /* Contact / identity values — allow wrapping */

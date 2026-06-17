@@ -1,45 +1,22 @@
-// Skill data for the homepage tech stack card.
-// Each item has a name (display label) and level (0–100 percentage).
+// Skill data for the homepage [TECH_STACK] card.
+// Matches resume exactly — no percentage ratings.
 
 const skills = [
   {
     category: 'LANGUAGES',
-    items: [
-      { name: 'PYTHON______', level: 90 },
-      { name: 'JS/TS_______', level: 92 },
-      { name: 'C/C++/C#____', level: 85 },
-      { name: 'HTML/CSS____', level: 93 }
-    ]
+    items: ['C/C++', 'C#', 'Python', 'JavaScript', 'TypeScript', 'HTML/CSS', 'PHP', 'Dart']
   },
   {
     category: 'FRAMEWORKS',
-    items: [
-      { name: 'FLUTTER_____', level: 95 },
-      { name: 'REACT_______', level: 90 },
-      { name: 'REACT NATIVE', level: 85 },
-      { name: 'VUE/NUXT____', level: 82 },
-      { name: 'NODE.JS_____', level: 88 },
-      { name: '.NET________', level: 80 },
-      { name: 'FLUTTERFLOW_', level: 78 }
-    ]
+    items: ['Flutter', 'React', 'React Native', 'Angular', 'Node.js', 'Express', '.NET']
   },
   {
-    category: 'DATABASE',
-    items: [
-      { name: 'MONGODB_____', level: 85 },
-      { name: 'MYSQL_______', level: 83 },
-      { name: 'FIREBASE____', level: 87 },
-      { name: 'SQLITE______', level: 80 }
-    ]
+    category: 'DATABASES',
+    items: ['MongoDB', 'Firebase', 'Firestore', 'SQL', 'SQLite']
   },
   {
-    category: 'CLOUD/TOOLS',
-    items: [
-      { name: 'GOOGLE CLOUD_', level: 80 },
-      { name: 'AWS/AZURE___', level: 85 },
-      { name: 'GIT_________', level: 90 },
-      { name: 'FIGMA_______', level: 82 }
-    ]
+    category: 'CLOUD & TOOLS',
+    items: ['AWS', 'Azure', 'Git', 'VS Code', 'Visual Studio', 'Linux', 'Figma', 'Algolia', 'Oracle Dev']
   }
 ]
 
