@@ -3,10 +3,11 @@
   <div class="home-container" id="home">
     <div class="terminal-header">
       <div class="terminal-title">
-        <span class="prompt">C:\USERS\VISITOR></span>
-        <span class="command typing-text">RUN PROFILE.EXE</span>
+        <span class="prompt">~/portfolio $</span>
+        <span class="command">./hello_world.sh</span>
         <span class="cursor">_</span>
       </div>
+      <div class="terminal-subtitle">Welcome. You are visitor <span class="visitor-count">#{{ visitorId }}</span></div>
     </div>
 
     <div class="content-wrapper">
@@ -170,10 +171,36 @@ export default {
       contacts,
       skills,
       showNotification: false,
-      notificationTimeout: null
+      notificationTimeout: null,
+      visitorId: (() => {
+        try {
+          const key = 'claurentia_visitor_id'
+          let id = localStorage.getItem(key)
+          if (!id) {
+            id = String(Math.floor(1000 + Math.random() * 8999))
+            localStorage.setItem(key, id)
+          }
+          return id
+        } catch {
+          return String(Math.floor(1000 + Math.random() * 8999))
+        }
+      })()
     }
   },
   methods: {
+    getVisitorId() {
+      try {
+        const key = 'claurentia_visitor_id'
+        let id = localStorage.getItem(key)
+        if (!id) {
+          id = String(Math.floor(1000 + Math.random() * 8999))
+          localStorage.setItem(key, id)
+        }
+        return id
+      } catch {
+        return String(Math.floor(1000 + Math.random() * 8999))
+      }
+    },
     copyToClipboard(text) {
       navigator.clipboard.writeText(text).then(() => {
         this.showCopyNotification()
@@ -200,18 +227,18 @@ export default {
 <style scoped>
 .home-container {
   background:
-    linear-gradient(45deg, transparent 48%, var(--color-earth-olive) 49%, var(--color-earth-olive) 51%, transparent 52%),
-    linear-gradient(-45deg, transparent 48%, var(--color-earth-olive) 49%, var(--color-earth-olive) 51%, transparent 52%),
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(67, 198, 195, 0.08) 0%, transparent 70%),
+    linear-gradient(rgba(128, 77, 55, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(128, 77, 55, 0.18) 1px, transparent 1px),
     var(--color-bg-dark);
-  background-size: 20px 20px, 20px 20px, 100% 100%;
-  background-position: 0 0, 10px 10px, 0 0;
+  background-size: 100% 100%, 40px 40px, 40px 40px, 100% 100%;
   min-height: 100dvh;
   height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  padding-top: 10rem;
+  padding-top: 6rem;
   padding-bottom: 2rem;
   overflow-y: auto;
 }
@@ -234,6 +261,20 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.terminal-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-terminal-green);
+  opacity: 0.5;
+  margin-top: 0.3rem;
+  letter-spacing: 0.05em;
+}
+
+.visitor-count {
+  color: var(--color-neon-teal);
+  opacity: 1;
 }
 
 .prompt {
@@ -381,20 +422,23 @@ export default {
 }
 
 .terminal-line.clickable:hover {
-  background: var(--color-earth-olive);
+  background: rgba(128, 77, 55, 0.25);
   padding-left: 1rem;
+  border-left: 2px solid var(--color-earth-olive);
   text-decoration: none;
 }
 
 .terminal-line .label {
   color: var(--color-neon-orange);
   min-width: 50px;
-  font-size: 0.85rem;
+  font-size: 0.72rem;
+  opacity: 0.6;
+  letter-spacing: 0.05em;
 }
 
 .terminal-line .value {
   color: var(--color-terminal-green);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   flex: 1;
 }
 
@@ -715,7 +759,7 @@ export default {
 /* Mobile Layout (< 768px) */
 @media (max-width: 768px) {
   .home-container {
-    padding-top: 5rem;
+    padding-top: 3.5rem;
   }
 
   /* Redesign the terminal header as a slim inline prompt on mobile */

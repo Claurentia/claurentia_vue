@@ -82,15 +82,19 @@ export default {
 /* ── Container ── */
 .career-container {
   min-height: 80dvh;
-  padding: 8rem 2rem 4rem;
-  /* Ensures the heading stays visible when the browser scrolls to #career */
+  padding: 5rem 2rem 4rem;
   scroll-margin-top: 0;
   background:
-    linear-gradient(-45deg, transparent 48%, rgba(128, 77, 55, 0.15) 49%, rgba(128, 77, 55, 0.15) 51%, transparent 52%),
-    linear-gradient(45deg, transparent 48%, rgba(128, 77, 55, 0.15) 49%, rgba(128, 77, 55, 0.15) 51%, transparent 52%),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 79px,
+      rgba(67, 198, 195, 0.10) 79px,
+      rgba(67, 198, 195, 0.10) 80px
+    ),
+    radial-gradient(ellipse 30% 80% at 0% 50%, rgba(67, 198, 195, 0.10) 0%, transparent 70%),
     var(--color-bg-dark);
-  background-size: 20px 20px, 20px 20px, 100% 100%;
-  background-position: 0 0, 10px 10px, 0 0;
+  background-size: 100% 100%, 100% 100%, 100% 100%;
   display: flex;
   flex-direction: column;
 }
@@ -335,7 +339,7 @@ export default {
 /* ── Mobile ── */
 @media (max-width: 768px) {
   .career-container {
-    padding: 5.5rem 1rem 3rem;
+    padding: 4rem 1rem 3rem;
   }
 
   .section-title {

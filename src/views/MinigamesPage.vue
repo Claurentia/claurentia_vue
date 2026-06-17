@@ -69,11 +69,18 @@ export default {
 <style scoped>
 .minigames-container {
   min-height: 86dvh;
-  padding: 8rem 2rem 4rem;
+  padding: 5rem 2rem 4rem;
   background:
-    radial-gradient(circle at 20% 50%, var(--color-bg-charcoal) 0%, transparent 50%),
-    radial-gradient(circle at 80% 50%, var(--color-bg-charcoal) 0%, transparent 50%),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 18px,
+      rgba(247, 90, 51, 0.07) 18px,
+      rgba(247, 90, 51, 0.07) 19px
+    ),
+    radial-gradient(ellipse 70% 40% at 50% 100%, rgba(247, 90, 51, 0.14) 0%, transparent 70%),
     var(--color-bg-dark);
+  background-size: 100% 100%, 100% 100%, 100% 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -155,10 +162,11 @@ export default {
 }
 
 .game-card:hover {
-  transform: translateY(-10px) scale(1.02);
+  border-color: var(--color-neon-teal);
   box-shadow:
-    0 0 30px rgba(0, 255, 65, 0.4),
+    0 0 25px rgba(0, 255, 65, 0.35),
     inset 0 0 20px rgba(0, 0, 0, 0.9);
+  transform: translateY(-4px);
 }
 
 /* Game Terminal */
@@ -280,7 +288,7 @@ export default {
 /* Responsive */
 @media (max-width: 768px) {
   .minigames-container {
-    padding: 4.5rem 1rem 3rem;
+    padding: 4rem 1rem 3rem;
   }
 
   .arcade-header {

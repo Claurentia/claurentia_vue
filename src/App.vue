@@ -81,7 +81,8 @@ export default {
   --font-retro: 'VT323', monospace;
 }
 
-* {
+/* Pixelated rendering only for images that opt in — not global */
+img.pixel-art {
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
@@ -89,7 +90,7 @@ export default {
 
 #app {
   font-family: var(--font-mono);
-  -webkit-font-smoothing: none;
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--color-terminal-green);
   background: var(--color-bg-dark);
@@ -116,7 +117,7 @@ export default {
   opacity: 0.3;
 }
 
-/* CRT Screen Flicker */
+/* CRT Screen Flicker — very subtle, just barely perceptible */
 #app::after {
   content: '';
   position: fixed;
@@ -124,16 +125,17 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.01);
   pointer-events: none;
   z-index: 9998;
-  animation: flicker 0.15s infinite;
+  animation: flicker 4s ease-in-out infinite;
 }
 
 @keyframes flicker {
-  0% { opacity: 0.97; }
-  50% { opacity: 1; }
-  100% { opacity: 0.97; }
+  0%, 100% { opacity: 1; }
+  45% { opacity: 0.995; }
+  50% { opacity: 0.98; }
+  55% { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {

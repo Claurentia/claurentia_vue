@@ -1,9 +1,8 @@
 <template>
   <nav class="navbar" aria-label="Main navigation">
-    <div class="crt-banner">
-      <div class="static-noise"></div>
-      <div class="cassette-logo">
-        <svg viewBox="0 0 100 60" class="cassette-icon">
+    <div class="nav-bar">
+      <div class="brand">
+        <svg viewBox="0 0 100 60" class="cassette-icon" aria-hidden="true">
           <!-- Cassette body -->
           <rect x="5" y="10" width="90" height="45" fill="var(--color-bg-charcoal)" stroke="var(--color-terminal-green)" stroke-width="2"/>
           <!-- Left reel -->
@@ -22,8 +21,25 @@
           <circle cx="12" cy="50" r="2" fill="var(--color-earth-mustard)"/>
           <circle cx="88" cy="50" r="2" fill="var(--color-earth-mustard)"/>
         </svg>
+        <h1 class="site-title glow-text">CARMEL.LAURENTIA.SYS</h1>
       </div>
-      <div class="site-title glow-text">CARMEL.LAURENTIA.SYS</div>
+
+      <!-- Desktop nav -->
+      <div class="nav-links desktop-nav">
+        <span class="nav-prompt" aria-hidden="true">&gt;</span>
+        <button @click="scrollToSection('home')" class="nav-link" :class="{ active: activeSection === 'home' }" :aria-current="activeSection === 'home' ? 'page' : undefined" aria-label="Scroll to Home section">
+          <span class="nav-bracket">[</span> HOME <span class="nav-bracket">]</span>
+        </button>
+        <button @click="scrollToSection('projects')" class="nav-link" :class="{ active: activeSection === 'projects' }" :aria-current="activeSection === 'projects' ? 'page' : undefined" aria-label="Scroll to Projects section">
+          <span class="nav-bracket">[</span> PROJECTS <span class="nav-bracket">]</span>
+        </button>
+        <button @click="scrollToSection('career')" class="nav-link" :class="{ active: activeSection === 'career' }" :aria-current="activeSection === 'career' ? 'page' : undefined" aria-label="Scroll to Career section">
+          <span class="nav-bracket">[</span> CAREER <span class="nav-bracket">]</span>
+        </button>
+        <button @click="scrollToSection('minigames')" class="nav-link" :class="{ active: activeSection === 'minigames' }" :aria-current="activeSection === 'minigames' ? 'page' : undefined" aria-label="Scroll to Games section">
+          <span class="nav-bracket">[</span> GAMES <span class="nav-bracket">]</span>
+        </button>
+      </div>
 
       <!-- Hamburger button — mobile only -->
       <button
@@ -39,26 +55,8 @@
       </button>
     </div>
 
-    <!-- Desktop nav -->
-    <div class="nav-content desktop-nav">
-      <div class="nav-links">
-        <button @click="scrollToSection('home')" class="nav-link" :class="{ active: activeSection === 'home' }" :aria-current="activeSection === 'home' ? 'page' : undefined" aria-label="Scroll to Home section">
-          <span class="nav-bracket">[</span> HOME <span class="nav-bracket">]</span>
-        </button>
-        <button @click="scrollToSection('projects')" class="nav-link" :class="{ active: activeSection === 'projects' }" :aria-current="activeSection === 'projects' ? 'page' : undefined" aria-label="Scroll to Projects section">
-          <span class="nav-bracket">[</span> PROJECTS <span class="nav-bracket">]</span>
-        </button>
-        <button @click="scrollToSection('career')" class="nav-link" :class="{ active: activeSection === 'career' }" :aria-current="activeSection === 'career' ? 'page' : undefined" aria-label="Scroll to Career section">
-          <span class="nav-bracket">[</span> CAREER <span class="nav-bracket">]</span>
-        </button>
-        <button @click="scrollToSection('minigames')" class="nav-link" :class="{ active: activeSection === 'minigames' }" :aria-current="activeSection === 'minigames' ? 'page' : undefined" aria-label="Scroll to Games section">
-          <span class="nav-bracket">[</span> GAMES <span class="nav-bracket">]</span>
-        </button>
-      </div>
-    </div>
-
     <!-- Mobile dropdown menu -->
-    <div class="mobile-menu" :class="{ open: menuOpen }" aria-hidden="!menuOpen">
+    <div class="mobile-menu" :class="{ open: menuOpen }" :aria-hidden="!menuOpen">
       <button @click="scrollToSection('home')" class="nav-link" :class="{ active: activeSection === 'home' }" :aria-current="activeSection === 'home' ? 'page' : undefined">
         <span class="nav-bracket">[</span> HOME <span class="nav-bracket">]</span>
       </button>
@@ -120,70 +118,144 @@ export default {
 <style scoped>
 .navbar {
   background: var(--color-bg-charcoal);
-  border: 3px solid var(--color-terminal-green);
-  border-left: 8px solid var(--color-earth-olive);
-  border-right: 8px solid var(--color-earth-olive);
+  border-bottom: 2px solid var(--color-terminal-green);
+  border-left: 4px solid var(--color-earth-olive);
+  border-right: 4px solid var(--color-earth-olive);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  box-shadow:
-    0 0 20px rgba(0, 255, 65, 0.3),
-    inset 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* CRT Banner Section */
-.crt-banner {
-  background: var(--color-bg-dark);
-  border-bottom: 2px solid var(--color-terminal-green);
-  padding: 0.6rem 1rem;
+/* Amber accent line at the very bottom of the navbar */
+.navbar::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--color-amber) 20%,
+    var(--color-neon-teal) 50%,
+    var(--color-amber) 80%,
+    transparent 100%
+  );
+  opacity: 0.5;
+}
+
+/* Single-row bar: brand left, nav right */
+.nav-bar {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 1.25rem;
+  height: 52px;
   gap: 1rem;
-  position: relative;
-  overflow: hidden;
 }
 
-.static-noise {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(255, 255, 255, 0.03) 2px,
-      rgba(255, 255, 255, 0.03) 4px
-    );
-  opacity: 0.1;
-  pointer-events: none;
-}
-
-.cassette-logo {
-  width: 64px;
-  height: 40px;
+/* Brand: cassette + title */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
   flex-shrink: 0;
-  filter: drop-shadow(0 0 10px var(--color-terminal-green));
 }
 
 .cassette-icon {
-  width: 100%;
-  height: 100%;
+  width: 36px;
+  height: 22px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 6px var(--color-terminal-green));
+}
+
+/* Spin the right reel of the cassette SVG */
+.cassette-icon :deep(circle:nth-child(6)) {
+  transform-origin: 75px 30px;
+  animation: spin-reel 3s linear infinite;
+}
+.cassette-icon :deep(circle:nth-child(7)) {
+  transform-origin: 75px 30px;
+  animation: spin-reel 3s linear infinite;
+}
+
+@keyframes spin-reel {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .site-title {
   font-family: var(--font-retro);
-  font-size: 1.6rem;
+  font-size: 1.25rem;
   color: var(--color-terminal-green);
   letter-spacing: 3px;
   text-transform: uppercase;
-  flex: 1;
-  text-align: center;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Desktop nav links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.nav-prompt {
+  color: var(--color-neon-orange);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  padding: 0 0.5rem 0 0;
+  animation: blink 1s infinite;
+  line-height: 1;
+}
+
+.nav-link {
+  background: none;
+  border: none;
+  border-left: 1px solid var(--color-earth-olive);
+  color: var(--color-terminal-green);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: background 0.1s, color 0.1s, border-color 0.1s;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.nav-links .nav-link:last-child {
+  border-right: 1px solid var(--color-earth-olive);
+}
+
+.nav-bracket {
+  color: var(--color-neon-orange);
+  font-weight: bold;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background: var(--color-earth-olive);
+  color: var(--color-yellow-highlight);
+  border-color: var(--color-earth-olive);
+}
+
+.nav-link:hover .nav-bracket,
+.nav-link.active .nav-bracket {
+  color: var(--color-yellow-highlight);
+}
+
+.nav-link:active {
+  background: var(--color-terminal-green);
+  color: var(--color-bg-dark);
 }
 
 /* Hamburger — hidden on desktop */
@@ -193,12 +265,12 @@ export default {
   justify-content: center;
   gap: 5px;
   background: none;
-  border: 2px solid var(--color-terminal-green);
+  border: 1px solid var(--color-terminal-green);
   padding: 6px 8px;
   cursor: pointer;
   flex-shrink: 0;
-  width: 40px;
-  height: 36px;
+  width: 38px;
+  height: 34px;
 }
 
 .hamburger span {
@@ -220,80 +292,7 @@ export default {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Navigation Content */
-.nav-content {
-  padding: 0.6rem 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(
-    to bottom,
-    var(--color-bg-charcoal),
-    var(--color-bg-dark)
-  );
-}
-
-.nav-links {
-  display: flex;
-  gap: 0;
-}
-
-.nav-link {
-  background: none;
-  border: none;
-  color: var(--color-terminal-green);
-  font-family: var(--font-mono);
-  font-size: 0.95rem;
-  padding: 0.5rem 1.2rem;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  position: relative;
-  transition: all 0.1s;
-  border-right: 1px solid var(--color-earth-olive);
-}
-
-.nav-link:first-child {
-  border-left: 1px solid var(--color-earth-olive);
-}
-
-.nav-bracket {
-  color: var(--color-neon-orange);
-  font-weight: bold;
-}
-
-.nav-link:hover,
-.nav-link.active {
-  background: var(--color-earth-olive);
-  color: var(--color-yellow-highlight);
-  box-shadow:
-    inset 0 0 10px rgba(0, 0, 0, 0.5),
-    0 0 15px var(--color-terminal-green);
-}
-
-.nav-link:hover .nav-bracket,
-.nav-link.active .nav-bracket {
-  color: var(--color-yellow-highlight);
-  text-shadow: 0 0 10px var(--color-yellow-highlight);
-}
-
-.nav-link:active {
-  background: var(--color-terminal-green);
-  color: var(--color-bg-dark);
-  transform: translateY(2px);
-}
-
-/* Blinking cursor before nav links */
-.nav-links::before {
-  content: '>';
-  color: var(--color-neon-orange);
-  font-family: var(--font-mono);
-  font-size: 1.2rem;
-  padding: 0.5rem 0.8rem;
-  animation: blink 1s infinite;
-}
-
-/* Mobile dropdown — hidden by default */
+/* Mobile dropdown */
 .mobile-menu {
   display: none;
   flex-direction: column;
@@ -305,18 +304,16 @@ export default {
 }
 
 .mobile-menu .nav-link {
-  border-right: none;
+  border-left: none;
   border-bottom: 1px solid var(--color-earth-olive);
+  border-right: none;
   text-align: left;
   padding: 0.8rem 1.5rem;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  height: auto;
 }
 
-.mobile-menu .nav-link:first-child {
-  border-left: none;
-}
-
-/* ── Responsive ── */
+/* Responsive */
 @media (max-width: 768px) {
   .desktop-nav {
     display: none;
@@ -334,19 +331,14 @@ export default {
     max-height: 300px;
   }
 
-  .crt-banner {
-    justify-content: space-between;
-    padding: 0.5rem 0.8rem;
-  }
-
-  .cassette-logo {
-    width: 48px;
-    height: 32px;
-  }
-
   .site-title {
-    font-size: 1rem;
+    font-size: 0.95rem;
     letter-spacing: 1px;
+  }
+
+  .cassette-icon {
+    width: 28px;
+    height: 18px;
   }
 }
 </style>

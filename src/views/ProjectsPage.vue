@@ -151,15 +151,18 @@ export default {
 <style scoped>
 .projects-container {
   min-height: 86dvh;
-  padding: 8rem 2rem 4rem;
+  padding: 5rem 2rem 4rem;
   background:
     repeating-linear-gradient(
-      90deg,
-      var(--color-bg-dark) 0px,
-      var(--color-bg-dark) 2px,
-      var(--color-bg-charcoal) 2px,
-      var(--color-bg-charcoal) 4px
-    );
+      0deg,
+      transparent,
+      transparent 39px,
+      rgba(128, 77, 55, 0.18) 39px,
+      rgba(128, 77, 55, 0.18) 40px
+    ),
+    radial-gradient(ellipse 55% 40% at 5% 10%, rgba(242, 199, 73, 0.12) 0%, transparent 70%),
+    var(--color-bg-dark);
+  background-size: 100% 100%, 100% 100%, 100% 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -253,9 +256,9 @@ export default {
 
 .track-card:hover {
   box-shadow:
-    0 0 25px rgba(0, 255, 65, 0.4),
+    0 0 20px rgba(0, 255, 65, 0.3),
     inset 0 0 20px rgba(0, 0, 0, 0.9);
-  transform: translateY(-5px);
+  border-color: var(--color-neon-teal);
 }
 
 /* Track Header */
@@ -442,7 +445,7 @@ export default {
 /* Responsive Design */
 @media (max-width: 768px) {
   .projects-container {
-    padding: 4.5rem 0.75rem 3rem;
+    padding: 4rem 0.75rem 3rem;
     gap: 1rem;
   }
 
