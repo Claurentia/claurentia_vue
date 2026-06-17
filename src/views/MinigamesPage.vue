@@ -6,10 +6,10 @@
       <div class="header-line"></div>
     </div>
 
-    <div class="insert-coin">
-      <span class="coin-icon">◉</span>
-      <span class="coin-text">INSERT_COIN_TO_CONTINUE</span>
-      <span class="coin-icon blink">◉</span>
+    <div class="process-prompt">
+      <span class="prompt-arrow">~/games $</span>
+      <span class="prompt-cmd">ls -la ./processes</span>
+      <span class="prompt-cursor blink">_</span>
     </div>
 
     <div class="minigames-grid">
@@ -115,27 +115,28 @@ export default {
   white-space: nowrap;
 }
 
-/* Insert Coin Message */
-.insert-coin {
-  text-align: center;
+/* Process prompt line */
+.process-prompt {
   font-family: var(--font-mono);
-  color: var(--color-neon-orange);
-  font-size: 1.2rem;
+  font-size: 0.95rem;
   margin-bottom: 2rem;
-  letter-spacing: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.6rem;
+  letter-spacing: 1px;
 }
 
-.coin-icon {
-  color: var(--color-amber);
-  font-size: 1.5rem;
+.prompt-arrow {
+  color: var(--color-neon-orange);
 }
 
-.coin-icon.blink {
-  animation: blink 1.5s infinite;
+.prompt-cmd {
+  color: var(--color-terminal-green);
+}
+
+.prompt-cursor {
+  color: var(--color-terminal-green);
 }
 
 .minigames-grid {
@@ -196,7 +197,7 @@ export default {
 
 .game-icon {
   width: 100%;
-  aspect-ratio: 16/9;
+  aspect-ratio: 4/2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -208,7 +209,7 @@ export default {
       rgba(0, 255, 65, 0.02) 4px,
       rgba(0, 255, 65, 0.02) 8px
     );
-  padding: 2rem;
+  padding: 1.25rem;
   box-sizing: border-box;
 }
 

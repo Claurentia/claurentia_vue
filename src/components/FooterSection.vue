@@ -1,10 +1,25 @@
 <template>
   <footer class="footer">
-    <div class="footer-content">
-      <button @click="scrollToTop" class="scroll-top-button" :class="{ visible: showButton }" aria-label="Return to top">
-        <span class="btn-icon">▲</span>
-        <span class="btn-text">[ RETURN_TO_TOP ]</span>
-      </button>
+    <div class="status-bar">
+      <div class="status-left">
+        <span class="status-item">[SESSION_END]</span>
+        <span class="status-divider">|</span>
+        <span class="status-item">uptime: {{ uptime }}</span>
+        <span class="status-divider">|</span>
+        <span class="status-item status-ok">status: 200 OK</span>
+      </div>
+      <div class="status-right">
+        <button
+          @click="scrollToTop"
+          class="scroll-top-button"
+          :class="{ visible: showButton }"
+          aria-label="Return to top"
+        >
+          <span class="btn-bracket">[</span> ^^ RETURN_TO_TOP <span class="btn-bracket">]</span>
+        </button>
+        <span class="status-divider">|</span>
+        <span class="status-item">CARMEL.LAURENTIA.SYS v2026</span>
+      </div>
     </div>
   </footer>
 </template>
@@ -15,21 +30,25 @@ export default {
   emits: ['scroll-to-top'],
   data() {
     return {
-      showButton: false
+      showButton: false,
+      uptime: '00:00:00',
+      uptimeInterval: null,
+      startTime: Date.now()
     }
   },
   mounted() {
-    // Listen on the main scroll container for visibility toggling
     const mainElement = document.querySelector('main')
     if (mainElement) {
       mainElement.addEventListener('scroll', this.handleScroll)
     }
+    this.uptimeInterval = setInterval(this.updateUptime, 1000)
   },
   beforeUnmount() {
     const mainElement = document.querySelector('main')
     if (mainElement) {
       mainElement.removeEventListener('scroll', this.handleScroll)
     }
+    clearInterval(this.uptimeInterval)
   },
   methods: {
     handleScroll(event) {
@@ -37,6 +56,13 @@ export default {
     },
     scrollToTop() {
       this.$emit('scroll-to-top')
+    },
+    updateUptime() {
+      const elapsed = Math.floor((Date.now() - this.startTime) / 1000)
+      const h = String(Math.floor(elapsed / 3600)).padStart(2, '0')
+      const m = String(Math.floor((elapsed % 3600) / 60)).padStart(2, '0')
+      const s = String(elapsed % 60).padStart(2, '0')
+      this.uptime = `${h}:${m}:${s}`
     }
   }
 }
@@ -48,80 +74,84 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 1.5rem;
   z-index: 100;
   pointer-events: none;
 }
 
-.footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
+.status-bar {
+  background: var(--color-bg-charcoal);
+  border-top: 2px solid var(--color-earth-olive);
+  padding: 0.4rem 1.5rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  pointer-events: auto;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.status-left,
+.status-right {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.status-item {
+  color: var(--color-earth-olive);
+  white-space: nowrap;
+}
+
+.status-ok {
+  color: var(--color-terminal-green);
+  text-shadow: 0 0 4px rgba(0, 255, 65, 0.4);
+}
+
+.status-divider {
+  color: var(--color-earth-olive);
+  opacity: 0.4;
 }
 
 .scroll-top-button {
-  background: var(--color-bg-charcoal);
-  border: 3px solid var(--color-terminal-green);
-  color: var(--color-terminal-green);
-  padding: 0.8rem 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
+  background: transparent;
+  border: none;
+  color: var(--color-earth-olive);
   font-family: var(--font-mono);
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-  transition: all 0.1s ease;
-  transform: translateY(100px);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  padding: 0;
   opacity: 0;
-  pointer-events: auto;
-  box-shadow:
-    0 0 20px rgba(0, 255, 65, 0.3),
-    inset 0 0 10px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  transition: color 0.15s ease, opacity 0.2s ease;
+  white-space: nowrap;
 }
 
 .scroll-top-button.visible {
-  transform: translateY(0);
   opacity: 1;
+  pointer-events: auto;
 }
 
 .scroll-top-button:hover {
-  background: var(--color-earth-olive);
-  color: var(--color-yellow-highlight);
-  box-shadow:
-    0 0 30px rgba(0, 255, 65, 0.5),
-    inset 0 0 10px rgba(0, 0, 0, 0.5);
-  transform: translateY(-3px);
+  color: var(--color-terminal-green);
+  text-shadow: 0 0 6px rgba(0, 255, 65, 0.5);
 }
 
-.scroll-top-button:active {
-  transform: translateY(1px);
-}
-
-.btn-icon {
-  font-size: 1.2rem;
+.btn-bracket {
   color: var(--color-neon-orange);
-  animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-
-.btn-text {
-  text-transform: uppercase;
 }
 
 @media (max-width: 768px) {
-  .footer {
-    padding: 1rem;
+  .status-bar {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.65rem;
   }
 
-  .scroll-top-button {
-    padding: 0.6rem 1rem;
-    font-size: 0.8rem;
+  .status-left .status-item:nth-child(3),
+  .status-left .status-divider:nth-child(4) {
+    display: none;
   }
 }
 </style> 

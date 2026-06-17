@@ -123,31 +123,33 @@
       <div class="bio-terminal">
         <div class="terminal-screen">
           <div class="screen-header">
-            <span>BIOGRAPHY.TXT</span>
-            <span class="screen-controls">
-              <span class="control-btn">─</span>
-              <span class="control-btn">□</span>
-              <span class="control-btn">×</span>
-            </span>
+            <span class="prompt">~/portfolio $</span>
+            <span class="command">cat README.md</span>
           </div>
           <div class="screen-content">
-            <p class="bio-paragraph">
-              > Software engineer and MS Computer Science graduate from Seattle University, based in Los Angeles. I build across the full stack with a focus on mobile and cloud — currently shipping features at MyStage Music and Ploom, two very different products with the same underlying question: how do you make something people actually want to use?
-            </p>
-            <p class="bio-paragraph">
-                > My background spans Flutter, React Native, Firebase, and cloud infrastructure on AWS and Azure. I've worked across greenfield products and legacy systems, solo and in teams — from leading a 3-person engineering sprint at a music startup to architecting serverless pipelines for Amazon's safety infrastructure, with hands-on experience in penetration testing and vulnerability assessment from my time at PT Astra Honda Motor.
-            </p>
-            <p class="bio-paragraph">
-              > Outside of work I ship my own stuff. Bloom'n Brew is a coffee brewing logger I co-built and published to the App Store — offline-first, no accounts, just a focused tool that does one thing well. It's the kind of project that keeps the instincts sharp.
-            </p>
-            <p class="bio-paragraph">
-              > Open to what comes next. I'm drawn to roles where I can stay close to the product and the people building it.
-            </p>
-            <div class="cassette-reel">
-              <div class="reel left-reel"></div>
-              <div class="tape-line"></div>
-              <div class="reel right-reel"></div>
+            <div class="bio-divider">────────────────────────────────────────────────────────────────</div>
+            <div class="bio-line">
+              <span class="bio-label">[WHO]</span>
+              <span class="bio-text">Software engineer and MS Computer Science graduate from Seattle University, based in Los Angeles.</span>
             </div>
+            <div class="bio-line">
+              <span class="bio-label">[DOES]</span>
+              <span class="bio-text">Full-stack with a focus on mobile and cloud — Flutter, React Native, Firebase, AWS, and Azure. From greenfield startups to Amazon-scale infrastructure.</span>
+            </div>
+            <div class="bio-line">
+              <span class="bio-label">[NOW]</span>
+              <span class="bio-text">Shipping features at MyStage Music (SWE) and Ploom, Inc. (FE Engineer) — two very different products with the same underlying question: how do you make something people actually want to use?</span>
+            </div>
+            <div class="bio-line">
+              <span class="bio-label">[BUILT]</span>
+              <span class="bio-text">Bloom'n Brew — a coffee brewing logger co-built and published to the App Store. Offline-first, no accounts, just a focused tool that does one thing well.</span>
+            </div>
+            <div class="bio-line">
+              <span class="bio-label">[OPEN]</span>
+              <span class="bio-text">Roles where I can stay close to the product and the people building it.</span>
+            </div>
+            <div class="bio-divider">────────────────────────────────────────────────────────────────</div>
+            <div class="bio-cursor"><span class="prompt">~/portfolio $</span> <span class="cursor">_</span></div>
           </div>
         </div>
       </div>
@@ -593,80 +595,53 @@ export default {
   border-bottom: 2px solid var(--color-terminal-green);
   padding: 0.5rem 1rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  font-family: var(--font-mono);
-  color: var(--color-terminal-green);
-  font-size: 0.9rem;
-}
-
-.screen-controls {
-  display: flex;
   gap: 0.5rem;
-}
-
-.control-btn {
-  color: var(--color-neon-orange);
-  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
 }
 
 .screen-content {
-  padding: 1.5rem;
+  padding: 1.25rem 1.5rem;
   font-family: var(--font-mono);
-  color: var(--color-terminal-green);
-  font-size: 0.9rem;
-  line-height: 1.8;
 }
 
-.bio-paragraph {
-  margin-bottom: 1rem;
-  text-align: justify;
+.bio-divider {
+  color: var(--color-earth-olive);
+  font-size: 0.75rem;
+  opacity: 0.5;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0.5rem 0;
 }
 
-/* Animated Cassette Reel */
-.cassette-reel {
+.bio-line {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3rem;
-  margin-top: 2rem;
-  padding: 1rem 0;
+  gap: 1.25rem;
+  padding: 0.45rem 0;
+  align-items: baseline;
 }
 
-.reel {
-  width: 40px;
-  height: 40px;
-  border: 3px solid var(--color-terminal-green);
-  border-radius: 50%;
-  position: relative;
+.bio-label {
+  color: var(--color-neon-teal);
+  font-size: 0.78rem;
+  min-width: 60px;
+  flex-shrink: 0;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 5px var(--color-neon-teal);
 }
 
-.reel::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 15px;
-  height: 15px;
-  background: var(--color-terminal-green);
-  border-radius: 50%;
+.bio-text {
+  color: var(--color-terminal-green);
+  font-size: 0.88rem;
+  line-height: 1.7;
+  opacity: 0.9;
 }
 
-.right-reel {
-  animation: spin-reel 3s linear infinite;
-}
-
-@keyframes spin-reel {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.tape-line {
-  width: 100px;
-  height: 3px;
-  background: var(--color-amber);
-  box-shadow: 0 0 5px var(--color-amber);
+.bio-cursor {
+  margin-top: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
 }
 
 /* Copy Notification */
