@@ -133,16 +133,16 @@
           </div>
           <div class="screen-content">
             <p class="bio-paragraph">
-              > Software Engineer pursuing my Master's in Computer Science at Seattle University, where I'm also serving as a Teaching Assistant. Most recently, I led cross-functional development teams at MyStage Music, a startup focused on empowering local artists through technology.
+              > Software engineer and MS Computer Science graduate from Seattle University, based in Los Angeles. I build across the full stack with a focus on mobile and cloud — currently shipping features at MyStage Music and Ploom, two very different products with the same underlying question: how do you make something people actually want to use?
             </p>
             <p class="bio-paragraph">
-              > My journey into tech leadership started with hands-on full-stack development—from building AI-powered customer feedback systems at Amazon to gaining hands-on experience in penetration testing and vulnerability assessment at PT Astra Honda Motor.
+                > My background spans Flutter, React Native, Firebase, and cloud infrastructure on AWS and Azure. I've worked across greenfield products and legacy systems, solo and in teams — from leading a 3-person engineering sprint at a music startup to architecting serverless pipelines for Amazon's safety infrastructure, with hands-on experience in penetration testing and vulnerability assessment from my time at PT Astra Honda Motor.
             </p>
             <p class="bio-paragraph">
-              > I specialize in modern web technologies (React, Node.js, Python) and cloud platforms (AWS, Azure), but my real strength is adaptability—quickly learning new tools and translating complex business needs into scalable technical solutions.
+              > Outside of work I ship my own stuff. Bloom'n Brew is a coffee brewing logger I co-built and published to the App Store — offline-first, no accounts, just a focused tool that does one thing well. It's the kind of project that keeps the instincts sharp.
             </p>
             <p class="bio-paragraph">
-              > Currently seeking opportunities in early-stage startups where I can contribute to mission-driven products while growing as both an engineer and leader.
+              > Open to what comes next. I'm drawn to roles where I can stay close to the product and the people building it.
             </p>
             <div class="cassette-reel">
               <div class="reel left-reel"></div>

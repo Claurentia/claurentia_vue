@@ -16,8 +16,11 @@ const skills = [
     items: [
       { name: 'FLUTTER_____', level: 95 },
       { name: 'REACT_______', level: 90 },
+      { name: 'REACT NATIVE', level: 85 },
+      { name: 'VUE/NUXT____', level: 82 },
       { name: 'NODE.JS_____', level: 88 },
-      { name: '.NET________', level: 80 }
+      { name: '.NET________', level: 80 },
+      { name: 'FLUTTERFLOW_', level: 78 }
     ]
   },
   {
@@ -32,7 +35,7 @@ const skills = [
   {
     category: 'CLOUD/TOOLS',
     items: [
-      { name: 'GOOGLE CLOUD_', level: 92 },
+      { name: 'GOOGLE CLOUD_', level: 80 },
       { name: 'AWS/AZURE___', level: 85 },
       { name: 'GIT_________', level: 90 },
       { name: 'FIGMA_______', level: 82 }

@@ -80,6 +80,15 @@ const projects = [
     technologies: ['C++', 'CURL for API requests', 'JSON processing (nlohmann/json library)', 'STL (vectors, strings)', 'Object-oriented programming'],
     github: 'https://github.com/Claurentia/Trivia',
     repo: 'GitHub'
+  },
+  {
+    title: "Bloom'n Brew",
+    description:
+      "An offline-first React Native app for logging and dialing in home coffee brews. Features a count-up/countdown timer, swipe-gesture brew history management, and full local data persistence via AsyncStorage. No account or internet required. Co-developed with Terbish (https://github.com/Terbish/).",
+    color: '#3b1f0e',
+    technologies: ['React Native', 'JavaScript', 'AsyncStorage', 'iOS', 'Android'],
+    live: 'https://apps.apple.com/us/app/bloomn-brew/id6758324003',
+    repo: 'App Store'
   }
 ]
 

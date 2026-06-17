@@ -68,6 +68,13 @@
                  class="action-btn">
                 <span class="btn-bracket">[</span> VIEW_SOURCE <span class="btn-bracket">]</span>
               </a>
+              <a v-if="project.live"
+                 :href="project.live"
+                 target="_blank"
+                 rel="noopener"
+                 class="action-btn action-btn--live">
+                <span class="btn-bracket">[</span> VIEW_LIVE <span class="btn-bracket">]</span>
+              </a>
             </div>
           </div>
 
@@ -395,6 +402,9 @@ export default {
   margin-top: auto;
   padding-top: 1rem;
   border-top: 1px solid var(--color-earth-olive);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .action-btn {
@@ -414,6 +424,17 @@ export default {
   background: var(--color-terminal-green);
   color: var(--color-bg-dark);
   box-shadow: 0 0 15px var(--color-terminal-green);
+}
+
+.action-btn--live {
+  border-color: var(--color-neon-teal);
+  color: var(--color-neon-teal);
+}
+
+.action-btn--live:hover {
+  background: var(--color-neon-teal);
+  color: var(--color-bg-dark);
+  box-shadow: 0 0 15px var(--color-neon-teal);
 }
 
 .btn-bracket {
