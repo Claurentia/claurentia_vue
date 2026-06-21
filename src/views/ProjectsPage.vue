@@ -7,6 +7,10 @@
       <div class="header-line"></div>
     </div>
 
+    <p class="boot-line">
+      <span class="prompt">SYS&gt;</span> LOADING PROJECT ARCHIVE... <span class="blink-cursor">_</span>
+    </p>
+
     <!-- Horizontal Scrolling Track List -->
     <div class="tracks-wrapper">
       <div class="projects-grid" ref="projectsGrid">
@@ -174,7 +178,6 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
 }
 
 /* Section Header */
@@ -183,7 +186,7 @@ export default {
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   width: 100%;
   max-width: 1400px;
 }
@@ -207,6 +210,25 @@ export default {
   letter-spacing: 5px;
   white-space: nowrap;
   margin: 0;
+}
+
+/* Boot line (matches CareerPage style) */
+.boot-line {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-terminal-green);
+  opacity: 0.55;
+  text-align: center;
+  margin: 0 0 2.5rem;
+  letter-spacing: 0.05em;
+}
+
+.prompt {
+  color: var(--color-neon-orange);
+}
+
+.blink-cursor {
+  animation: blink 1s step-end infinite;
 }
 
 /* Tracks Wrapper */
@@ -467,7 +489,6 @@ export default {
 @media (max-width: 768px) {
   .projects-container {
     padding: 4rem 0.75rem 3rem;
-    gap: 1rem;
   }
 
   .arcade-header {

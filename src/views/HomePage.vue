@@ -239,8 +239,7 @@ export default {
   flex-direction: column;
   align-items: center;
   position: relative;
-  padding-top: 6rem;
-  padding-bottom: 2rem;
+  padding: 6rem 2rem 2rem;
   overflow-y: auto;
 }
 
@@ -253,6 +252,7 @@ export default {
   margin-bottom: 2rem;
   max-width: 1400px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .terminal-title {
@@ -300,7 +300,6 @@ export default {
 .content-wrapper {
   max-width: 1400px;
   width: 100%;
-  padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -312,7 +311,6 @@ export default {
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: minmax(160px, auto);
   gap: 1.5rem;
-  margin-bottom: 2rem;
 }
 
 /* --- MODIFIED: CARD GRID POSITIONING (Desktop) --- */
@@ -580,6 +578,7 @@ export default {
 /* Bio Terminal */
 .bio-terminal {
   width: 100%;
+  margin-bottom: 2.5rem;
 }
 
 .terminal-screen {
@@ -713,7 +712,7 @@ export default {
 /* Mobile Layout (< 768px) */
 @media (max-width: 768px) {
   .home-container {
-    padding-top: 3.5rem;
+    padding: 3.5rem 0.75rem 2rem;
   }
 
   /* Redesign the terminal header as a slim inline prompt on mobile */
@@ -724,9 +723,6 @@ export default {
     box-shadow: none;
     padding: 0.4rem 0.75rem;
     margin-bottom: 1rem;
-    width: auto;
-    align-self: flex-start;
-    margin-left: 0.75rem;
   }
 
   .terminal-title {
@@ -734,10 +730,6 @@ export default {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-
-  .content-wrapper {
-    padding: 0.75rem;
   }
 
   .bento-grid {

@@ -2,25 +2,7 @@
   <nav class="navbar" aria-label="Main navigation">
     <div class="nav-bar">
       <div class="brand">
-        <svg viewBox="0 0 100 60" class="cassette-icon" aria-hidden="true">
-          <!-- Cassette body -->
-          <rect x="5" y="10" width="90" height="45" fill="var(--color-bg-charcoal)" stroke="var(--color-terminal-green)" stroke-width="2"/>
-          <!-- Left reel -->
-          <circle cx="25" cy="30" r="12" fill="var(--color-bg-dark)" stroke="var(--color-terminal-green)" stroke-width="2"/>
-          <circle cx="25" cy="30" r="5" fill="var(--color-terminal-green)"/>
-          <!-- Right reel -->
-          <circle cx="75" cy="30" r="12" fill="var(--color-bg-dark)" stroke="var(--color-terminal-green)" stroke-width="2"/>
-          <circle cx="75" cy="30" r="5" fill="var(--color-terminal-green)"/>
-          <!-- Tape -->
-          <path d="M 25 30 Q 50 25 75 30" stroke="var(--color-amber)" stroke-width="2" fill="none"/>
-          <!-- Label window -->
-          <rect x="15" y="15" width="70" height="12" fill="var(--color-bg-dark)" stroke="var(--color-neon-teal)" stroke-width="1"/>
-          <!-- Screws -->
-          <circle cx="12" cy="15" r="2" fill="var(--color-earth-mustard)"/>
-          <circle cx="88" cy="15" r="2" fill="var(--color-earth-mustard)"/>
-          <circle cx="12" cy="50" r="2" fill="var(--color-earth-mustard)"/>
-          <circle cx="88" cy="50" r="2" fill="var(--color-earth-mustard)"/>
-        </svg>
+        <span class="brand-glyph" aria-hidden="true"><span class="glyph-chevron">&gt;</span><span class="glyph-cursor">_</span></span>
         <h1 class="site-title glow-text">CARMEL.LAURENTIA.SYS</h1>
       </div>
 
@@ -158,7 +140,7 @@ export default {
   gap: 1rem;
 }
 
-/* Brand: cassette + title */
+/* Brand: glyph mark + title */
 .brand {
   display: flex;
   align-items: center;
@@ -166,26 +148,23 @@ export default {
   flex-shrink: 0;
 }
 
-.cassette-icon {
-  width: 36px;
-  height: 22px;
+.brand-glyph {
+  font-family: var(--font-mono);
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 1;
   flex-shrink: 0;
-  filter: drop-shadow(0 0 6px var(--color-terminal-green));
+  display: inline-flex;
+  align-items: baseline;
 }
 
-/* Spin the right reel of the cassette SVG */
-.cassette-icon :deep(circle:nth-child(6)) {
-  transform-origin: 75px 30px;
-  animation: spin-reel 3s linear infinite;
-}
-.cassette-icon :deep(circle:nth-child(7)) {
-  transform-origin: 75px 30px;
-  animation: spin-reel 3s linear infinite;
+.glyph-chevron {
+  color: var(--color-neon-orange);
 }
 
-@keyframes spin-reel {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.glyph-cursor {
+  color: var(--color-terminal-green);
+  text-shadow: 0 0 6px var(--color-terminal-green);
 }
 
 .site-title {
@@ -336,9 +315,8 @@ export default {
     letter-spacing: 1px;
   }
 
-  .cassette-icon {
-    width: 28px;
-    height: 18px;
+  .brand-glyph {
+    font-size: 1.1rem;
   }
 }
 </style>

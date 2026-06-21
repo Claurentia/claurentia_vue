@@ -6,11 +6,9 @@
       <div class="header-line"></div>
     </div>
 
-    <div class="process-prompt">
-      <span class="prompt-arrow">~/games $</span>
-      <span class="prompt-cmd">ls -la ./processes</span>
-      <span class="prompt-cursor blink">_</span>
-    </div>
+    <p class="boot-line">
+      <span class="prompt">SYS&gt;</span> LOADING ARCADE PROCESSES... <span class="blink-cursor">_</span>
+    </p>
 
     <div class="minigames-grid">
       <div class="game-card" v-for="(game, index) in games" :key="index" @click="playGame(game)">
@@ -92,7 +90,7 @@ export default {
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .header-line {
@@ -113,30 +111,26 @@ export default {
   font-size: 2.5rem;
   letter-spacing: 5px;
   white-space: nowrap;
+  margin: 0;
 }
 
-/* Process prompt line */
-.process-prompt {
+/* Boot line (matches CareerPage style) */
+.boot-line {
   font-family: var(--font-mono);
-  font-size: 0.95rem;
-  margin-bottom: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  letter-spacing: 1px;
+  font-size: 0.75rem;
+  color: var(--color-terminal-green);
+  opacity: 0.55;
+  text-align: center;
+  margin: 0 0 2.5rem;
+  letter-spacing: 0.05em;
 }
 
-.prompt-arrow {
+.prompt {
   color: var(--color-neon-orange);
 }
 
-.prompt-cmd {
-  color: var(--color-terminal-green);
-}
-
-.prompt-cursor {
-  color: var(--color-terminal-green);
+.blink-cursor {
+  animation: blink 1s step-end infinite;
 }
 
 .minigames-grid {
@@ -299,12 +293,6 @@ export default {
   .section-title {
     font-size: 1.5rem;
     letter-spacing: 2px;
-  }
-
-  .insert-coin {
-    font-size: 0.85rem;
-    flex-direction: column;
-    gap: 0.3rem;
   }
 
   .minigames-grid {
