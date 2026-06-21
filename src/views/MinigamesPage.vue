@@ -12,22 +12,16 @@
 
     <div class="minigames-grid">
       <div class="game-card" v-for="(game, index) in games" :key="index" @click="playGame(game)">
-        <div class="game-terminal">
-          <div class="terminal-top">
-            <span class="game-number">{{ 'GAME_' + (index + 1).toString().padStart(2, '0') }}</span>
-            <span class="game-status">[ READY ]</span>
-          </div>
-          
-          <div class="game-icon" v-html="game.icon"></div>
-        </div>
+        <div class="game-icon" v-html="game.icon"></div>
 
         <div class="game-content">
-          <h3 class="game-title">{{ game.title.toUpperCase() }}</h3>
-          <p class="game-desc">
-            <span class="desc-arrow">></span> {{ game.description }}
-          </p>
+          <div class="game-meta">
+            <span class="game-number">{{ './' + game.title.toLowerCase().replace(/\s+/g, '_') }}</span>
+            <h3 class="game-title">{{ game.title.toUpperCase() }}</h3>
+          </div>
+          <p class="game-desc">{{ game.description }}</p>
           <button class="play-button">
-            <span class="play-bracket">[</span> EXECUTE <span class="play-bracket">]</span>
+            <span class="play-bracket">[</span> RUN <span class="play-bracket">]</span>
           </button>
         </div>
       </div>
@@ -137,15 +131,15 @@ export default {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
   padding: 1rem;
 }
 
 /* Game Card */
 .game-card {
   background: var(--color-bg-dark);
-  border: 3px solid var(--color-terminal-green);
+  border: 2px solid var(--color-terminal-green);
   box-shadow:
     0 0 15px rgba(0, 255, 65, 0.2),
     inset 0 0 20px rgba(0, 0, 0, 0.9);
@@ -164,38 +158,15 @@ export default {
   transform: translateY(-4px);
 }
 
-/* Game Terminal */
-.game-terminal {
-  background: var(--color-bg-charcoal);
-  border-bottom: 2px solid var(--color-terminal-green);
-}
-
-.terminal-top {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.8rem 1rem;
-  border-bottom: 1px solid var(--color-earth-olive);
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-}
-
-.game-number {
-  color: var(--color-neon-orange);
-  letter-spacing: 1px;
-}
-
-.game-status {
-  color: var(--color-terminal-green);
-  text-shadow: 0 0 5px var(--color-terminal-green);
-}
-
 .game-icon {
   width: 100%;
-  aspect-ratio: 4/2;
+  aspect-ratio: 16/7;
   display: flex;
   align-items: center;
   justify-content: center;
-  background:
+  background: var(--color-bg-charcoal);
+  border-bottom: 1px solid var(--color-earth-olive);
+  background-image:
     repeating-linear-gradient(
       0deg,
       transparent,
@@ -203,62 +174,72 @@ export default {
       rgba(0, 255, 65, 0.02) 4px,
       rgba(0, 255, 65, 0.02) 8px
     );
-  padding: 1.25rem;
+  padding: 0.75rem;
   box-sizing: border-box;
 }
 
 .game-icon > :deep(svg) {
-  width: min(100%, 120px);
-  height: 120px;
+  width: min(100%, 72px);
+  height: 72px;
   display: block;
   margin: 0 auto;
-  filter: drop-shadow(0 0 10px rgba(0, 255, 65, 0.5));
+  filter: drop-shadow(0 0 8px rgba(0, 255, 65, 0.5));
   transition: transform 0.3s ease;
 }
 
 .game-card:hover .game-icon > :deep(svg) {
-  transform: scale(1.15) rotate(5deg);
-  filter: drop-shadow(0 0 15px var(--color-terminal-green));
+  transform: scale(1.1) rotate(4deg);
+  filter: drop-shadow(0 0 12px var(--color-terminal-green));
 }
 
 /* Game Content */
 .game-content {
-  padding: 1.5rem;
+  padding: 1.1rem 1.25rem;
   display: flex;
   flex-direction: column;
   flex: 1;
   font-family: var(--font-mono);
 }
 
+.game-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 0.7rem;
+}
+
+.game-number {
+  color: var(--color-neon-orange);
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+}
+
 .game-title {
   color: var(--color-terminal-green);
-  margin: 0 0 1rem 0;
-  font-size: 1.3rem;
+  margin: 0;
+  font-size: 1.15rem;
   font-family: var(--font-retro);
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   text-shadow: 0 0 5px var(--color-terminal-green);
 }
 
 .game-desc {
   color: var(--color-terminal-green);
-  margin-bottom: 1.5rem;
-  line-height: 1.8;
+  opacity: 0.85;
+  margin: 0 0 1.1rem;
+  line-height: 1.6;
   flex-grow: 1;
-  font-size: 0.85rem;
-}
-
-.desc-arrow {
-  color: var(--color-neon-orange);
-  margin-right: 0.5rem;
+  font-size: 0.8rem;
 }
 
 .play-button {
   background: var(--color-bg-charcoal);
-  border: 2px solid var(--color-terminal-green);
+  border: 1px solid var(--color-terminal-green);
   color: var(--color-terminal-green);
-  padding: 0.8rem 1.5rem;
+  padding: 0.6rem 1.25rem;
   font-family: var(--font-mono);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.1s ease;
   letter-spacing: 2px;
@@ -297,7 +278,45 @@ export default {
 
   .minigames-grid {
     grid-template-columns: 1fr;
+    gap: 1.1rem;
     padding: 0.5rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .minigames-container {
+    padding: 3.5rem 0.75rem 2.5rem;
+  }
+
+  .boot-line {
+    font-size: 0.65rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .game-icon {
+    aspect-ratio: 16/6;
+  }
+
+  .game-icon > :deep(svg) {
+    width: min(100%, 56px);
+    height: 56px;
+  }
+
+  .game-content {
+    padding: 0.9rem 1rem;
+  }
+
+  .game-title {
+    font-size: 1.05rem;
+  }
+
+  .game-desc {
+    font-size: 0.75rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .play-button {
+    width: 100%;
   }
 }
 </style>

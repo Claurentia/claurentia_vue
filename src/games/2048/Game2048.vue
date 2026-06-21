@@ -7,8 +7,8 @@
         <div>Best: {{ bestScore }}</div>
       </div>
       <div class="game-instructions" v-if="!isPlaying">
-        <p>Use arrow keys to move tiles</p>
-        <div class="controls-guide">
+        <p>{{ isMobile ? 'Swipe to move tiles' : 'Use arrow keys to move tiles' }}</p>
+        <div class="controls-guide" v-if="!isMobile">
           <div class="control-row">
             <span>Move: </span>
             <span class="key">↑</span>
@@ -39,12 +39,7 @@
     </div>
 
     <div class="mobile-controls" v-if="isMobile">
-      <button class="direction-button" @click="move('ArrowUp')">↑</button>
-      <div class="horizontal-controls">
-        <button class="direction-button" @click="move('ArrowLeft')">←</button>
-        <button class="direction-button" @click="move('ArrowRight')">→</button>
-      </div>
-      <button class="direction-button" @click="move('ArrowDown')">↓</button>
+      <p class="swipe-hint">swipe the board to move tiles</p>
     </div>
 
     <div class="game-controls">
@@ -495,41 +490,17 @@ export default {
 
 .mobile-controls {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.horizontal-controls {
-  display: flex;
-  gap: 2rem;
-}
-
-.direction-button {
-  width: 3rem;
-  height: 3rem;
-  background: var(--color-bg-charcoal, #2b2b2b);
-  border: 2px solid var(--color-teal, #43C6C3);
-  color: var(--color-teal, #43C6C3);
-  border-radius: 0;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: all 0.1s;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  font-family: var(--font-mono, 'Share Tech Mono', monospace);
+  margin-bottom: 1.5rem;
 }
 
-.direction-button:hover {
-  background: var(--color-teal, #43C6C3);
-  color: var(--color-bg-dark, #1a1a1a);
-  box-shadow: 0 0 10px var(--color-teal, #43C6C3);
-}
-
-.direction-button:active {
-  transform: translateY(2px);
+.swipe-hint {
+  color: var(--color-cream, #F5F4ED);
+  opacity: 0.5;
+  font-size: 0.75rem;
+  margin: 0;
+  text-align: center;
+  font-style: italic;
 }
 
 .game-controls {
@@ -730,12 +701,6 @@ export default {
   .tile-1024,
   .tile-2048 {
     font-size: 0.75rem;
-  }
-
-  .direction-button {
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 1.3rem;
   }
 
   .game-board {

@@ -10,7 +10,7 @@
     <div class="game-layout">
       <!-- Left Column: Game Board -->
       <div class="game-board-wrapper">
-        <div class="game-instructions" v-if="!isPlaying && !isGameOver">
+        <div class="game-instructions" v-if="!isPlaying && !isGameOver && !isMobile">
           <p>Press any arrow key to start</p>
           <div class="controls-guide">
             <div class="control-row">
@@ -27,10 +27,16 @@
           </div>
         </div>
 
+        <div class="game-instructions mobile" v-if="!isPlaying && !isGameOver && isMobile">
+          <p>Swipe the board or tap the pad to start</p>
+        </div>
+
         <div class="game-board"
              ref="board"
              tabindex="0"
              @keydown="handleKeyPress"
+             @touchstart="handleTouchStart"
+             @touchend="handleTouchEnd"
              :style="{ gridTemplateColumns: `repeat(${gridSize}, 1fr)` }">
           <div v-for="(cell, index) in cells"
                :key="index"
@@ -45,15 +51,16 @@
         </div>
 
         <div class="mobile-controls" v-if="isMobile">
-          <button class="direction-button" @click="changeDirection('ArrowUp')">↑</button>
-          <div class="horizontal-controls">
-            <button class="direction-button" @click="changeDirection('ArrowLeft')">←</button>
-            <button class="direction-button" @click="changeDirection('ArrowRight')">→</button>
+          <div class="dpad">
+            <button class="direction-button up" @click="changeDirection('ArrowUp')" aria-label="Move up">▲</button>
+            <button class="direction-button left" @click="changeDirection('ArrowLeft')" aria-label="Move left">◀</button>
+            <button class="direction-button pause" @click="toggleGame" :aria-label="isPlaying ? 'Pause' : 'Resume'">
+              {{ isPlaying ? '❚❚' : '▶' }}
+            </button>
+            <button class="direction-button right" @click="changeDirection('ArrowRight')" aria-label="Move right">▶</button>
+            <button class="direction-button down" @click="changeDirection('ArrowDown')" aria-label="Move down">▼</button>
           </div>
-          <button class="direction-button" @click="changeDirection('ArrowDown')">↓</button>
-          <button class="space-button" @click="toggleGame">
-            {{ isPlaying ? 'Pause' : 'Resume' }}
-          </button>
+          <p class="swipe-hint">swipe or tap the pad to steer</p>
         </div>
       </div>
 
@@ -116,16 +123,6 @@
       </div>
     </div>
 
-    <!-- Window Too Small Overlay -->
-    <div class="window-size-overlay" v-if="isWindowTooSmall">
-      <div class="window-size-content">
-        <div class="window-size-icon">⚠</div>
-        <h3>Screen Too Small</h3>
-        <p>This game requires a larger screen for optimal experience.</p>
-        <p class="window-size-suggestion">Please open this game on a tablet or desktop device (minimum width: 768px).</p>
-        <button class="control-button" @click="$emit('close')">Exit Game</button>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -150,7 +147,8 @@ export default {
       isAIEnabled: false,
       aiLogs: [],
       moveCount: 0,
-      isWindowTooSmall: false
+      touchStart: null,
+      touchEnd: null
     }
   },
   computed: {
@@ -169,25 +167,19 @@ export default {
   },
   mounted() {
     this.checkMobile()
-    this.checkWindowSize()
     this.spawnFood()
     if (this.$refs.board) {
       this.$refs.board.focus()
     }
     window.addEventListener('resize', this.checkMobile)
-    window.addEventListener('resize', this.checkWindowSize)
   },
   beforeUnmount() {
     this.stopGame()
     window.removeEventListener('resize', this.checkMobile)
-    window.removeEventListener('resize', this.checkWindowSize)
   },
   methods: {
     checkMobile() {
       this.isMobile = window.innerWidth <= 768
-    },
-    checkWindowSize() {
-      this.isWindowTooSmall = window.innerWidth < 768
     },
     isSnake(index) {
       const [x, y] = this.indexToCoords(index)
@@ -219,9 +211,6 @@ export default {
       }
       
       this.changeDirection(event.key)
-      if (!this.isPlaying && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
-        this.startGame()
-      }
     },
     changeDirection(key) {
       // Prevent direction change if game is over
@@ -247,6 +236,42 @@ export default {
       if (opposites[this.direction] !== newDirection) {
         this.direction = newDirection
       }
+
+      if (!this.isPlaying) {
+        this.startGame()
+      }
+    },
+    handleTouchStart(event) {
+      if (this.isGameOver) return
+      this.touchStart = {
+        x: event.touches[0].clientX,
+        y: event.touches[0].clientY
+      }
+    },
+    handleTouchEnd(event) {
+      if (!this.touchStart || this.isGameOver) return
+
+      this.touchEnd = {
+        x: event.changedTouches[0].clientX,
+        y: event.changedTouches[0].clientY
+      }
+
+      const deltaX = this.touchEnd.x - this.touchStart.x
+      const deltaY = this.touchEnd.y - this.touchStart.y
+      const minSwipeDistance = 24
+
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (Math.abs(deltaX) > minSwipeDistance) {
+          this.changeDirection(deltaX > 0 ? 'ArrowRight' : 'ArrowLeft')
+        }
+      } else {
+        if (Math.abs(deltaY) > minSwipeDistance) {
+          this.changeDirection(deltaY > 0 ? 'ArrowDown' : 'ArrowUp')
+        }
+      }
+
+      this.touchStart = null
+      this.touchEnd = null
     },
     moveSnake() {
       // If AI is enabled, calculate the next best move
@@ -471,6 +496,7 @@ export default {
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
+  touch-action: none;
 }
 
 .cell {
@@ -537,22 +563,22 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
-.horizontal-controls {
-  display: flex;
-  gap: 2rem;
+.dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 3rem);
+  grid-template-rows: repeat(3, 3rem);
+  gap: 0.4rem;
 }
 
 .direction-button {
-  width: 3rem;
-  height: 3rem;
   background: var(--color-bg-charcoal, #2b2b2b);
   border: 2px solid var(--color-teal, #43C6C3);
   color: var(--color-teal, #43C6C3);
   border-radius: 0;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   cursor: pointer;
   transition: all 0.1s;
   display: flex;
@@ -560,6 +586,12 @@ export default {
   justify-content: center;
   font-family: var(--font-mono, 'Share Tech Mono', monospace);
 }
+
+.direction-button.up { grid-column: 2; grid-row: 1; }
+.direction-button.left { grid-column: 1; grid-row: 2; }
+.direction-button.pause { grid-column: 2; grid-row: 2; font-size: 0.9rem; }
+.direction-button.right { grid-column: 3; grid-row: 2; }
+.direction-button.down { grid-column: 2; grid-row: 3; }
 
 .direction-button:hover {
   background: var(--color-teal, #43C6C3);
@@ -569,6 +601,15 @@ export default {
 
 .direction-button:active {
   transform: translateY(2px);
+}
+
+.swipe-hint {
+  color: var(--color-cream, #F5F4ED);
+  opacity: 0.5;
+  font-size: 0.7rem;
+  margin: 0;
+  text-align: center;
+  font-style: italic;
 }
 
 .game-controls {
@@ -781,9 +822,12 @@ export default {
   }
 
   .direction-button {
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 1.3rem;
+    font-size: 0.95rem;
+  }
+
+  .dpad {
+    grid-template-columns: repeat(3, 2.6rem);
+    grid-template-rows: repeat(3, 2.6rem);
   }
 
   .game-board {
@@ -882,32 +926,6 @@ export default {
   padding: 0.25rem 1rem;
   text-transform: uppercase;
   font-size: 0.75rem;
-}
-
-.space-button {
-  margin-top: 1rem;
-  width: 100%;
-  background: var(--color-bg-charcoal, #2b2b2b);
-  border: 2px solid var(--color-teal, #43C6C3);
-  color: var(--color-teal, #43C6C3);
-  padding: 0.8rem;
-  border-radius: 0;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.1s;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-family: var(--font-mono, 'Share Tech Mono', monospace);
-}
-
-.space-button:hover {
-  background: var(--color-teal, #43C6C3);
-  color: var(--color-bg-dark, #1a1a1a);
-  box-shadow: 0 0 10px var(--color-teal, #43C6C3);
-}
-
-.space-button:active {
-  transform: translateY(2px);
 }
 
 .game-over-overlay {
@@ -1113,79 +1131,5 @@ export default {
   .game-over-controls .control-button {
     width: 100%;
   }
-}
-
-/* Window Size Warning Overlay */
-.window-size-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(26, 26, 26, 0.98);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: fadeIn 0.3s ease-out;
-  border-radius: 4px;
-  z-index: 200;
-}
-
-.window-size-content {
-  text-align: center;
-  padding: 2rem;
-  max-width: 400px;
-  border: 2px solid var(--color-orange, #F75A33);
-  background: var(--color-bg-charcoal, #2b2b2b);
-  box-shadow: 0 0 20px rgba(247, 90, 51, 0.5);
-  border-radius: 4px;
-}
-
-.window-size-icon {
-  font-size: 4rem;
-  color: var(--color-orange, #F75A33);
-  margin-bottom: 1rem;
-  text-shadow: 0 0 15px var(--color-orange, #F75A33);
-  animation: pulse-warning 2s infinite;
-}
-
-@keyframes pulse-warning {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scale(1.1);
-  }
-}
-
-.window-size-content h3 {
-  color: var(--color-orange, #F75A33);
-  font-size: 1.8rem;
-  margin: 0 0 1rem 0;
-  text-shadow: 0 0 10px var(--color-orange, #F75A33);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-family: var(--font-retro, 'VT323', monospace);
-}
-
-.window-size-content p {
-  color: var(--color-cream, #F5F4ED);
-  font-size: 1rem;
-  margin: 0 0 1rem 0;
-  line-height: 1.6;
-}
-
-.window-size-suggestion {
-  color: var(--color-gold, #F2C749);
-  font-size: 0.9rem;
-  margin-bottom: 1.5rem !important;
-  font-style: italic;
-}
-
-.window-size-content .control-button {
-  margin-top: 1rem;
-  width: 100%;
 }
 </style> 
