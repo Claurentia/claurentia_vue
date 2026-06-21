@@ -159,7 +159,7 @@ export default {
       if (this.isPlaying) {
         return 'Pause Game'
       } else if (this.isAIEnabled) {
-        return 'Auto Play'
+        return 'Resume AI'
       } else {
         return 'Auto Play'
       }
