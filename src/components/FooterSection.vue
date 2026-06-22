@@ -2,11 +2,11 @@
   <footer class="footer">
     <div class="status-bar">
       <div class="status-left">
-        <span class="status-item">[SESSION_END]</span>
-        <span class="status-divider">|</span>
+        <span class="status-item hide-mobile">[SESSION_END]</span>
+        <span class="status-divider hide-mobile">|</span>
         <span class="status-item">uptime: {{ uptime }}</span>
-        <span class="status-divider">|</span>
-        <span class="status-item status-ok">status: 200 OK</span>
+        <span class="status-divider hide-mobile">|</span>
+        <span class="status-item status-ok hide-mobile">status: 200 OK</span>
       </div>
       <div class="status-right">
         <button
@@ -17,8 +17,8 @@
         >
           <span class="btn-bracket">[</span> ^^ RETURN_TO_TOP <span class="btn-bracket">]</span>
         </button>
-        <span class="status-divider">|</span>
-        <span class="status-item">CARMEL.LAURENTIA.SYS v2026</span>
+        <span class="status-divider hide-mobile">|</span>
+        <span class="status-item hide-mobile">CARMEL.LAURENTIA.SYS v2026</span>
       </div>
     </div>
   </footer>
@@ -149,8 +149,7 @@ export default {
     font-size: 0.65rem;
   }
 
-  .status-left .status-item:nth-child(3),
-  .status-left .status-divider:nth-child(4) {
+  .hide-mobile {
     display: none;
   }
 }

@@ -45,12 +45,18 @@ export default {
 </script>
 
 <style scoped>
+/*
+  Backdrop spans only the safe zone between the fixed navbar (52px)
+  and the fixed footer (~40px). align-items: center is always on —
+  no padding-top hacks needed. Content height is driven by children;
+  max-height: 100% just prevents overflow of the safe zone.
+*/
 .modal-backdrop {
   position: fixed;
-  top: 0;
+  top: 52px;
+  bottom: 40px;
   left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;
   background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(10px);
   display: flex;
@@ -64,7 +70,7 @@ export default {
 .modal-content {
   width: 100%;
   max-width: 800px;
-  max-height: calc(100vh - 2rem);
+  max-height: 100%;
   margin: auto;
   animation: modal-in 0.3s ease-out;
   overflow-y: auto;
@@ -81,7 +87,6 @@ export default {
   }
 }
 
-/* Tablet responsive */
 @media (max-width: 1024px) {
   .modal-content {
     max-width: 700px;
@@ -90,38 +95,23 @@ export default {
 
 @media (max-width: 768px) {
   .modal-backdrop {
-    padding: 0.5rem;
+    padding: 0.75rem;
   }
 
   .modal-content {
     max-width: 100%;
-    max-height: calc(100vh - 1rem);
   }
 }
 
-/* Mobile responsive */
 @media (max-width: 480px) {
   .modal-backdrop {
-    padding: 0.25rem;
-    align-items: flex-start;
-  }
-
-  .modal-content {
-    max-height: calc(100vh - 0.5rem);
-    margin-top: 0.25rem;
+    padding: 0.5rem;
   }
 }
 
-/* Landscape mobile */
 @media (max-height: 600px) and (orientation: landscape) {
   .modal-backdrop {
-    align-items: flex-start;
-    padding: 0.5rem;
-  }
-
-  .modal-content {
-    max-height: calc(100vh - 1rem);
-    margin: 0.5rem auto;
+    padding: 0.5rem 0.75rem;
   }
 }
 </style> 

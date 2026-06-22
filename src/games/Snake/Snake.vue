@@ -28,7 +28,7 @@
         </div>
 
         <div class="game-instructions mobile" v-if="!isPlaying && !isGameOver && isMobile">
-          <p>Swipe the board or tap the pad to start</p>
+          <p>Swipe to steer</p>
         </div>
 
         <div class="game-board"
@@ -51,16 +51,9 @@
         </div>
 
         <div class="mobile-controls" v-if="isMobile">
-          <div class="dpad">
-            <button class="direction-button up" @click="changeDirection('ArrowUp')" aria-label="Move up">▲</button>
-            <button class="direction-button left" @click="changeDirection('ArrowLeft')" aria-label="Move left">◀</button>
-            <button class="direction-button pause" @click="toggleGame" :aria-label="isPlaying ? 'Pause' : 'Resume'">
-              {{ isPlaying ? '❚❚' : '▶' }}
-            </button>
-            <button class="direction-button right" @click="changeDirection('ArrowRight')" aria-label="Move right">▶</button>
-            <button class="direction-button down" @click="changeDirection('ArrowDown')" aria-label="Move down">▼</button>
-          </div>
-          <p class="swipe-hint">swipe or tap the pad to steer</p>
+          <button class="pause-button" @click="toggleGame" :aria-label="isPlaying ? 'Pause' : 'Resume'">
+            <span class="pause-bracket">[</span> {{ isPlaying ? '❚❚ PAUSE' : '▶ RESUME' }} <span class="pause-bracket">]</span>
+          </button>
         </div>
       </div>
 
@@ -561,55 +554,35 @@ export default {
 
 .mobile-controls {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
 }
 
-.dpad {
-  display: grid;
-  grid-template-columns: repeat(3, 3rem);
-  grid-template-rows: repeat(3, 3rem);
-  gap: 0.4rem;
-}
-
-.direction-button {
+.pause-button {
   background: var(--color-bg-charcoal, #2b2b2b);
   border: 2px solid var(--color-teal, #43C6C3);
   color: var(--color-teal, #43C6C3);
-  border-radius: 0;
-  font-size: 1.1rem;
+  font-family: var(--font-mono, 'Share Tech Mono', monospace);
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 0.4rem 2rem;
+  width: 100%;
   cursor: pointer;
   transition: all 0.1s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-mono, 'Share Tech Mono', monospace);
 }
 
-.direction-button.up { grid-column: 2; grid-row: 1; }
-.direction-button.left { grid-column: 1; grid-row: 2; }
-.direction-button.pause { grid-column: 2; grid-row: 2; font-size: 0.9rem; }
-.direction-button.right { grid-column: 3; grid-row: 2; }
-.direction-button.down { grid-column: 2; grid-row: 3; }
-
-.direction-button:hover {
+.pause-button:hover {
   background: var(--color-teal, #43C6C3);
   color: var(--color-bg-dark, #1a1a1a);
   box-shadow: 0 0 10px var(--color-teal, #43C6C3);
 }
 
-.direction-button:active {
-  transform: translateY(2px);
+.pause-button:active {
+  transform: translateY(1px);
 }
 
-.swipe-hint {
-  color: var(--color-cream, #F5F4ED);
-  opacity: 0.5;
-  font-size: 0.7rem;
-  margin: 0;
-  text-align: center;
-  font-style: italic;
+.pause-bracket {
+  color: var(--color-neon-orange, #F75A33);
 }
 
 .game-controls {
@@ -794,9 +767,26 @@ export default {
     gap: 1rem;
   }
 
+  /* Controls go below the board on mobile (not above) */
+  .controls-panel {
+    order: unset;
+  }
+
+  /* Horizontal compact button row */
+  .game-controls {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
   .control-button {
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    flex: 1;
+    min-width: 90px;
+    letter-spacing: 1px;
+    text-align: center;
   }
 
   .ai-log {
@@ -819,15 +809,6 @@ export default {
 
   .game-status {
     font-size: 1rem;
-  }
-
-  .direction-button {
-    font-size: 0.95rem;
-  }
-
-  .dpad {
-    grid-template-columns: repeat(3, 2.6rem);
-    grid-template-rows: repeat(3, 2.6rem);
   }
 
   .game-board {
