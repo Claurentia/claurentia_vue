@@ -23,7 +23,9 @@
           <!-- Track Header -->
           <div class="track-header">
             <div class="track-number">{{ 'TRACK_' + (index + 1).toString().padStart(2, '0') }}</div>
-            <div class="track-led" :class="{ active: index === currentTrack - 1 }"></div>
+            <div class="track-led"
+                 :class="{ active: index === 0 }"
+                 :aria-label="index === 0 ? 'Active' : 'Inactive'"></div>
           </div>
 
           <!-- Track Info Panel -->
@@ -99,7 +101,6 @@ export default {
     return {
       expandedProjects: Array(projects.length).fill(false),
       overflowMap: Array(projects.length).fill(false),
-      currentTrack: 1,
       projects,
       descRefs: []
     }
@@ -142,19 +143,6 @@ export default {
         this.$nextTick(() => this.checkOverflow())
       }
     },
-    scrollProjects(direction) {
-      const grid = this.$refs.projectsGrid
-      if (!grid) return
-
-      const scrollAmount = 400
-      if (direction === 'left') {
-        grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' })
-        if (this.currentTrack > 1) this.currentTrack--
-      } else {
-        grid.scrollBy({ left: scrollAmount, behavior: 'smooth' })
-        if (this.currentTrack < this.projects.length) this.currentTrack++
-      }
-    }
   }
 }
 </script>

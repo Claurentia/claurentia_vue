@@ -112,8 +112,9 @@ function floodFill(start, snake, gridSize) {
 
   const neighborDirs = [[0, -1], [0, 1], [-1, 0], [1, 0]];
 
-  while (queue.length > 0) {
-    const [cx, cy] = queue.shift();
+  let head = 0
+  while (head < queue.length) {
+    const [cx, cy] = queue[head++];
     for (const [dx, dy] of neighborDirs) {
       const nx = cx + dx;
       const ny = cy + dy;
@@ -148,14 +149,3 @@ function isValidMove([x, y], snake, gridSize) {
   return !snakeBody.some(([sX, sY]) => sX === x && sY === y);
 }
 
-/**
- * Calculates the Manhattan distance between snake head and food.
- * Exported for use in the UI modal.
- * @param {Array<number>} head - The snake's head coordinates.
- * @param {Array<number>} food - The food's coordinates.
- * @returns {number} The distance.
- */
-export function calculateManhattanDistance(head, food) {
-    if (!food || !head) return 0;
-    return Math.abs(head[0] - food[0]) + Math.abs(head[1] - food[1]);
-}

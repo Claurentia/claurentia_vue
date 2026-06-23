@@ -5,14 +5,17 @@
       <div class="game-status">{{ status }}</div>
     </div>
     
-    <div class="game-board">
-      <div v-for="(row, rowIndex) in board" 
-           :key="rowIndex" 
-           class="board-row">
-        <button v-for="(cell, colIndex) in row" 
+    <div class="game-board" role="grid" aria-label="Tic Tac Toe board">
+      <div v-for="(row, rowIndex) in board"
+           :key="rowIndex"
+           class="board-row"
+           role="row">
+        <button v-for="(cell, colIndex) in row"
                 :key="colIndex"
                 class="board-cell"
-                :class="{ 'x': cell === 'X', 'o': cell === 'O' }"
+                role="gridcell"
+                :class="{ 'x': cell === 'X', 'o': cell === 'O', 'winning': isWinningCell(rowIndex, colIndex) }"
+                :aria-label="`Row ${rowIndex + 1}, Column ${colIndex + 1}: ${cell || 'empty'}`"
                 @click="makeMove(rowIndex, colIndex)"
                 :disabled="cell !== null || winner">
           {{ cell }}
@@ -36,7 +39,8 @@ export default {
       board: Array(3).fill(null).map(() => Array(3).fill(null)),
       currentPlayer: 'X',
       winner: null,
-      isDraw: false
+      isDraw: false,
+      winningCells: []
     }
   },
   computed: {
@@ -66,21 +70,27 @@ export default {
     },
     checkWinner(row, col) {
       const lines = [
-        // Check row
         [[row, 0], [row, 1], [row, 2]],
-        // Check column
         [[0, col], [1, col], [2, col]],
-        // Check diagonals
         [[0, 0], [1, 1], [2, 2]],
         [[0, 2], [1, 1], [2, 0]]
       ]
 
-      return lines.some(line => {
+      for (const line of lines) {
         const [a, b, c] = line
-        return this.board[a[0]][a[1]] === this.currentPlayer &&
-               this.board[b[0]][b[1]] === this.currentPlayer &&
-               this.board[c[0]][c[1]] === this.currentPlayer
-      })
+        if (
+          this.board[a[0]][a[1]] === this.currentPlayer &&
+          this.board[b[0]][b[1]] === this.currentPlayer &&
+          this.board[c[0]][c[1]] === this.currentPlayer
+        ) {
+          this.winningCells = line
+          return true
+        }
+      }
+      return false
+    },
+    isWinningCell(row, col) {
+      return this.winningCells.some(([r, c]) => r === row && c === col)
     },
     checkDraw() {
       return this.board.every(row => row.every(cell => cell !== null))
@@ -90,6 +100,7 @@ export default {
       this.currentPlayer = 'X'
       this.winner = null
       this.isDraw = false
+      this.winningCells = []
     }
   }
 }
@@ -166,6 +177,18 @@ export default {
 .board-cell:disabled {
   cursor: not-allowed;
   opacity: 0.9;
+}
+
+.board-cell.winning {
+  background: var(--color-terminal-green, #43C6C3);
+  color: var(--color-bg-dark, #1a1a1a);
+  text-shadow: none;
+  animation: win-pulse 0.6s ease-in-out 3;
+}
+
+@keyframes win-pulse {
+  0%, 100% { box-shadow: 0 0 10px var(--color-terminal-green, #43C6C3); }
+  50%       { box-shadow: 0 0 30px var(--color-terminal-green, #43C6C3); }
 }
 
 .board-cell.x {

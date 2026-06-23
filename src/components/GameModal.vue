@@ -21,6 +21,13 @@ export default {
   },
   mounted() {
     document.addEventListener('keydown', this.handleKeydown)
+    this.$nextTick(() => {
+      const focusable = this.$el.querySelectorAll(
+        'button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )
+      this._focusable = Array.from(focusable)
+      if (this._focusable.length) this._focusable[0].focus()
+    })
   },
   beforeUnmount() {
     document.removeEventListener('keydown', this.handleKeydown)
@@ -38,7 +45,15 @@ export default {
   },
   methods: {
     handleKeydown(e) {
-      if (e.key === 'Escape') this.$emit('close')
+      if (e.key === 'Escape') { this.$emit('close'); return }
+      if (e.key !== 'Tab' || !this._focusable?.length) return
+      const first = this._focusable[0]
+      const last  = this._focusable[this._focusable.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault(); last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault(); first.focus()
+      }
     }
   }
 }

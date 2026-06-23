@@ -1,4 +1,4 @@
-<!-- src/components/Home.vue -->
+<!-- src/views/HomePage.vue -->
 <template>
   <div class="home-container" id="home">
     <div class="terminal-header">
@@ -14,7 +14,7 @@
       <div class="bento-grid">
         <div class="terminal-card profile-card">
           <div class="card-header">
-            <span class="card-led active"></span>
+            <span class="card-led active" aria-label="Active"></span>
             <span class="card-title">[PROFILE.IMG]</span>
           </div>
           <div class="card-body profile-body">
@@ -29,7 +29,7 @@
 
         <div class="terminal-card identity-card">
           <div class="card-header">
-            <span class="card-led active"></span>
+            <span class="card-led active" aria-label="Active"></span>
             <span class="card-title">[IDENTITY]</span>
           </div>
           <div class="card-body">
@@ -54,19 +54,19 @@
 
         <div class="terminal-card contact-card">
           <div class="card-header">
-            <span class="card-led active"></span>
+            <span class="card-led active" aria-label="Active"></span>
             <span class="card-title">[CONTACT]</span>
           </div>
           <div class="card-body">
-            <button @click="copyToClipboard(contacts.email)" class="terminal-line clickable">
+            <button @click="copyToClipboard(contacts.email)" class="terminal-line clickable" :aria-label="`Copy email: ${contacts.email}`">
               <span class="label">MAIL:</span>
               <span class="value">{{ contacts.email }}</span>
-              <span class="copy-indicator">[ COPY ]</span>
+              <span class="copy-indicator" aria-hidden="true">[ COPY ]</span>
             </button>
-            <button @click="copyToClipboard(contacts.phone)" class="terminal-line clickable">
+            <button @click="copyToClipboard(contacts.phone)" class="terminal-line clickable" :aria-label="`Copy phone: ${contacts.phoneDisplay}`">
               <span class="label">TELE:</span>
               <span class="value">{{ contacts.phoneDisplay }}</span>
-              <span class="copy-indicator">[ COPY ]</span>
+              <span class="copy-indicator" aria-hidden="true">[ COPY ]</span>
             </button>
             <a :href="contacts.linkedin" target="_blank" class="terminal-line clickable">
               <span class="label">LINK:</span>
@@ -81,7 +81,7 @@
 
         <div class="terminal-card skills-card">
           <div class="card-header">
-            <span class="card-led active"></span>
+            <span class="card-led active" aria-label="Active"></span>
             <span class="card-title">[TECH_STACK]</span>
           </div>
           <div class="card-body">
@@ -96,7 +96,7 @@
 
         <div class="terminal-card experience-card">
           <div class="card-header">
-            <span class="card-led active"></span>
+            <span class="card-led active" aria-label="Active"></span>
             <span class="card-title">[EXPERIENCE]</span>
           </div>
           <div class="card-body">
@@ -189,19 +189,6 @@ export default {
     }
   },
   methods: {
-    getVisitorId() {
-      try {
-        const key = 'claurentia_visitor_id'
-        let id = localStorage.getItem(key)
-        if (!id) {
-          id = String(Math.floor(1000 + Math.random() * 8999))
-          localStorage.setItem(key, id)
-        }
-        return id
-      } catch {
-        return String(Math.floor(1000 + Math.random() * 8999))
-      }
-    },
     copyToClipboard(text) {
       navigator.clipboard.writeText(text).then(() => {
         this.showCopyNotification()

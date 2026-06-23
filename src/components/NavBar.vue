@@ -38,7 +38,7 @@
     </div>
 
     <!-- Mobile dropdown menu -->
-    <div class="mobile-menu" :class="{ open: menuOpen }" :aria-hidden="!menuOpen">
+    <div class="mobile-menu" :class="{ open: menuOpen }" :aria-hidden="!menuOpen" :inert="!menuOpen || undefined">
       <button @click="scrollToSection('home')" class="nav-link" :class="{ active: activeSection === 'home' }" :aria-current="activeSection === 'home' ? 'page' : undefined">
         <span class="nav-bracket">[</span> HOME <span class="nav-bracket">]</span>
       </button>

@@ -4,7 +4,7 @@
 const games = [
   {
     title: 'Tic Tac Toe',
-    description: "Classic game of X's and O's. Challenge the computer or play with a friend in this timeless strategy game.",
+    description: "Classic game of X's and O's. Two players, same device — place your marks and claim three in a row.",
     component: () => import('@/games/TicTacToe/TicTacToe.vue'),
     icon: `<svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2" stroke="rgba(163, 255, 187, 0.4)" fill="none"/><line x1="9" y1="3" x2="9" y2="21" stroke="rgba(163, 255, 187, 0.4)" stroke-dasharray="2,2"/><line x1="15" y1="3" x2="15" y2="21" stroke="rgba(163, 255, 187, 0.4)" stroke-dasharray="2,2"/><line x1="3" y1="9" x2="21" y2="9" stroke="rgba(163, 255, 187, 0.4)" stroke-dasharray="2,2"/><line x1="3" y1="15" x2="21" y2="15" stroke="rgba(163, 255, 187, 0.4)" stroke-dasharray="2,2"/><path d="M5 5l2.5 2.5M7.5 5L5 7.5" stroke="rgba(163, 255, 187, 0.9)" stroke-width="1"/><circle cx="12" cy="12" r="1.5" stroke="rgba(163, 255, 187, 0.9)" fill="none"/><path d="M16.5 16.5l2.5 2.5M19 16.5l-2.5 2.5" stroke="rgba(163, 255, 187, 0.9)" stroke-width="1"/></svg>`
   },

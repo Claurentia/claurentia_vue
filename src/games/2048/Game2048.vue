@@ -20,9 +20,11 @@
       </div>
     </div>
     
-    <div class="game-board" 
+    <div class="game-board"
          ref="board"
-         tabindex="0" 
+         tabindex="0"
+         role="application"
+         aria-label="2048 game board. Use arrow keys to slide tiles."
          @keydown="handleKeyPress"
          @touchstart="handleTouchStart"
          @touchend="handleTouchEnd"
@@ -45,6 +47,19 @@
     <div class="game-controls">
       <button class="control-button" @click="resetGame">New Game</button>
       <button class="control-button" @click="$emit('close')">Exit Game</button>
+    </div>
+
+    <!-- Win Overlay -->
+    <div class="win-overlay" v-if="hasWon && !isGameOver">
+      <div class="win-content">
+        <h3>You Win!</h3>
+        <p class="final-score">Score: {{ score }}</p>
+        <div class="game-over-controls">
+          <button class="control-button" @click="hasWon = false">Keep Going</button>
+          <button class="control-button" @click="resetGame">New Game</button>
+          <button class="control-button" @click="$emit('close')">Exit</button>
+        </div>
+      </div>
     </div>
 
     <!-- Game Over Overlay -->
@@ -73,6 +88,7 @@ export default {
       score: 0,
       bestScore: 0,
       isGameOver: false,
+      hasWon: false,
       isPlaying: false,
       isMobile: false,
       touchStart: null,
@@ -92,7 +108,7 @@ export default {
     
     // Load best score from localStorage
     try {
-      this.bestScore = parseInt(localStorage.getItem('2048_best_score') || '0')
+      this.bestScore = parseInt(localStorage.getItem('claurentia_2048_best_score') || '0')
     } catch {
       this.bestScore = 0
     }
@@ -109,6 +125,7 @@ export default {
       this.board = Array(this.size).fill().map(() => Array(this.size).fill(0))
       this.score = 0
       this.isGameOver = false
+      this.hasWon = false
       this.isPlaying = false
       
       // Add two initial tiles
@@ -184,12 +201,17 @@ export default {
       if (JSON.stringify(newBoard) !== previousBoard) {
         this.board = newBoard
         this.addNewTile()
-        
+
+        // Check for win (2048 tile reached)
+        if (!this.hasWon && this.board.flat().some(tile => tile >= 2048)) {
+          this.hasWon = true
+        }
+
         // Update best score
         if (this.score > this.bestScore) {
           this.bestScore = this.score
           try {
-            localStorage.setItem('2048_best_score', this.bestScore.toString())
+            localStorage.setItem('claurentia_2048_best_score', this.bestScore.toString())
           } catch { /* ignore in private/incognito mode */ }
         }
         
@@ -395,22 +417,6 @@ export default {
   100% { transform: scale(1); }
 }
 
-.tile-merged {
-  animation: merge 0.2s ease-in-out;
-}
-
-@keyframes merge {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
 .tile-new {
   animation: tile-appear 0.2s ease-in-out;
 }
@@ -558,6 +564,41 @@ export default {
   border-radius: 0;
   font-size: 0.8rem;
   color: var(--color-teal, #43C6C3);
+}
+
+.win-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(26, 26, 26, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease-out;
+  border-radius: 4px;
+  z-index: 100;
+  backdrop-filter: blur(4px);
+}
+
+.win-content {
+  text-align: center;
+  padding: 2rem;
+  background: var(--color-bg-charcoal, #2b2b2b);
+  border: 2px solid var(--color-teal, #43C6C3);
+  box-shadow: 0 0 20px rgba(67, 198, 195, 0.5);
+  min-width: 280px;
+}
+
+.win-content h3 {
+  color: var(--color-teal, #43C6C3);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px var(--color-teal, #43C6C3);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-family: var(--font-retro, 'VT323', monospace);
 }
 
 .game-over-overlay {

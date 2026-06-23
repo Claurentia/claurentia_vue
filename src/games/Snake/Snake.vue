@@ -2,7 +2,7 @@
   <div class="game-container">
     <div class="game-header">
       <h2>Snake</h2>
-      <div class="game-status">
+      <div class="game-status" aria-live="polite" aria-atomic="true">
         <div>Score: {{ score }}</div>
       </div>
     </div>
@@ -34,6 +34,8 @@
         <div class="game-board"
              ref="board"
              tabindex="0"
+             role="application"
+             aria-label="Snake game board. Use arrow keys to control the snake."
              @keydown="handleKeyPress"
              @touchstart="handleTouchStart"
              @touchend="handleTouchEnd"
@@ -128,6 +130,7 @@ export default {
   data() {
     return {
       gridSize: 20,
+      cells: Object.freeze(Array(20 * 20).fill(null)),
       snake: [[10, 10]], // Starting position
       direction: 'Right',
       food: null,
@@ -145,9 +148,6 @@ export default {
     }
   },
   computed: {
-    cells() {
-      return Array(this.gridSize * this.gridSize).fill(null)
-    },
     getPlayPauseButtonText() {
       if (this.isPlaying) {
         return 'Pause Game'
@@ -378,7 +378,9 @@ export default {
       this.aiLogs = []
       this.moveCount = 0
       this.spawnFood()
-      this.$refs.board.focus()
+      this.$nextTick(() => {
+        if (this.$refs.board) this.$refs.board.focus()
+      })
     },
     toggleAI() {
       this.isAIEnabled = !this.isAIEnabled
