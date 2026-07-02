@@ -60,8 +60,8 @@ export default {
 
 <style scoped>
 .minigames-container {
-  min-height: 86dvh;
-  padding: 5rem 2rem 4rem;
+  min-height: 100dvh;
+  padding: calc(var(--nav-height) + 2rem) 2rem var(--section-bottom-padding);
   background:
     repeating-linear-gradient(
       -45deg,
@@ -264,7 +264,7 @@ export default {
 /* Responsive */
 @media (max-width: 768px) {
   .minigames-container {
-    padding: 4rem 1rem 3rem;
+    padding: calc(var(--nav-height) + 1rem) 1rem var(--section-bottom-padding);
   }
 
   .arcade-header {
@@ -285,7 +285,7 @@ export default {
 
 @media (max-width: 480px) {
   .minigames-container {
-    padding: 3.5rem 0.75rem 2.5rem;
+    padding: calc(var(--nav-height) + 0.75rem) 0.75rem calc(var(--footer-safe-height) + 1.5rem);
   }
 
   .boot-line {

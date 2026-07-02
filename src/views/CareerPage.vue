@@ -81,8 +81,8 @@ export default {
 <style scoped>
 /* ── Container ── */
 .career-container {
-  min-height: 80dvh;
-  padding: 5rem 2rem 4rem;
+  min-height: 100dvh;
+  padding: calc(var(--nav-height) + 2rem) 2rem var(--section-bottom-padding);
   scroll-margin-top: 0;
   background:
     repeating-linear-gradient(
@@ -339,7 +339,7 @@ export default {
 /* ── Mobile ── */
 @media (max-width: 768px) {
   .career-container {
-    padding: 4rem 1rem 3rem;
+    padding: calc(var(--nav-height) + 1rem) 1rem var(--section-bottom-padding);
   }
 
   .section-title {

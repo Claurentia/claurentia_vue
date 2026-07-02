@@ -61,15 +61,14 @@ export default {
 
 <style scoped>
 /*
-  Backdrop spans only the safe zone between the fixed navbar (52px)
-  and the fixed footer (~40px). align-items: center is always on —
-  no padding-top hacks needed. Content height is driven by children;
-  max-height: 100% just prevents overflow of the safe zone.
+  Backdrop spans only the safe zone between the fixed navbar and footer.
+  Content height is driven by children; max-height: 100% prevents overflow
+  of the safe zone.
 */
 .modal-backdrop {
   position: fixed;
-  top: 52px;
-  bottom: 40px;
+  top: var(--nav-height);
+  bottom: var(--footer-safe-height);
   left: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.85);
@@ -129,4 +128,4 @@ export default {
     padding: 0.5rem 0.75rem;
   }
 }
-</style> 
+</style>

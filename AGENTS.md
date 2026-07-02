@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
 
 ## Project Overview
 
@@ -27,8 +27,8 @@ npm run deploy     # Build and deploy to GitHub Pages (runs predeploy script aut
 The app uses a **single-page scroll-snap layout** rather than traditional routing. While Vue Router is installed and configured, the main app ([App.vue](src/App.vue)) renders all page components simultaneously in a vertical scroll container with `scroll-snap-type: y mandatory`.
 
 **Key architectural pattern:**
-- [App.vue](src/App.vue) renders HomePage, ProjectsPage, CareerPage, and MinigamesPage as direct children
-- Page components participate in the vertical snap container with `scroll-snap-align: start`
+- [App.vue](src/App.vue) renders HomePage, ProjectsPage, and MinigamesPage as direct children
+- Each page component fills 100vh and uses `scroll-snap-align: start`
 - Navigation is handled via smooth scrolling to anchor links, not route changes
 - Vue Router exists for future route-based features but is not actively used for main navigation
 
@@ -37,13 +37,12 @@ The app uses a **single-page scroll-snap layout** rather than traditional routin
 **Main Pages** ([src/views/](src/views/)):
 - [HomePage.vue](src/views/HomePage.vue) - Landing section with bio and contact info with clipboard copy functionality
 - [ProjectsPage.vue](src/views/ProjectsPage.vue) - Portfolio projects showcase
-- [CareerPage.vue](src/views/CareerPage.vue) - Career timeline with current and past roles
 - [MinigamesPage.vue](src/views/MinigamesPage.vue) - Interactive games grid with modal launcher
-
-**Shared Components** ([src/components/](src/components/)):
 - [NavBar.vue](src/components/NavBar.vue) - Fixed navigation header
+- [FooterSection.vue](src/components/FooterSection.vue) - Footer with social links
+
+**Shared Components:**
 - [GameModal.vue](src/components/GameModal.vue) - Modal wrapper that dynamically loads game components
-- [FooterSection.vue](src/components/FooterSection.vue) - Fixed status bar with return-to-top control
 
 **Games** ([src/games/](src/games/)):
 - Each game is a self-contained Vue SFC (Single File Component)
@@ -80,15 +79,12 @@ The site deploys to GitHub Pages using the `gh-pages` package:
 When adding new games:
 1. Create game as standalone Vue component in [src/games/](src/games/)
 2. Add game entry to `games` array in [src/data/games.js](src/data/games.js)
-3. Set the entry's `component` to a dynamic import loader, for example `() => import('@/games/YourGame/YourGame.vue')`
-4. Include `title`, `description`, and icon markup in the same data entry
-5. Game should handle its own state, controls, rendering, and `close` emit within the modal
-
-[GameModal.vue](src/components/GameModal.vue) accepts those loader functions and wraps them with Vue's `defineAsyncComponent`, so it does not need a hard-coded import or component map for each new game.
+3. Import game component in [GameModal.vue](src/components/GameModal.vue) dynamic component mapping
+4. Game should handle its own state, controls, and rendering within the modal
 
 ## Styling Approach
 
 - Global styles in [App.vue](src/App.vue) handle scroll behavior and layout
 - Component styles are scoped within each `.vue` file
-- Main color scheme is defined as CSS variables in [App.vue](src/App.vue), centered on dark charcoal, terminal teal, orange, gold, cream, and brown accents
-- Fonts: Share Tech Mono for terminal/body text and VT323 for retro headings
+- Main color scheme uses green accent colors (rgba(163, 255, 187, ...))
+- Font: Avenir, Helvetica, Arial, sans-serif

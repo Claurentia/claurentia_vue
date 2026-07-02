@@ -149,8 +149,8 @@ export default {
 
 <style scoped>
 .projects-container {
-  min-height: 86dvh;
-  padding: 5rem 2rem 4rem;
+  min-height: 100dvh;
+  padding: calc(var(--nav-height) + 2rem) 2rem var(--section-bottom-padding);
   background:
     repeating-linear-gradient(
       0deg,
@@ -476,7 +476,7 @@ export default {
 /* Responsive Design */
 @media (max-width: 768px) {
   .projects-container {
-    padding: 4rem 0.75rem 3rem;
+    padding: calc(var(--nav-height) + 1rem) 0.75rem var(--section-bottom-padding);
   }
 
   .arcade-header {
@@ -517,4 +517,4 @@ export default {
     gap: 1.25rem;
   }
 }
-</style> 
+</style>

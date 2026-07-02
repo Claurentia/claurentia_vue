@@ -75,13 +75,16 @@ export default {
   left: 0;
   right: 0;
   z-index: 100;
+  min-height: var(--footer-safe-height);
   pointer-events: none;
 }
 
 .status-bar {
   background: var(--color-bg-charcoal);
   border-top: 2px solid var(--color-earth-olive);
-  padding: 0.4rem 1.5rem;
+  min-height: var(--footer-safe-height);
+  box-sizing: border-box;
+  padding: 0.4rem 1.5rem calc(0.4rem + env(safe-area-inset-bottom, 0px));
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -145,7 +148,7 @@ export default {
 
 @media (max-width: 768px) {
   .status-bar {
-    padding: 0.4rem 0.75rem;
+    padding: 0.4rem 0.75rem calc(0.4rem + env(safe-area-inset-bottom, 0px));
     font-size: 0.65rem;
   }
 
@@ -153,4 +156,4 @@ export default {
     display: none;
   }
 }
-</style> 
+</style>

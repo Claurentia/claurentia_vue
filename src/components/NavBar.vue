@@ -136,7 +136,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 0 1.25rem;
-  height: 52px;
+  height: calc(var(--nav-height) - 2px);
   gap: 1rem;
 }
 
@@ -205,7 +205,7 @@ export default {
   text-transform: uppercase;
   letter-spacing: 2px;
   transition: background 0.1s, color 0.1s, border-color 0.1s;
-  height: 52px;
+  height: calc(var(--nav-height) - 2px);
   display: flex;
   align-items: center;
   gap: 0.2rem;

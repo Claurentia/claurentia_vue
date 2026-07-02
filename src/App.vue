@@ -79,6 +79,12 @@ export default {
   /* Typography */
   --font-mono: 'Share Tech Mono', 'Courier New', monospace;
   --font-retro: 'VT323', monospace;
+
+  /* Fixed chrome sizing */
+  --nav-height: 54px;
+  --footer-height: 40px;
+  --footer-safe-height: calc(var(--footer-height) + env(safe-area-inset-bottom, 0px));
+  --section-bottom-padding: calc(var(--footer-safe-height) + 2rem);
 }
 
 /* Pixelated rendering only for images that opt in — not global */
@@ -168,16 +174,17 @@ html, body {
 
 main {
   scroll-snap-type: y mandatory;
-  height: 100vh;
-  overflow-y: scroll;
+  height: 100dvh;
+  overflow-y: auto;
+  scroll-padding-bottom: var(--footer-safe-height);
   background: var(--color-bg-dark);
 }
 
 main > * {
+  box-sizing: border-box;
   scroll-snap-align: start;
   scroll-snap-stop: normal;
-  /* Offset for fixed navbar so section headers aren't hidden beneath it */
-  scroll-margin-top: 0;
+  scroll-margin-bottom: var(--footer-safe-height);
 }
 
 @media (max-width: 768px) {

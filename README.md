@@ -9,7 +9,8 @@ A retro-themed personal portfolio site built with **Vue 3**, styled as a vintage
 | Section | What's inside |
 |---|---|
 | **Home** | Terminal-style bento grid — profile photo, identity, contact info with one-click clipboard copy, tech-stack skill bars, and experience |
-| **Projects** | Horizontally-scrolling cassette "track list" of 9 portfolio projects with expandable descriptions and GitHub links |
+| **Projects** | Horizontally-scrolling cassette "track list" of portfolio projects with expandable descriptions and source/live links |
+| **Career** | Terminal-style timeline of current and past roles |
 | **Minigames** | Arcade-style launcher for three browser games: Tic Tac Toe, Snake (with AI mode + decision log), and 2048 |
 
 ---
@@ -19,27 +20,30 @@ A retro-themed personal portfolio site built with **Vue 3**, styled as a vintage
 ```
 claurentia_vue/
 ├── public/
-│   ├── index.html          # App shell, Font Awesome CDN
+│   ├── index.html          # App shell, metadata, favicon link
 │   └── Cl_brand.png        # Favicon / brand logo
 ├── src/
 │   ├── main.js             # App entry point
 │   ├── App.vue             # Root component — global styles, CSS vars, CRT overlay
 │   ├── router/
-│   │   └── index.js        # Vue Router config (scroll-snap navigation)
+│   │   └── index.js        # Empty hash router reserved for future routes
+│   ├── data/               # Static content for contacts, skills, projects, career, games
 │   ├── assets/             # Project images (logos, profile photo)
 │   ├── components/
-│   │   ├── NavBar.vue          # Fixed top nav — cassette SVG logo, smooth-scroll links
+│   │   ├── NavBar.vue          # Fixed top nav with smooth-scroll section buttons
+│   │   ├── GameModal.vue       # Modal wrapper that renders async game components
+│   │   └── FooterSection.vue   # Fixed status bar and return-to-top control
+│   ├── views/
 │   │   ├── HomePage.vue        # Landing section — bento grid + bio terminal
 │   │   ├── ProjectsPage.vue    # Horizontal scrolling project cards
-│   │   ├── MinigamesPage.vue   # Game launcher grid
-│   │   ├── GameModal.vue       # Modal wrapper that dynamically renders a game
-│   │   └── FooterSection.vue   # Fixed "return to top" button
+│   │   ├── CareerPage.vue      # Career timeline
+│   │   └── MinigamesPage.vue   # Game launcher grid
 │   └── games/
 │       ├── TicTacToe/
 │       │   └── TicTacToe.vue   # 2-player, client-side logic
 │       ├── Snake/
 │       │   ├── Snake.vue       # Game loop, keyboard + mobile controls, AI mode
-│       │   └── SnakeAI.js      # Manhattan-distance greedy AI
+│       │   └── SnakeAI.js      # Distance scoring plus flood-fill safety checks
 │       └── 2048/
 │           └── Game2048.vue    # Board rotation merge algorithm, swipe + keyboard
 ├── vue.config.js           # publicPath for GitHub Pages, dev server on :3030
@@ -124,8 +128,11 @@ Global utility classes: `.retro-btn`, `.glow-text`
 
 1. Create a self-contained `.vue` SFC in `src/games/YourGame/YourGame.vue`
 2. The component must emit `close` when the player exits: `@click="$emit('close')"`
-3. Register it in `GameModal.vue` — add an import and an entry to the `games` map
-4. Add a card entry to the `games` array in `MinigamesPage.vue` (title, description, SVG icon)
+3. Add a card entry to the `games` array in `src/data/games.js`
+4. Set `component` to a dynamic import loader, for example `() => import('@/games/YourGame/YourGame.vue')`
+5. Add the card metadata there too: `title`, `description`, and icon markup
+
+`MinigamesPage.vue` reads from `src/data/games.js`, and `GameModal.vue` wraps loader functions with Vue's `defineAsyncComponent`, so new games do not need a hard-coded import in the modal.
 
 ---
 

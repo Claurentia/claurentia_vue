@@ -226,7 +226,7 @@ export default {
   flex-direction: column;
   align-items: center;
   position: relative;
-  padding: 6rem 2rem 2rem;
+  padding: calc(var(--nav-height) + 2.75rem) 2rem var(--section-bottom-padding);
   overflow-y: auto;
 }
 
@@ -699,7 +699,7 @@ export default {
 /* Mobile Layout (< 768px) */
 @media (max-width: 768px) {
   .home-container {
-    padding: 3.5rem 0.75rem 2rem;
+    padding: calc(var(--nav-height) + 0.75rem) 0.75rem var(--section-bottom-padding);
   }
 
   /* Redesign the terminal header as a slim inline prompt on mobile */
