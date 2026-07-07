@@ -174,7 +174,7 @@ html, body {
 
 main {
   scroll-snap-type: y mandatory;
-  height: 100dvh;
+  height: calc(100dvh - var(--footer-safe-height));
   overflow-y: auto;
   scroll-padding-bottom: var(--footer-safe-height);
   background: var(--color-bg-dark);
