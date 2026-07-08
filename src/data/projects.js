@@ -1,5 +1,6 @@
 // Static project data. Edit here to update content without touching the component.
 
+import bloomNBrewImage from '@/assets/BloomNBrew.png'
 import brandImage from '@/assets/Cl_brand.png'
 import ecoPandaImage from '@/assets/EcoPanda.png'
 import gourmetImage from '@/assets/Gourmet.png'
@@ -19,6 +20,7 @@ const projects = [
       "An offline-first React Native app for logging and dialing in home coffee brews. Features a count-up/countdown timer, swipe-gesture brew history management, and full local data persistence via AsyncStorage. No account or internet required. Co-developed with Terbish (https://github.com/Terbish/).",
     technologies: ['React Native', 'JavaScript', 'AsyncStorage', 'iOS', 'Android'],
     live: 'https://apps.apple.com/us/app/bloomn-brew/id6758324003',
+    image: bloomNBrewImage,
     featured: true
   },
   {
