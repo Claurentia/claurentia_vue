@@ -29,7 +29,8 @@
 
     <GameModal 
       v-if="activeGame"
-      :gameComponent="activeGame"
+      :gameComponent="activeGame.component"
+      :title="activeGame.title"
       @close="activeGame = null"
     />
   </div>
@@ -52,7 +53,7 @@ export default {
   },
   methods: {
     playGame(game) {
-      this.activeGame = game.component
+      this.activeGame = game
     }
   }
 }
