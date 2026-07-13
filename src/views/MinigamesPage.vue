@@ -11,8 +11,10 @@
     </p>
 
     <div class="minigames-grid">
-      <div class="game-card" v-for="(game, index) in games" :key="index" @click="playGame(game)">
-        <div class="game-icon" v-html="game.icon"></div>
+      <article class="game-card" v-for="game in games" :key="game.title">
+        <div class="game-icon">
+          <component :is="game.iconComponent" />
+        </div>
 
         <div class="game-content">
           <div class="game-meta">
@@ -20,11 +22,16 @@
             <h3 class="game-title">{{ game.title.toUpperCase() }}</h3>
           </div>
           <p class="game-desc">{{ game.description }}</p>
-          <button class="play-button">
+          <button
+            class="play-button"
+            type="button"
+            :aria-label="`Run ${game.title}`"
+            @click="playGame(game)"
+          >
             <span class="play-bracket">[</span> RUN <span class="play-bracket">]</span>
           </button>
         </div>
-      </div>
+      </article>
     </div>
 
     <GameModal 
@@ -144,14 +151,14 @@ export default {
   box-shadow:
     0 0 15px rgba(0, 255, 65, 0.2),
     inset 0 0 20px rgba(0, 0, 0, 0.9);
-  cursor: pointer;
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease;
   overflow: hidden;
 }
 
-.game-card:hover {
+.game-card:hover,
+.game-card:focus-within {
   border-color: var(--color-neon-teal);
   box-shadow:
     0 0 25px rgba(0, 255, 65, 0.35),
@@ -188,7 +195,8 @@ export default {
   transition: transform 0.3s ease;
 }
 
-.game-card:hover .game-icon > :deep(svg) {
+.game-card:hover .game-icon > :deep(svg),
+.game-card:focus-within .game-icon > :deep(svg) {
   transform: scale(1.1) rotate(4deg);
   filter: drop-shadow(0 0 12px var(--color-terminal-green));
 }
@@ -251,6 +259,14 @@ export default {
   color: var(--color-bg-dark);
   box-shadow: 0 0 20px var(--color-terminal-green);
   transform: translateY(-2px);
+}
+
+.play-button:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 3px;
+  background: var(--color-terminal-green);
+  color: var(--color-bg-dark);
+  box-shadow: 0 0 20px var(--color-terminal-green);
 }
 
 .play-button:active {
