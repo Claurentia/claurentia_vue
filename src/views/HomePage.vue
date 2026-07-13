@@ -68,11 +68,11 @@
               <span class="value">{{ contacts.phoneDisplay }}</span>
               <span class="copy-indicator" aria-hidden="true">[ COPY ]</span>
             </button>
-            <a :href="contacts.linkedin" target="_blank" class="terminal-line clickable">
+            <a :href="contacts.linkedin" target="_blank" rel="noopener" class="terminal-line clickable">
               <span class="label">LINK:</span>
               <span class="value">{{ contacts.linkedinDisplay }}</span>
             </a>
-            <a :href="contacts.github" target="_blank" class="terminal-line clickable">
+            <a :href="contacts.github" target="_blank" rel="noopener" class="terminal-line clickable">
               <span class="label">CODE:</span>
               <span class="value">{{ contacts.githubDisplay }}</span>
             </a>
@@ -155,8 +155,8 @@
       </div>
     </div>
 
-    <div class="copy-notification" :class="{ show: showNotification }">
-      <span class="notif-icon">[√]</span> DATA COPIED TO BUFFER
+    <div class="copy-notification" :class="{ show: showNotification, error: notificationIsError }" role="status" aria-live="polite">
+      <span class="notif-icon">{{ notificationIsError ? '[!]' : '[√]' }}</span> {{ notificationMessage }}
     </div>
   </div>
 </template>
@@ -172,6 +172,8 @@ export default {
       contacts,
       skills,
       showNotification: false,
+      notificationIsError: false,
+      notificationMessage: '',
       notificationTimeout: null,
       visitorId: (() => {
         try {
@@ -190,14 +192,39 @@ export default {
   },
   methods: {
     copyToClipboard(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        this.showCopyNotification()
-      })
+      if (!navigator.clipboard || !navigator.clipboard.writeText) {
+        this.copyWithFallback(text)
+        return
+      }
+
+      navigator.clipboard.writeText(text)
+        .then(() => this.showCopyNotification(false))
+        .catch(() => this.copyWithFallback(text))
     },
-    showCopyNotification() {
+    copyWithFallback(text) {
+      const textArea = document.createElement('textarea')
+      textArea.value = text
+      textArea.setAttribute('readonly', '')
+      textArea.style.position = 'fixed'
+      textArea.style.opacity = '0'
+      document.body.appendChild(textArea)
+      textArea.select()
+
+      try {
+        const copied = document.execCommand('copy')
+        this.showCopyNotification(!copied)
+      } catch {
+        this.showCopyNotification(true)
+      } finally {
+        document.body.removeChild(textArea)
+      }
+    },
+    showCopyNotification(isError) {
       if (this.notificationTimeout) {
         clearTimeout(this.notificationTimeout)
       }
+      this.notificationIsError = isError
+      this.notificationMessage = isError ? 'COPY FAILED — SELECT TEXT MANUALLY' : 'DATA COPIED TO BUFFER'
       this.showNotification = true
       this.notificationTimeout = setTimeout(() => {
         this.showNotification = false
@@ -653,6 +680,16 @@ export default {
 .copy-notification.show {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+}
+
+.copy-notification.error {
+  color: var(--color-orange, #F75A33);
+  border-color: var(--color-orange, #F75A33);
+  box-shadow: 0 0 20px rgba(255, 140, 0, 0.5);
+}
+
+.copy-notification.error .notif-icon {
+  color: var(--color-orange, #F75A33);
 }
 
 .notif-icon {
