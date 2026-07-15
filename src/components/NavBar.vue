@@ -9,18 +9,18 @@
       <!-- Desktop nav -->
       <div class="nav-links desktop-nav">
         <span class="nav-prompt" aria-hidden="true">&gt;</span>
-        <button @click="scrollToSection('home')" class="nav-link" :class="{ active: activeSection === 'home' }" :aria-current="activeSection === 'home' ? 'page' : undefined" aria-label="Scroll to Home section">
+        <a href="#home" @click="scrollToSection($event, 'home')" class="nav-link" :class="{ active: activeSection === 'home' }" :aria-current="activeSection === 'home' ? 'location' : undefined" aria-label="Scroll to Home section">
           <span class="nav-bracket">[</span> HOME <span class="nav-bracket">]</span>
-        </button>
-        <button @click="scrollToSection('projects')" class="nav-link" :class="{ active: activeSection === 'projects' }" :aria-current="activeSection === 'projects' ? 'page' : undefined" aria-label="Scroll to Projects section">
+        </a>
+        <a href="#projects" @click="scrollToSection($event, 'projects')" class="nav-link" :class="{ active: activeSection === 'projects' }" :aria-current="activeSection === 'projects' ? 'location' : undefined" aria-label="Scroll to Projects section">
           <span class="nav-bracket">[</span> PROJECTS <span class="nav-bracket">]</span>
-        </button>
-        <button @click="scrollToSection('career')" class="nav-link" :class="{ active: activeSection === 'career' }" :aria-current="activeSection === 'career' ? 'page' : undefined" aria-label="Scroll to Career section">
+        </a>
+        <a href="#career" @click="scrollToSection($event, 'career')" class="nav-link" :class="{ active: activeSection === 'career' }" :aria-current="activeSection === 'career' ? 'location' : undefined" aria-label="Scroll to Career section">
           <span class="nav-bracket">[</span> CAREER <span class="nav-bracket">]</span>
-        </button>
-        <button @click="scrollToSection('minigames')" class="nav-link" :class="{ active: activeSection === 'minigames' }" :aria-current="activeSection === 'minigames' ? 'page' : undefined" aria-label="Scroll to Games section">
+        </a>
+        <a href="#minigames" @click="scrollToSection($event, 'minigames')" class="nav-link" :class="{ active: activeSection === 'minigames' }" :aria-current="activeSection === 'minigames' ? 'location' : undefined" aria-label="Scroll to Games section">
           <span class="nav-bracket">[</span> GAMES <span class="nav-bracket">]</span>
-        </button>
+        </a>
       </div>
 
       <!-- Hamburger button — mobile only -->
@@ -39,18 +39,18 @@
 
     <!-- Mobile dropdown menu -->
     <div class="mobile-menu" :class="{ open: menuOpen }" :aria-hidden="!menuOpen" :inert="!menuOpen || undefined">
-      <button @click="scrollToSection('home')" class="nav-link" :class="{ active: activeSection === 'home' }" :aria-current="activeSection === 'home' ? 'page' : undefined">
+      <a href="#home" @click="scrollToSection($event, 'home')" class="nav-link" :class="{ active: activeSection === 'home' }" :aria-current="activeSection === 'home' ? 'location' : undefined">
         <span class="nav-bracket">[</span> HOME <span class="nav-bracket">]</span>
-      </button>
-      <button @click="scrollToSection('projects')" class="nav-link" :class="{ active: activeSection === 'projects' }" :aria-current="activeSection === 'projects' ? 'page' : undefined">
+      </a>
+      <a href="#projects" @click="scrollToSection($event, 'projects')" class="nav-link" :class="{ active: activeSection === 'projects' }" :aria-current="activeSection === 'projects' ? 'location' : undefined">
         <span class="nav-bracket">[</span> PROJECTS <span class="nav-bracket">]</span>
-      </button>
-      <button @click="scrollToSection('career')" class="nav-link" :class="{ active: activeSection === 'career' }" :aria-current="activeSection === 'career' ? 'page' : undefined">
+      </a>
+      <a href="#career" @click="scrollToSection($event, 'career')" class="nav-link" :class="{ active: activeSection === 'career' }" :aria-current="activeSection === 'career' ? 'location' : undefined">
         <span class="nav-bracket">[</span> CAREER <span class="nav-bracket">]</span>
-      </button>
-      <button @click="scrollToSection('minigames')" class="nav-link" :class="{ active: activeSection === 'minigames' }" :aria-current="activeSection === 'minigames' ? 'page' : undefined">
+      </a>
+      <a href="#minigames" @click="scrollToSection($event, 'minigames')" class="nav-link" :class="{ active: activeSection === 'minigames' }" :aria-current="activeSection === 'minigames' ? 'location' : undefined">
         <span class="nav-bracket">[</span> GAMES <span class="nav-bracket">]</span>
-      </button>
+      </a>
     </div>
   </nav>
 </template>
@@ -66,6 +66,11 @@ export default {
     }
   },
   mounted() {
+    const hashSection = window.location.hash.slice(1)
+    if (['home', 'projects', 'career', 'minigames'].includes(hashSection)) {
+      this.activeSection = hashSection
+    }
+
     const main = document.querySelector('main')
     if (main) {
       main.addEventListener('scroll', this.handleScroll)
@@ -78,8 +83,14 @@ export default {
     }
   },
   methods: {
-    scrollToSection(sectionId) {
+    scrollToSection(event, sectionId) {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+        return
+      }
+
+      event.preventDefault()
       this.$emit('scroll-to', sectionId)
+      this.activeSection = sectionId
       this.menuOpen = false
     },
     handleScroll(e) {
@@ -204,6 +215,7 @@ export default {
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 2px;
+  text-decoration: none;
   transition: background 0.1s, color 0.1s, border-color 0.1s;
   height: calc(var(--nav-height) - 2px);
   display: flex;

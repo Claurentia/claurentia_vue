@@ -31,13 +31,31 @@ export default {
     CareerPage,
     FooterSection
   },
+  mounted() {
+    window.addEventListener('popstate', this.handleHistoryNavigation)
+    this.$nextTick(() => this.scrollToHash('auto'))
+  },
+  beforeUnmount() {
+    window.removeEventListener('popstate', this.handleHistoryNavigation)
+  },
   methods: {
-    scrollToSection(sectionId) {
+    scrollToSection(sectionId, { updateHistory = true, behavior = 'smooth' } = {}) {
       const main = this.$refs.mainScroll
       const section = document.getElementById(sectionId)
       if (main && section) {
-        main.scrollTo({ top: section.offsetTop, behavior: 'smooth' })
+        const hash = `#${sectionId}`
+        if (updateHistory && window.location.hash !== hash) {
+          window.history.pushState(null, '', hash)
+        }
+        main.scrollTo({ top: section.offsetTop, behavior })
       }
+    },
+    scrollToHash(behavior = 'smooth') {
+      const sectionId = window.location.hash.slice(1) || 'home'
+      this.scrollToSection(sectionId, { updateHistory: false, behavior })
+    },
+    handleHistoryNavigation() {
+      this.scrollToHash()
     },
     scrollToTop() {
       const main = this.$refs.mainScroll
